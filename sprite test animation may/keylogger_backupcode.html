@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheet_tla.css">
+    <title>Keylogger script</title>
+    <style>
+    </style>
+</head>
+
+<!-- 
+    - find how to move exact position of keyframes animation across screen with js
+    - combine running animation into one animation using two keyframes
+    - collision control
+        - borders
+        - with other objects
+            - power up
+            - enemy (bot)
+    - add space bar to pressed keys
+    - animating text
+        - save phrase as a var in js
+        - run through each char in a loop (for)
+    - start menu
+        - blur
+        - start button
+    - background drawn on canvas
+    - write a function that changes the z-index of all the spritesheets
+-->
+
+<body>
+    <div style="float:left">
+        <div class="border1" id="border1" style="background-color:black;max-width:500px;height:250;margin:5px">
+            <canvas class="canvas1" id="canvas1"
+                style="background-color: white;max-width:475px;height:225px;margin:25px">
+                <img class="Q_key" id="Q_key" src="keypad_Q.png" alt="Q key pressed">
+                <img class="W_key" id="W_key" src="keypad_W.png" alt="W key pressed">
+                <img class="E_key" id="E_key" src="keypad_E.png" alt="E key pressed">
+                <img class="A_key" id="A_key" src="keypad_A.png" alt="Q key pressed">
+                <img class="S_key" id="S_key" src="keypad_S.png" alt="S key pressed">
+                <img class="D_key" id="D_key" src="keypad_D.png" alt="D key pressed">
+                <img class="no_key" id="no_key" src="keypad_main.png" alt="No key pressed">
+            </canvas>
+        </div>
+
+        <div class="border2" id="border2" style="background-color:black;max-width:500px;height:250;margin:5px">
+            <canvas class="canvas2" id="canvas2"
+                style="background-color: white;max-width:475px;height:225px;margin:25px">
+            </canvas>
+        </div>
+    </div>
+
+    <div style="float:right;width:925px;height:600px;">
+        <div class="border3" id="border3" style="background-color:black;width:900px;height:600px;margin:25px;">
+            <div style="position:absolute;">
+                <div class="Character">
+                    <img id="Character_megaman_main_1" class="Character_spritesheet pixelart"
+                        src="ss_megaman_twolayer.png" alt="Character_Stationary_layer1" style="z-index:2;"/>
+                    <!-- test two layer spritesheet-->
+                </div>
+                <div class="Character">
+                    <img id="Character_megaman_main_2" class="Character_spritesheet pixelart Character_spritesheet_row_two"
+                        src="ss_megaman_twolayer.png" alt="Character_Stationary_layer2"style="z-index:2;"/>
+                </div>
+                <div class="Character_jumping">
+                    <img id="Character_megaman_jumping"class="Character_jumping_spritesheet pixelart" src="ss_megaman_jump.png"
+                        alt="Character Jumping" style="z-index:2;"/>
+                </div>
+                <div class="Character_chargeShot" style="display:none;">
+                    <img class="Character_chargeShot_spritesheet pixelart" src="ss_megaman_attack.png"
+                        alt="Character Attacking" style="z-index:2;"/>
+                </div>
+                <div class="Character_chargeBeam">
+                    <img class="Character_chargeBeam_spritesheet pixelart" src="ss_megaman_blast.png"
+                        alt="Blast Animation" style="z-index:2;"/>
+                </div>
+            </div>
+
+            <canvas class="canvas3" id="canvas3" style="z-index:1;position:absolute;background-color:white;width:850px;height:550px;margin:25px">
+            </canvas>
+        </div>
+    </div>
+
+    <script>
+        var exit = true;
+        var key;
+        var state = "no";
+        var img;
+        var canvas1,canvas2,canvas3;
+
+        var canvas1DOM = document.getElementById("canvas1")
+        var canvas2DOM = document.getElementById("canvas2")
+        var canvas3DOM = document.getElementById("canvas3")
+        //var main_animate = document.getElementById("Character_megaman_main"); // doesn't easily display keyframe animations
+
+
+        window.onload = function () {
+            canvas = canvas1DOM.getContext("2d");
+            img = document.getElementById(state + "_key");
+            canvas.drawImage(img, 0, 0);
+
+            canvas3 = canvas3DOM.getContext("2d");
+            document.getElementById("Character_megaman_main_1").style.zIndex = "2";
+            //document.getElementById("Character_megaman_main_1").style.top = "10px;";
+            //document.getElementById("Character_megaman_main_1").style.left = "100px;";
+        }
+
+        window.addEventListener('keydown', function (e) { doWhichKey(e); }, false)
+        window.addEventListener('keyup', function (e) { doNoKey(e); }, false)
+
+        function doNoKey(e) {
+            canvas = canvas1DOM.getContext("2d");
+            img = document.getElementById("no_key");
+            canvas.drawImage(img, 0, 0);
+        }
+
+        function doWhichKey(e) {
+            e = e || window.event;
+            let charCode = e.keyCode || e.which;
+            key = String.fromCharCode(charCode);
+
+            if (key == "a" || key == "A") {
+                state = "A";
+            } else if (key == "s" || key == "S") {
+                state = "S";
+            } else if (key == "d" || key == "D") {
+                state = "D";
+            } else if (key == "w" || key == "W") {
+                state = "W";
+            } else if (key == "q" || key == "Q") {
+                state = "Q";
+            } else if (key == "e" || key == "E") {
+                state = "E";
+            } else {
+                state = "no";
+            }
+
+            canvas = canvas1DOM.getContext("2d");
+            img = document.getElementById(state + "_key");
+            canvas.drawImage(img, 0, 0);
+
+            console.log(state);
+            console.log(key);
+            return String.fromCharCode(charCode);
+        }
+    </script>
+</body>

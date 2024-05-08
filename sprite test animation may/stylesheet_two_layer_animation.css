@@ -1,0 +1,252 @@
+:root {
+    --pixel-size: .70;
+    --jump-pixel-size: 1;
+    --pixel-size2: .30;
+    --pixel-size3: 1;
+}
+
+body {
+    background: white;
+}
+
+/*Non Interactive windows*/
+.window1 {
+    float: left;
+}
+
+/*key pressed animations*/
+.border1 {
+    background-color: black;
+    max-width: 500px;
+    height: 250;
+    margin: 5px;
+}
+
+.canvas1 {
+    background-color: white;
+    max-width: 475px;
+    height: 225px;
+    margin: 25px
+}
+
+/*Animated text window*/
+.border2 {
+    background-color: black;
+    max-width: 500px;
+    height: 280px;
+    margin: 5px;
+}
+
+.canvas2 {
+    background-color: white;
+    max-width: 475px;
+    height: 225px;
+    margin: 25px;
+}
+
+.canvas3 {
+    background-color: white;
+}
+
+/*Game window*/
+.window2 {
+    float: right;
+    width: 925px;
+    height: 600px;
+    z-index: 1;
+}
+
+.border3 {
+    background-color: black;
+    width: 900px;
+    height: 600px;
+    margin: 25px;
+}
+
+.keyframeSprites {
+    position: absolute;
+    left: 600px;
+    top: 100px;
+    z-index: 3;
+}
+
+.portal_sprite {
+    position: absolute;
+    left: 1400px;
+    top: 150px;
+    z-index: 2;
+}
+
+.platform_sprite_1 {
+    position: absolute;
+    left: 700px;
+    top: 400px;
+    z-index: 2;
+}
+
+.platform_sprite_2 {
+    position: absolute;
+    left: 700px;
+    top: 300px;
+    z-index: 2;
+}
+
+.platform_sprite_3 {
+    position: absolute;
+    left: 700px;
+    top: 200px;
+    z-index: 2;
+}
+
+/* .Left_animation{
+} */
+
+/*Spritesheets*/
+.Character_jumping {
+    width: calc(573px / 7 * var(--jump-pixel-size));
+    height: 162px;
+    overflow: hidden;
+    position: relative;
+    margin: 0 auto;
+    display: none;
+    /* background: red; */
+}
+
+.Character_jumping_spritesheet {
+    animation: moveSpritesheet2 1s steps(7) infinite;
+    width: calc(700px * var(--jump-pixel-size));
+    position: absolute;
+}
+
+.Character {
+    /* select on frame on sprite sheet (coordinates start from top left to bottom right) */
+    width: calc(860px / 5 * var(--pixel-size));
+    /* to make each sprite the same size i have to measure and move each sprite into blocks whose size is the same as 
+    the biggest sprite on the sheet */
+    height: calc(256px / 2 * var(--pixel-size));
+    /* removes rest of spritesheet to show one image at a time */
+    overflow: hidden;
+    position: relative;
+    /* highlights first sprite (remove the whitespace from the png image using software or hide image source to see shape of first sprite) */
+    /* background: red;*/
+    margin: 0 auto;
+}
+
+.Character_spritesheet {
+    animation: moveSpritesheet1 1s steps(5) infinite;
+    width: calc(860px * var(--pixel-size));
+    position: absolute;
+}
+
+.pixelart {
+    image-rendering: pixelated;
+}
+
+.Character_spritesheet_row_two {
+    top: calc(-132px * var(--pixel-size));
+    display: none;
+}
+
+.Attack_animation {
+    position: relative;
+    /*placeholder*/
+    left: 185px;
+    display: none;
+}
+
+.Character_chargeShot {
+    width: calc(319px * var(--pixel-size2));
+    height: calc(340px * var(--pixel-size2));
+    position: relative;
+    left: 25px;
+    top: 0px;
+    margin: 0 auto;
+    z-index: 2;
+    float: left;
+}
+
+.Character_chargeShot_spritesheet {
+    width: calc(319px * var(--pixel-size2));
+    position: absolute;
+}
+
+.Character_chargeBeam {
+    width: calc(1776px / 4 * var(--pixel-size3));
+    height: 157px;
+    overflow: hidden;
+    position: relative;
+    left: 25px;
+    top: -40px;
+    margin: 0 auto;
+    z-index: 2;
+    float: right;
+}
+
+.Character_chargeBeam_spritesheet {
+    animation: moveSpritesheet3 0.5s steps(4) infinite;
+    width: calc(1776px * var(--pixel-size3));
+    position: absolute;
+}
+
+.canvas3 {
+    z-index: 1;
+    position: absolute;
+    background-color: white;
+    width: 850px;
+    height: 550px;
+    margin: 25px;
+}
+
+.portal_sprite {
+    /* width: 90%;
+    height: 90%; */
+    position: absolute;
+}
+
+.platform_sprite_1 {
+    width:  300px;
+    height: 50px;
+    position: absolute;
+}
+
+.platform_sprite_2 {
+    width:  300px;
+    height: 50px;
+    position: absolute;
+}
+
+.platform_sprite_3 {
+    width:  300px;
+    height: 50px;
+    position: absolute;
+}
+
+@keyframes moveSpritesheet1 {
+    from {
+        transform: translate3d(0px, 0, 0)
+    }
+
+    to {
+        transform: translate3d(-100%, 0, 0)
+    }
+}
+
+@keyframes moveSpritesheet2 {
+    from {
+        transform: translate3d(0px, 0, 0)
+    }
+
+    to {
+        transform: translate3d(-100%, 0, 0)
+    }
+}
+
+@keyframes moveSpritesheet3 {
+    from {
+        transform: translate3d(0px, 0, 0)
+    }
+
+    to {
+        transform: translate3d(-100%, 0, 0)
+    }
+}

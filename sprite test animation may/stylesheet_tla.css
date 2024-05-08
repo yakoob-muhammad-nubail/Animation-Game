@@ -1,0 +1,108 @@
+:root{
+    --pixel-size: .70;
+    --jump-pixel-size: 1;
+    --pixel-size2: .30;
+    --pixel-size3: 1;
+}
+
+body
+{
+    background: white;
+}
+
+.Character_jumping{
+    width: calc( 573px / 7 * var(--jump-pixel-size));
+    height: 162px ;
+    overflow: hidden;
+    position: relative;
+    margin: 0 auto;
+    /* background: red; */
+}
+
+.Character_jumping_spritesheet{
+    animation: moveSpritesheet2 1s steps(7) infinite;
+    width: calc(700px * var(--jump-pixel-size)) ;
+    position: absolute;
+}
+
+.Character
+{
+    /* select on frame on sprite sheet (coordinates start from top left to bottom right) */
+    width: calc(860px / 5 * var(--pixel-size)) ; /* to make each sprite the same size i have to measure and move each sprite into blocks whose size is the same as 
+    the biggest sprite on the sheet */
+    height: calc(264px / 2 * var(--pixel-size));
+    /* removes rest of spritesheet to show one image at a time */
+    overflow: hidden;
+    position: relative;
+    /* highlights first sprite (remove the whitespace from the png image using software or hide image source to see shape of first sprite) */ 
+    /* background: red;*/
+    margin: 0 auto;
+}
+
+.Character_spritesheet{
+    animation: moveSpritesheet1 1s steps(5) infinite;
+    width: calc(860px * var(--pixel-size)) ;
+    position: absolute;
+}
+
+.pixelart{
+    image-rendering: pixelated;
+}
+
+.Character_spritesheet_row_two{
+    top: calc(-132px * var(--pixel-size));
+}
+
+.Character_chargeShot{
+    width: calc(319px * var(--pixel-size2));
+    height: calc(340px * var(--pixel-size2));
+    position: relative;
+    margin: 0 auto;
+}
+
+.Character_chargeShot_spritesheet{
+    width: calc(319px * var(--pixel-size2)) ;
+    position: absolute;
+}
+
+.Character_chargeBeam{
+    width: calc(1776px / 4 * var(--pixel-size3));
+    height: 157px;
+    overflow: hidden;
+    position: relative;
+    margin: 0 auto;
+}
+
+.Character_chargeBeam_spritesheet{
+    animation: moveSpritesheet3 0.5s steps(4) infinite;
+    width: calc(1776px * var(--pixel-size3)) ;
+    position: absolute;
+}
+
+@keyframes moveSpritesheet1 {
+    from{
+        transform: translate3d(0px,0,0)
+    }
+    to{
+        transform: translate3d(-100%,0,0)
+    }
+}
+
+@keyframes moveSpritesheet2 {
+    from{
+        transform: translate3d(0px,0,0)
+    }
+    to{
+        transform: translate3d(-100%,0,0)
+    }
+}
+
+@keyframes moveSpritesheet3 {
+    from{
+        transform: translate3d(0px,0,0)
+    }
+    to{
+        transform: translate3d(-100%,0,0)
+    }
+}
+

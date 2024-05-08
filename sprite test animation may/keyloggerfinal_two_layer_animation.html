@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheet_two_layer_animation.css">
+    <title>Keylogger Script</title>
+    <style>
+    </style>
+</head>
+
+<!-- 
+    - find how to move exact position of keyframes animation across screen with js - done
+    - write a function that changes the z-index of all the spritesheets - done
+    - cannot move keyframes with position or any matter - done
+    - creat parabolic standing jump - done
+    - switch if else to case statement - done
+    - rotate through jump, attack and run animation - done    
+
+    - combine running animation into one animation using two keyframes - tbd - low priority
+    - add in defend animation for new key - tbd - low priority
+        - new spritesheet
+        - new keyframe animation
+    - add in duck animation for e key - tbd
+        - new spritesheet
+        - new keyframe animation
+    - background drawn on canvas -tbd
+        - find a good background spritesheet that is wider than 925px (at least 1800px for parallax scroll)
+    - allow for combination of jump and left/right movement - tbd
+        - (true parabolic jump)
+    - clean up code - tbd
+        - group into functions
+        - remove log statements
+        - look for further efficiencies
+
+    - immediate
+        - create discrepencies for spritesheet locations (1) - tbd
+            - when rotating through sprites megaman location appears to be 
+                same location
+
+        - collision control (2) - tbd
+            - borders
+            - with other objects
+                - power up
+                - enemy (bot)
+            - disable jump inputs to prevent from jumping off the screen
+                - have jump reset when jump key is pressed again - extra
+
+        - animating text (3) - tbd
+            - save phrase as a var in js
+            - run through each char in a loop (for)
+            - intro text
+            - pause menu text
+            - start menu
+                - blur
+                - start button
+
+    in js the use of loops is weird due to the fact that js scripts run on the browser while the browser is constantly
+    updated use of timed loops is limited. Switch between two platforms for w and s - tbd
+-->
+
+<body>
+    <div class="window1">
+        <div class="border1" id="border1">
+            <canvas class="canvas1" id="canvas1">
+                <img class="Q_key" id="Q_key" src="keypad_Q.png" alt="Q key pressed">
+                <img class="W_key" id="W_key" src="keypad_W.png" alt="W key pressed">
+                <img class="E_key" id="E_key" src="keypad_E.png" alt="E key pressed">
+                <img class="A_key" id="A_key" src="keypad_A.png" alt="Q key pressed">
+                <img class="S_key" id="S_key" src="keypad_S.png" alt="S key pressed">
+                <img class="D_key" id="D_key" src="keypad_D.png" alt="D key pressed">
+                <img class="no_key" id="no_key" src="keypad_main.png" alt="No key pressed">
+            </canvas>
+        </div>
+
+        <div class="border2" id="border2">
+            <canvas class="canvas2" id="canvas2">
+                <!--insert text to animate here, leave display as none and change as needed-->
+            </canvas>
+        </div>
+    </div>
+
+    <div class="window2">
+        <div class="border3" id="border3">
+            <div id="keyframeSprites" class="keyframeSprites">
+                <div id="Left_animation" class="Left_animation">
+                    <div class="Character">
+                        <img id="Character_megaman_main_1" class="Character_spritesheet pixelart"
+                            src="ss_megaman_twolayer.png" alt="Character_Stationary_layer1" />
+                    </div>
+                </div>
+                <div class="Character">
+                    <img id="Character_megaman_main_2"
+                        class="Character_spritesheet pixelart Character_spritesheet_row_two"
+                        src="ss_megaman_twolayer.png" alt="Character_Stationary_layer2" />
+                </div>
+                <div id="Character_jumping" class="Character_jumping">
+                    <img id="Character_megaman_jumping" class="Character_jumping_spritesheet pixelart"
+                        src="ss_megaman_jump.png" alt="Character Jumping" />
+                </div>
+                <div id="Character_duck" class="Character_jumping">
+                    <img id="Character_megaman_jumping" class="Character_jumping_spritesheet pixelart"
+                        src="ss_megaman_jump.png" alt="Character Jumping" />
+                </div>
+                <div id="Attack_animation" class="Attack_animation">
+                    <div id="Character_chargeshot" class="Character_chargeShot">
+                        <img id="Character_megaman_chargeshot" class="Character_chargeShot_spritesheet pixelart"
+                            src="ss_megaman_attack.png" alt="Character Attacking" />
+                    </div>
+                    <div id="Character_chargeBeam" class="Character_chargeBeam">
+                        <img id="Character_megaman_chargeBeam" class="Character_chargeBeam_spritesheet pixelart"
+                            src="ss_megaman_blast.png" alt="Blast Animation" />
+                    </div>
+                </div>
+            </div>
+
+            <div id="portal_sprites" class="portal_sprites">
+                <img id="portal_sprite" class="portal_sprite" src="portal.jpg" alt="Portal Animation">
+            </div>
+            <!-- <div id="base_sprite" class="base_sprite">
+                    <img id="">
+                </div> -->
+            <div id="platform_sprite_A" class="platform_sprite_A">
+                <img id="platform_sprite_1" class="platform_sprite_1" src="platform.png" alt="Platform Animation">
+            </div>
+            <div id="platform_sprite_B" class="platform_sprite_B">
+                <img id="platform_sprite_2" class="platform_sprite_2" src="platform.png" alt="Platform Animation">
+            </div>
+            <div id="platform_sprite_C" class="platform_sprite_C">
+                <img id="platform_sprite_3" class="platform_sprite_3" src="platform.png" alt="Platform Animation">
+            </div>
+
+            <canvas class="canvas3" id="canvas3">
+            </canvas>
+        </div>
+    </div>
+
+    <script>
+        var exit = true;
+
+        var key, img, canvas1, canvas2, canvas3;
+
+        var secondMotion, nojump, jumpfinished = false;
+
+        var state = "no";
+        var current_animation = "Left_animation";
+        var previous_animation = "";
+        var jumpMode = "";
+
+        var timer = 0;
+
+        let xPos = 750;
+        let yPos = 0;
+
+        var vx = 10;
+        var vy = 10;
+
+        var jumpHeight = 75;
+        var jumpDelay = 1;
+
+        var canvas1DOM = document.getElementById("canvas1")
+        var canvas2DOM = document.getElementById("canvas2")
+        var canvas3DOM = document.getElementById("canvas3")
+
+        window.onload = function () {
+            canvas = canvas1DOM.getContext("2d");
+            img = document.getElementById(state + "_key");
+            canvas.drawImage(img, 0, 0);
+
+            canvas3 = canvas3DOM.getContext("2d");
+        }
+
+        window.addEventListener('keydown', function (e) { doWhichKey(e); }, false)
+        window.addEventListener('keyup', function (e) { doNoKey(e); }, false)
+
+        function getWidth() {
+            return self.innerWidth;
+        }
+
+        function movePositionX() {
+            document.getElementById(current_animation).style.left = xPos + "px";
+        }
+
+        function clearScreen() {
+            document.getElementById("Character_megaman_main_1").style.display = "none";
+            document.getElementById("Character_megaman_main_2").style.display = "none";
+            document.getElementById("Character_megaman_jumping").style.display = "none";
+            document.getElementById("Character_megaman_chargeshot").style.display = "none";
+            document.getElementById("Character_megaman_chargeBeam").style.display = "none";
+            document.getElementById("portal_sprite").style.display = "none";
+            document.getElementById("platform_sprite_1").style.display = "none";
+            document.getElementById("platform_sprite_2").style.display = "none";
+            document.getElementById("platform_sprite_3").style.display = "none";
+        }
+
+        function doNoKey(e) {
+            canvas = canvas1DOM.getContext("2d");
+            img = document.getElementById("no_key");
+            canvas.drawImage(img, 0, 0);
+        }
+
+        function doWhichKey(e) {
+            e = e || window.event;
+            var charCode = e.keyCode || e.which;
+            key = String.fromCharCode(charCode);
+            nojump = false;
+            switch (key) {
+                case "a":
+                    previous_animation = current_animation;
+                    state = "A";
+                    current_animation = "Left_animation";
+                    xPos -= vx;
+                    document.getElementById(current_animation).style.display = "block";
+                    if (current_animation != previous_animation) {
+                        document.getElementById(previous_animation).style.display = "none";
+                    }
+                    document.getElementById("keyframeSprites").style.left = xPos + "px";
+                    break;
+                case "A":
+                    previous_animation = current_animation;
+                    state = "A";
+                    current_animation = "Left_animation";
+                    xPos -= vx;
+                    document.getElementById(current_animation).style.display = "block";
+                    if (current_animation != previous_animation) {
+                        document.getElementById(previous_animation).style.display = "none";
+                    }
+                    document.getElementById("keyframeSprites").style.left = xPos + "px";
+                    break;
+                //case "e":
+                //    state = "E";
+                //    current_animation = "Defend_animation";
+                //    break;
+                //case "E":
+                //    state = "E";
+                //    current_animation = "Defend_animation";
+                //    break;
+                case "s":
+                    state = "S";
+                    previous_animation = current_animation;
+                    current_animation = "Character_duck";
+                    yPos += vy;
+                    document.getElementById(current_animation).style.display = "block";
+                    if (current_animation != previous_animation) {
+                        document.getElementById(previous_animation).style.display = "none";
+                    }
+                    document.getElementById("keyframeSprites").style.top = yPos + "px";
+                    break;
+                case "S":
+                    state = "S";
+                    previous_animation = current_animation;
+                    current_animation = "Character_duck";
+                    yPos += vy;
+                    document.getElementById(current_animation).style.display = "block";
+                    if (current_animation != previous_animation) {
+                        document.getElementById(previous_animation).style.display = "none";
+                    }
+                    document.getElementById("keyframeSprites").style.top = yPos + "px";
+                    break;
+                case "d":
+                    previous_animation = current_animation;
+                    state = "D";
+                    current_animation = "Left_animation";
+                    xPos += vx;
+                    document.getElementById(current_animation).style.display = "block";
+                    if (current_animation != previous_animation) {
+                        document.getElementById(previous_animation).style.display = "none";
+                    }
+                    document.getElementById("keyframeSprites").style.left = xPos + "px";
+                    break;
+                case "D":
+                    previous_animation = current_animation;
+                    state = "D";
+                    current_animation = "Left_animation";
+                    xPos += vx;
+                    document.getElementById(current_animation).style.display = "block";
+                    if (current_animation != previous_animation) {
+                        document.getElementById(previous_animation).style.display = "none";
+                    }
+                    document.getElementById("keyframeSprites").style.left = xPos + "px";
+                    break;
+                case "w":
+                    previous_animation = current_animation;
+                    state = "W";
+                    current_animation = "Character_jumping";
+                    document.getElementById(current_animation).style.display = "block";
+                    if (current_animation != previous_animation) {
+                        document.getElementById(previous_animation).style.display = "none";
+                    } else {
+                        nojump = true;
+                    }
+                    if (nojump == false) {
+                        const up1 = setInterval(() => {
+                            if (timer == jumpHeight) {
+                                secondMotion = true;
+                            }
+                            timer++
+                            console.log(timer);
+                            if (secondMotion) {
+                                yPos += 1;
+                                if (timer == (2 * jumpHeight)) {
+                                    timer = 0;
+                                    nojump = false;
+                                    console.log("secondmotion");
+                                    console.log(nojump);
+                                    clearInterval(up1);
+                                }
+                            } else {
+                                yPos -= 1;
+                            }
+                            document.getElementById(current_animation).style.top = yPos + "px";
+                        }, jumpDelay);
+                    }
+                    secondMotion = false;
+                    break;
+                case "W":
+                    previous_animation = current_animation;
+                    state = "W";
+                    current_animation = "Character_jumping"
+                    document.getElementById(current_animation).style.display = "block";
+                    if (current_animation != previous_animation) {
+                        document.getElementById(previous_animation).style.display = "none";
+                    } else {
+                        nojump = true;
+                    }
+                    if (nojump == false) {
+                        const up2 = setInterval(() => {
+                            if (timer == jumpHeight) {
+                                secondMotion = true;
+                            }
+                            timer++
+                            console.log(timer);
+                            if (secondMotion) {
+                                yPos += 1;
+                                if (timer == (2 * jumpHeight)) {
+                                    timer = 0;
+                                    nojump = false;
+                                    console.log("secondmotion");
+                                    console.log(nojump);
+                                    clearInterval(up2);
+                                }
+                            } else {
+                                yPos -= 1;
+                            }
+                            document.getElementById(current_animation).style.top = yPos + "px";
+                        }, jumpDelay);
+                    }
+                    secondMotion = false;
+                    break;
+                case "q":
+                    previous_animation = current_animation;
+                    state = "Q";
+                    current_animation = "Attack_animation";
+                    document.getElementById(current_animation).style.display = "block";
+                    if (current_animation != previous_animation) {
+                        document.getElementById(previous_animation).style.display = "none";
+                    }
+                    break;
+                case "Q":
+                    previous_animation = current_animation;
+                    state = "Q";
+                    current_animation = "Attack_animation";
+                    document.getElementById(current_animation).style.display = "block";
+                    if (current_animation != previous_animation) {
+                        document.getElementById(previous_animation).style.display = "none";
+                    }
+                    break;
+                default:
+                    state = "no";
+                    break;
+            }
+            /*
+                        switch (current_animation) {
+                            case "Attack_animation":
+                                console.log("attack");
+                                //document.getElementById(current_animation).style.display = "none";
+                                break;
+                            //case "Defend_animation":
+                            //    console.log("defend");
+                            //    document.getElementById(current_animation).style.display = "none";
+                            //    break;
+                            case "Character_jumping":
+                                console.log("jump");
+                                break;
+                            //case "Duck_animation":
+                            //    console.log("down");
+                            //    break;                    
+                            case "Left_animation":
+                                console.log("left");
+                                break;
+                            case "Right_animation":
+                                console.log("right");
+                                break;
+                        }*/
+
+            //document.getElementById(previous_animation).style.display = "none";
+            //document.getElementById(current_animation).style.left = xPos +"px";
+
+            // drawing the key pressed animation
+            canvas = canvas1DOM.getContext("2d");
+            img = document.getElementById(state + "_key");
+            canvas.drawImage(img, 0, 0);
+
+            //console.log(state);
+            //console.log(previous_animation);
+            //console.log(key);
+            //console.log(vx);
+            //console.log(vy);
+            //console.log(xPos);
+            console.log(String.fromCharCode(charCode));
+            return String.fromCharCode(charCode);
+        }
+    </script>
+</body>
