@@ -331,7 +331,7 @@
 
                         xPos += discrepencyx;
                         yPos += discrepencyy;
-                        
+
                     }
 
                     xPos -= vx;
@@ -632,8 +632,6 @@
                         xPos += discrepencyx;
                         yPos += discrepencyy;
 
-                        document.getElementById("keyframeSprites").style.left = xPos + "px";
-                        document.getElementById("keyframeSprites").style.top = yPos + "px";
                     }
 
                     document.getElementById(current_animation).style.display = "block";
@@ -641,6 +639,9 @@
                     if (current_animation != previous_animation) {
                         document.getElementById(previous_animation).style.display = "none";
                     }
+
+                    document.getElementById("keyframeSprites").style.left = xPos + "px";
+                    document.getElementById("keyframeSprites").style.top = yPos + "px";
 
                     break;
                 case "Q":
@@ -666,8 +667,6 @@
                         xPos += discrepencyx;
                         yPos += discrepencyy;
 
-                        document.getElementById("keyframeSprites").style.left = xPos + "px";
-                        document.getElementById("keyframeSprites").style.top = yPos + "px";
                     }
 
                     document.getElementById(current_animation).style.display = "block";
@@ -675,6 +674,9 @@
                     if (current_animation != previous_animation) {
                         document.getElementById(previous_animation).style.display = "none";
                     }
+
+                    document.getElementById("keyframeSprites").style.left = xPos + "px";
+                    document.getElementById("keyframeSprites").style.top = yPos + "px";
 
                     break;
                 default:
