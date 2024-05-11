@@ -151,8 +151,8 @@
     </div>
 
     <script>
-        let xPos = 750;
-        let yPos = 0;
+        let xPos = 770; //718 602
+        let yPos = 120; //207 188
 
         const boundaryymax = 70;
         const boundaryymin = 270;
@@ -160,13 +160,13 @@
         const boundaryxmax = 890;
 
         const discrepencyxrun = 817; //
-        const discrepencyyrun = 40; //
+        const discrepencyyrun = 0; //
         const discrepencyxjump = 0; //
         const discrepencyyjump = 0; //
         //const discrepencyxjump2 = 0; //
         //const discrepencyyjump2 = 0; //
-        const discrepencyxbeam = 0; //
-        const discrepencyybeam = 0; //
+        const discrepencyxbeam = -210; // 720 209 // 928 170
+        const discrepencyybeam = 100; // 
 
         var discrepencyy, discrepencyx = 0;
 
@@ -207,6 +207,9 @@
             canvas.drawImage(img, 0, 0);
 
             canvas3 = canvas3DOM.getContext("2d");
+
+            document.getElementById("keyframeSprites").style.left = xPos + "px";
+            document.getElementById("keyframeSprites").style.top = yPos + "px";
         }
 
         window.addEventListener('keydown', function (e) { doWhichKey(e); }) // can you simplify this
@@ -222,7 +225,7 @@
         }
 
         function printMousePos(event) {
-            document.body.textContent = "clientX" + event.clientX + " - clientY: " + event.clientY;
+            document.body.textContent = "clientX " + event.clientX + " - clientY: " + event.clientY;
         }
 
         function accountDiscrepency() {
@@ -258,6 +261,7 @@
             e = e || window.event;
             var charCode = e.keyCode || e.which;
             key = String.fromCharCode(charCode);
+            discrepencyx, discrepencyy = 0;
 
             nojump = false;
 
@@ -270,27 +274,29 @@
 
                     if (xPos == boundaryxmin) {
                         console.log("boundary x min reached");
+                        current_animation = previous_animation;
                         break;
-                    }
 
-                    if (previous_animation != current_animation) {
-                        // if the current animation is diff from previous animation
+                        if (previous_animation != current_animation) {
+                            // if the current animation is diff from previous animation
 
-                        switch (current_animation) {
-                            case "Left_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                            case "Right_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                            case "Character_duck": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                            case "Character_jumping": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                            //const discrepencyxjump2 = 0; //833
-                            //const discrepencyyjump2 = 0; //488
-                            case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
-                            //case ""const discrepencyybeam; //615 200
+                            switch (current_animation) {
+                                case "Left_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
+                                case "Right_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
+                                case "Character_duck": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
+                                case "Character_jumping": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
+                                //const discrepencyxjump2 = 0; //833
+                                //const discrepencyyjump2 = 0; //488
+                                case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
+                                //case ""const discrepencyybeam; //615 200
+                            }
+
                         }
 
-                        xPos += discrepencyx;
-                        yPos += discrepencyy;
-
                     }
+
+                    xPos += discrepencyx;
+                    yPos += discrepencyy;
 
                     xPos -= vx; // since js is async could move this together might be right to wait till after
 
@@ -312,27 +318,28 @@
 
                     if (xPos == boundaryxmin) {
                         console.log("boundary x min reached");
+                        current_animation = previous_animation;
                         break;
-                    }
 
-                    if (previous_animation != current_animation) {
-                        // if the current animation is diff from previous animation
+                        if (previous_animation != current_animation) {
+                            // if the current animation is diff from previous animation
 
-                        switch (current_animation) {
-                            case "Left_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                            case "Right_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                            case "Character_duck": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                            case "Character_jumping": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                            //const discrepencyxjump2 = 0; //833
-                            //const discrepencyyjump2 = 0; //488
-                            case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
-                            //case ""const discrepencyybeam; //615 200
+                            switch (current_animation) {
+                                case "Left_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
+                                case "Right_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
+                                case "Character_duck": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
+                                case "Character_jumping": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
+                                //const discrepencyxjump2 = 0; //833
+                                //const discrepencyyjump2 = 0; //488
+                                case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
+                                //case ""const discrepencyybeam; //615 200
+                            }
+
                         }
-
-                        xPos += discrepencyx;
-                        yPos += discrepencyy;
-
                     }
+
+                    xPos += discrepencyx;
+                    yPos += discrepencyy;
 
                     xPos -= vx;
 
@@ -365,27 +372,29 @@
 
                     if (yPos == boundaryymin) {
                         console.log("boundary y min reached");
+                        current_animation = previous_animation;
                         break;
-                    }
 
-                    if (previous_animation != current_animation) {
-                        // if the current animation is diff from previous animation
+                        if (previous_animation != current_animation) {
+                            // if the current animation is diff from previous animation
 
-                        switch (current_animation) {
-                            case "Left_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                            case "Right_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                            case "Character_duck": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                            case "Character_jumping": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                            //const discrepencyxjump2 = 0; //833
-                            //const discrepencyyjump2 = 0; //488
-                            case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
-                            //case ""const discrepencyybeam; //615 200
+                            switch (current_animation) {
+                                case "Left_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
+                                case "Right_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
+                                case "Character_duck": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
+                                case "Character_jumping": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
+                                //const discrepencyxjump2 = 0; //833
+                                //const discrepencyyjump2 = 0; //488
+                                case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
+                                //case ""const discrepencyybeam; //615 200
+                            }
+
                         }
 
-                        xPos += discrepencyx;
-                        yPos += discrepencyy;
-
                     }
+
+                    xPos += discrepencyx;
+                    yPos += discrepencyy;
 
                     yPos += vy;
 
@@ -407,27 +416,28 @@
 
                     if (yPos == boundaryymin) {
                         console.log("boundary y min reached");
+                        current_animation = previous_animation;
                         break;
-                    }
 
-                    if (previous_animation != current_animation) {
-                        // if the current animation is diff from previous animation
+                        if (previous_animation != current_animation) {
+                            // if the current animation is diff from previous animation
 
-                        switch (current_animation) {
-                            case "Left_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                            case "Right_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                            case "Character_duck": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                            case "Character_jumping": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                            //const discrepencyxjump2 = 0; //833
-                            //const discrepencyyjump2 = 0; //488
-                            case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
-                            //case ""const discrepencyybeam; //615 200
+                            switch (current_animation) {
+                                case "Left_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
+                                case "Right_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
+                                case "Character_duck": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
+                                case "Character_jumping": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
+                                //const discrepencyxjump2 = 0; //833
+                                //const discrepencyyjump2 = 0; //488
+                                case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
+                                //case ""const discrepencyybeam; //615 200
+                            }
+
                         }
-
-                        xPos += discrepencyx;
-                        yPos += discrepencyy;
-
                     }
+
+                    xPos += discrepencyx;
+                    yPos += discrepencyy;
 
                     yPos += vy;
 
@@ -449,27 +459,28 @@
 
                     if (xPos == boundaryxmax) {
                         console.log("boundary x max reached");
+                        current_animation = previous_animation;
                         break;
-                    }
 
-                    if (previous_animation != current_animation) {
-                        // if the current animation is diff from previous animation
+                        if (previous_animation != current_animation) {
+                            // if the current animation is diff from previous animation
 
-                        switch (current_animation) {
-                            case "Left_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                            case "Right_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                            case "Character_duck": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                            case "Character_jumping": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                            //const discrepencyxjump2 = 0; //833
-                            //const discrepencyyjump2 = 0; //488
-                            case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
-                            //case ""const discrepencyybeam; //615 200
+                            switch (current_animation) {
+                                case "Left_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
+                                case "Right_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
+                                case "Character_duck": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
+                                case "Character_jumping": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
+                                //const discrepencyxjump2 = 0; //833
+                                //const discrepencyyjump2 = 0; //488
+                                case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
+                                //case ""const discrepencyybeam; //615 200
+                            }
+
                         }
-
-                        xPos += discrepencyx;
-                        yPos += discrepencyy;
-
                     }
+
+                    xPos += discrepencyx;
+                    yPos += discrepencyy;
 
                     xPos += vx;
 
@@ -491,27 +502,28 @@
 
                     if (xPos == boundaryxmax) {
                         console.log("boundary x max reached");
+                        current_animation = previous_animation;
                         break;
-                    }
 
-                    if (previous_animation != current_animation) {
-                        // if the current animation is diff from previous animation
+                        if (previous_animation != current_animation) {
+                            // if the current animation is diff from previous animation
 
-                        switch (current_animation) {
-                            case "Left_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                            case "Right_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                            case "Character_duck": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                            case "Character_jumping": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                            //const discrepencyxjump2 = 0; //833
-                            //const discrepencyyjump2 = 0; //488
-                            case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
-                            //case ""const discrepencyybeam; //615 200
+                            switch (current_animation) {
+                                case "Left_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
+                                case "Right_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
+                                case "Character_duck": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
+                                case "Character_jumping": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
+                                //const discrepencyxjump2 = 0; //833
+                                //const discrepencyyjump2 = 0; //488
+                                case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
+                                //case ""const discrepencyybeam; //615 200
+                            }
+
                         }
-
-                        xPos += discrepencyx;
-                        yPos += discrepencyy;
-
                     }
+
+                    xPos += discrepencyx;
+                    yPos += discrepencyy;
 
                     xPos += vx;
 
@@ -533,27 +545,27 @@
 
                     if (yPos == boundaryymax) {
                         console.log("boundary y max reached");
+                        current_animation = previous_animation;
                         break;
-                    }
 
-                    if (previous_animation != current_animation) {
-                        // if the current animation is diff from previous animation
+                        if (previous_animation != current_animation) {
+                            // if the current animation is diff from previous animation
 
-                        switch (current_animation) {
-                            case "Left_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                            case "Right_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                            case "Character_duck": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                            case "Character_jumping": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                            //const discrepencyxjump2 = 0; //833
-                            //const discrepencyyjump2 = 0; //488
-                            case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
-                            //case ""const discrepencyybeam; //615 200
+                            switch (current_animation) {
+                                case "Left_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
+                                case "Right_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
+                                case "Character_duck": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
+                                case "Character_jumping": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
+                                //const discrepencyxjump2 = 0; //833
+                                //const discrepencyyjump2 = 0; //488
+                                case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
+                                //case ""const discrepencyybeam; //615 200
+                            }
                         }
-
-                        xPos += discrepencyx;
-                        yPos += discrepencyy;
-
                     }
+
+                    xPos += discrepencyx;
+                    yPos += discrepencyy;
 
                     yPos -= vy;
 
@@ -575,27 +587,27 @@
 
                     if (yPos == boundaryymax) {
                         console.log("boundary y max reached");
+                        current_animation = previous_animation;
                         break;
-                    }
 
-                    if (previous_animation != current_animation) {
-                        // if the current animation is diff from previous animation
+                        if (previous_animation != current_animation) {
+                            // if the current animation is diff from previous animation
 
-                        switch (current_animation) {
-                            case "Left_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                            case "Right_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                            case "Character_duck": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                            case "Character_jumping": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                            //const discrepencyxjump2 = 0; //833
-                            //const discrepencyyjump2 = 0; //488
-                            case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
-                            //case ""const discrepencyybeam; //615 200
+                            switch (current_animation) {
+                                case "Left_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
+                                case "Right_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
+                                case "Character_duck": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
+                                case "Character_jumping": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
+                                //const discrepencyxjump2 = 0; //833
+                                //const discrepencyyjump2 = 0; //488
+                                case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
+                                //case ""const discrepencyybeam; //615 200
+                            }
                         }
-
-                        xPos += discrepencyx;
-                        yPos += discrepencyy;
-
                     }
+
+                    xPos += discrepencyx;
+                    yPos += discrepencyy;
 
                     yPos -= vy;
 
@@ -615,6 +627,12 @@
                     state = "Q";
                     current_animation = "Attack_animation";
 
+                    if (yPos == boundaryymax || xPos == boundaryxmax) {
+                        console.log("boundary y max reached");
+                        current_animation = previous_animation;
+                        break;
+                    }
+                    
                     if (previous_animation != current_animation) {
                         // if the current animation is diff from previous animation
 
@@ -629,10 +647,10 @@
                             //case ""const discrepencyybeam; //615 200
                         }
 
-                        xPos += discrepencyx;
-                        yPos += discrepencyy;
-
                     }
+
+                    xPos += discrepencyx;
+                    yPos += discrepencyy;
 
                     document.getElementById(current_animation).style.display = "block";
 
@@ -650,6 +668,12 @@
                     state = "Q";
                     current_animation = "Attack_animation";
 
+                    if (yPos == boundaryymax || xPos == boundaryxmax) {
+                        console.log("boundary y max reached");
+                        current_animation = previous_animation;
+                        break;
+                    }
+
                     if (previous_animation != current_animation) {
                         // if the current animation is diff from previous animation
 
@@ -664,10 +688,10 @@
                             //case ""const discrepencyybeam; //615 200
                         }
 
-                        xPos += discrepencyx;
-                        yPos += discrepencyy;
-
                     }
+
+                    xPos += discrepencyx;
+                    yPos += discrepencyy;
 
                     document.getElementById(current_animation).style.display = "block";
 
@@ -719,7 +743,8 @@
             canvas.drawImage(img, 0, 0);
 
             // console.log(state);
-            // console.log(previous_animation);
+            console.log(previous_animation);
+            console.log(current_animation);
             // console.log(key);
             // console.log(vx);
             // console.log(vy);
