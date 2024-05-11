@@ -25,7 +25,7 @@
     - add in duck animation for e key - tbd
         - new spritesheet
         - new keyframe animation
-    - background drawn on canvas -tbd
+    - background drawn on canvas - tbd
         - find a good background spritesheet that is wider than 925px (at least 1800px for parallax scroll)
     - allow for combination of jump and left/right movement - tbd
         - (true parabolic jump)
@@ -47,13 +47,11 @@
             - add in collision control after
         
         - collision control (2) - tbd
-            - borders
-            - with other objects
+            - borders - done
+            - with other objects - tbd
                 - power up
                 - enemy (bot)
-            - disable jump inputs to prevent from jumping off the screen
-                - have jump reset when jump key is pressed again - extra
-            - discrepencies untested
+            - discrepencies - finish jump, attack discrepencies, centered around running animation - tbd
 
         - animating text (3) - tbd
             - save phrase as a var in js
@@ -154,19 +152,19 @@
         let xPos = 770; //718 602
         let yPos = 120; //207 188
 
-        const boundaryymax = 70;
-        const boundaryymin = 270;
+        const boundaryymax = 110;
+        const boundaryymin = 320;
         const boundaryxmin = 720;
         const boundaryxmax = 890;
 
         const discrepencyxrun = 817; //
         const discrepencyyrun = 0; //
         const discrepencyxjump = 0; //
-        const discrepencyyjump = 0; //
+        const discrepencyyjump = -20; //
         //const discrepencyxjump2 = 0; //
         //const discrepencyyjump2 = 0; //
-        const discrepencyxbeam = -210; // 720 209 // 928 170
-        const discrepencyybeam = 100; // 
+        // const discrepencyxbeam = 0; // 720 209 // 928 170
+        // const discrepencyybeam = 0; // 
 
         var discrepencyy, discrepencyx = 0;
 
@@ -287,12 +285,10 @@
                                 case "Character_jumping": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
                                 //const discrepencyxjump2 = 0; //833
                                 //const discrepencyyjump2 = 0; //488
-                                case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
+                                //case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
                                 //case ""const discrepencyybeam; //615 200
                             }
-
                         }
-
                     }
 
                     xPos += discrepencyx;
@@ -318,7 +314,6 @@
 
                     if (xPos == boundaryxmin) {
                         console.log("boundary x min reached");
-                        current_animation = previous_animation;
                         break;
 
                         if (previous_animation != current_animation) {
@@ -334,7 +329,6 @@
                                 case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
                                 //case ""const discrepencyybeam; //615 200
                             }
-
                         }
                     }
 
@@ -385,12 +379,10 @@
                                 case "Character_jumping": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
                                 //const discrepencyxjump2 = 0; //833
                                 //const discrepencyyjump2 = 0; //488
-                                case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
+                                //case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
                                 //case ""const discrepencyybeam; //615 200
                             }
-
                         }
-
                     }
 
                     xPos += discrepencyx;
@@ -429,10 +421,9 @@
                                 case "Character_jumping": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
                                 //const discrepencyxjump2 = 0; //833
                                 //const discrepencyyjump2 = 0; //488
-                                case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
+                                //case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
                                 //case ""const discrepencyybeam; //615 200
                             }
-
                         }
                     }
 
@@ -451,6 +442,7 @@
                     document.getElementById("keyframeSprites").style.left = xPos + "px";
 
                     break;
+
                 case "d":
 
                     previous_animation = current_animation;
@@ -472,10 +464,9 @@
                                 case "Character_jumping": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
                                 //const discrepencyxjump2 = 0; //833
                                 //const discrepencyyjump2 = 0; //488
-                                case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
+                                //case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
                                 //case ""const discrepencyybeam; //615 200
                             }
-
                         }
                     }
 
@@ -494,6 +485,7 @@
                     document.getElementById("keyframeSprites").style.left = xPos + "px";
 
                     break;
+
                 case "D":
 
                     previous_animation = current_animation;
@@ -515,10 +507,9 @@
                                 case "Character_jumping": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
                                 //const discrepencyxjump2 = 0; //833
                                 //const discrepencyyjump2 = 0; //488
-                                case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
+                                //case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
                                 //case ""const discrepencyybeam; //615 200
                             }
-
                         }
                     }
 
@@ -537,6 +528,7 @@
                     document.getElementById("keyframeSprites").style.left = xPos + "px";
 
                     break;
+
                 case "w":
 
                     previous_animation = current_animation;
@@ -558,7 +550,7 @@
                                 case "Character_jumping": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
                                 //const discrepencyxjump2 = 0; //833
                                 //const discrepencyyjump2 = 0; //488
-                                case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
+                                //case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
                                 //case ""const discrepencyybeam; //615 200
                             }
                         }
@@ -579,6 +571,7 @@
                     document.getElementById("keyframeSprites").style.left = xPos + "px";
 
                     break;
+
                 case "W":
 
                     previous_animation = current_animation;
@@ -600,7 +593,7 @@
                                 case "Character_jumping": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
                                 //const discrepencyxjump2 = 0; //833
                                 //const discrepencyyjump2 = 0; //488
-                                case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
+                                //case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
                                 //case ""const discrepencyybeam; //615 200
                             }
                         }
@@ -621,96 +614,42 @@
                     document.getElementById("keyframeSprites").style.left = xPos + "px";
 
                     break;
+
                 case "q":
 
                     previous_animation = current_animation;
                     state = "Q";
                     current_animation = "Attack_animation";
 
-                    if (yPos == boundaryymax || xPos == boundaryxmax) {
-                        console.log("boundary y max reached");
-                        current_animation = previous_animation;
-                        break;
-                    }
-                    
-                    if (previous_animation != current_animation) {
-                        // if the current animation is diff from previous animation
-
-                        switch (current_animation) {
-                            case "Left_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                            case "Right_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                            case "Character_duck": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                            case "Character_jumping": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                            //const discrepencyxjump2 = 0; //833
-                            //const discrepencyyjump2 = 0; //488
-                            case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
-                            //case ""const discrepencyybeam; //615 200
-                        }
-
-                    }
-
-                    xPos += discrepencyx;
-                    yPos += discrepencyy;
-
                     document.getElementById(current_animation).style.display = "block";
 
                     if (current_animation != previous_animation) {
                         document.getElementById(previous_animation).style.display = "none";
                     }
 
-                    document.getElementById("keyframeSprites").style.left = xPos + "px";
-                    document.getElementById("keyframeSprites").style.top = yPos + "px";
-
                     break;
+
                 case "Q":
 
                     previous_animation = current_animation;
                     state = "Q";
                     current_animation = "Attack_animation";
 
-                    if (yPos == boundaryymax || xPos == boundaryxmax) {
-                        console.log("boundary y max reached");
-                        current_animation = previous_animation;
-                        break;
-                    }
-
-                    if (previous_animation != current_animation) {
-                        // if the current animation is diff from previous animation
-
-                        switch (current_animation) {
-                            case "Left_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                            case "Right_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                            case "Character_duck": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                            case "Character_jumping": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                            //const discrepencyxjump2 = 0; //833
-                            //const discrepencyyjump2 = 0; //488
-                            case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
-                            //case ""const discrepencyybeam; //615 200
-                        }
-
-                    }
-
-                    xPos += discrepencyx;
-                    yPos += discrepencyy;
-
                     document.getElementById(current_animation).style.display = "block";
 
                     if (current_animation != previous_animation) {
                         document.getElementById(previous_animation).style.display = "none";
                     }
 
-                    document.getElementById("keyframeSprites").style.left = xPos + "px";
-                    document.getElementById("keyframeSprites").style.top = yPos + "px";
-
                     break;
+
                 default:
 
                     state = "no";
 
                     break;
             }
-            /*
-                        switch (current_animation) {
+            /*          switch (current_animation) {
                             case "Attack_animation":
                                 console.log("attack");
                                 //document.getElementById(current_animation).style.display = "none";

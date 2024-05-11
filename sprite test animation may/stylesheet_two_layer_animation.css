@@ -105,6 +105,8 @@ body {
 .Character_jumping {
     width: calc(573px / 7 * var(--jump-pixel-size));
     height: 162px;
+    left: 25px;
+    bottom: 40px;
     overflow: hidden;
     position: relative;
     margin: 0 auto;
@@ -150,7 +152,7 @@ body {
 .Attack_animation {
     position: relative;
     /*placeholder*/
-    left: 185px;
+    bottom: 10px;
     display: none;
 }
 
