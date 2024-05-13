@@ -77,6 +77,52 @@ body {
     z-index: 2;
 }
 
+.life_counter {
+    position: absolute;
+    left: 1350px;
+    top: 570px;
+    z-index: 4;
+}
+
+.scoreboard {
+    position: absolute;
+    left: 690px;
+    top: 570px;
+    z-index: 4;
+}
+
+.score_text{
+
+}
+
+.life_counter_1 {
+    /* position: absolute;
+    left: 1400px;
+    top: 280px;
+    z-index: 3; */
+}
+
+.life_counter_2 {
+    /* position: absolute;
+    left: 1400px;
+    top: 280px;
+    z-index: 3; */
+}
+
+.life_counter_3 {
+    /* position: absolute;
+    left: 1400px;
+    top: 280px;
+    z-index: 3; */
+}
+
+.box_sprite {
+    position: absolute;
+    left: 1400px;
+    top: 280px;
+    z-index: 2;
+}
+
 .platform_sprite_1 {
     position: absolute;
     left: 700px;

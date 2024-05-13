@@ -35,14 +35,14 @@
         - look for further efficiencies
 
     - immediate
-        - create discrepencies for spritesheet locations (1) - tbd
+        - create discrepencies for spritesheet locations (1) - done
             - when rotating through sprites megaman location appears to be 
                 same location
             - change initial location
             - center animations
             - get new discrepencies
 
-        - use e key to switch between platforms (2) - tbd - priority high
+        - use e key to switch between platforms (2) - extra - priority high
             - with w and s
             - add in collision control after
         
@@ -51,9 +51,8 @@
             - with other objects - tbd
                 - power up
                 - enemy (bot)
-            - discrepencies - finish jump, attack discrepencies, centered around running animation - tbd
 
-        - animating text (3) - tbd
+        - animating text (3) - extra
             - save phrase as a var in js
             - run through each char in a loop (for)
             - intro text
@@ -62,7 +61,7 @@
                 - blur
                 - start button
 
-        - functional programming (4) - tbd
+        - functional programming (4) - tbd - optional
             - good grouping
             - change after fixing
 
@@ -145,6 +144,14 @@
 
             <div id="box_sprite_container" class="box_sprite_container">
                 <img id="box_sprite" class="box_sprite" src="box_sprite.png" alt="Box Sprite">
+            </div>
+            <div id="life_counter" class="life_counter">
+                <img id="life_counter_1" class="life_counter_1" src="life_alive.png" alt="Heart Sprite">
+                <img id="life_counter_2" class="life_counter_2" src="life_alive.png" alt="Heart Sprite">
+                <img id="life_counter_3" class="life_counter_3" src="life_alive.png" alt="Heart Sprite">
+            </div>
+            <div id="scoreboard" class="scoreboard">
+                <p id="score_text" class="score_text">Insert Score</p>
             </div>
 
             <canvas class="canvas3" id="canvas3">
@@ -229,10 +236,10 @@
 
         window.addEventListener('keydown', function (e) { doWhichKey(e); }) // can you simplify this
         window.addEventListener('keyup', function (e) { doNoKey(e); }) // and this
-        window.addEventListener("click", printMousePos);
+        //window.addEventListener("click", printMousePos);
 
         function getWidth() {
-            return self.innerWidth;
+            return window.innerWidth;
         }
 
         function movePositionX() {
@@ -713,12 +720,91 @@
 
             // console.log(xPos);
             // console.log(yPos);
+            console.log(window.innerWidth);
+            console.log(self.innerWidth);
+            console.log(getWidth());
 
             return String.fromCharCode(charCode);
         }
 
-        function enemySprites(){
+        function enemySprites(x,y) {
+            // with oops move box in different directions
+            var yPos = 0;
+            var xPos = 0;
+            var exit = false;
+            var window_width = 856; //650 1504
+            var total = 0;
+            var movex = 10;
+            //var movey = 10;
+            var lives = 3;
+            var timer = 0;
 
+            timer = scoreboard();
+
+            document.getElementById("box_sprite").style.display = "block";
+
+            while (exit == false) {
+                xPos -= movex;
+                yPos -= movey;
+                total += move;
+                timer += 1;
+
+                if ( collision_check(xPos, yPos) ) {
+
+                    lives(lives);
+
+                    lives -= 1;
+
+                    if (lives == 0) {
+                        exit = true;
+                    }
+                }
+                
+                document.getElementById("score_text").innerText = "Timer: " + timer;
+
+                document.getElementById("box_sprite_container").style.left = xPos + "px";
+
+                if ( timer == 999 ) {
+                    exit = true;
+                }
+
+                if ( total == window_width ) {
+                    xPos = 0;
+                }
+            }
+            alert("Game Over");
+        }
+
+        function lives(life_count) {
+            switch (life_count) {
+                case 1: document.getElementById("life_counter_1").src = "life_dead.png";
+                case 2: document.getElementById("life_counter_2").src = "life_dead.png";
+                case 3: document.getElementById("life_counter_3").src = "life_dead.png";
+            }
+        }
+
+        function collision_check() {
+            switch (key) {
+                case "a": if (xPos == 0) {
+
+                }
+                case "A":
+                case "s":
+                case "S":
+                case "d":
+                case "D":
+                case "w":
+                case "W":
+                case "q":
+                case "Q":
+            }
+        }
+
+        function gameOver() {
+
+        }
+
+        function level_1() {
         }
 
     </script>
