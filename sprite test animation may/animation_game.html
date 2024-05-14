@@ -165,36 +165,39 @@
 
         // collision control
         // borders for movement
-        const boundaryymax = 110;
-        const boundaryymin = 320;
-        const boundaryxmin = 720;
-        const boundaryxmax = 890;
+        let boundaryymax = 110;
+        let boundaryymin = 320;
+        let boundaryxmin = 720;
+        let boundaryxmax = 890;
 
         // discrepencies to level spritesheets (for changing size of window)
-        const discrepencyxrun = 0; //
-        const discrepencyyrun = 0; //
-        const discrepencyxjump = 0; //
-        const discrepencyyjump = 0; //
-        const discrepencyxduck = 0; //
-        const discrepencyyduck = 0; //
-        const discrepencyxbeam = 0; // 720 209 // 928 170
-        const discrepencyybeam = 0; // 
+        // let discrepencyxrun = 0; //
+        // let discrepencyyrun = 0; //
+        // let discrepencyxjump = 0; //
+        // let discrepencyyjump = 0; //
+        // let discrepencyxduck = 0; //
+        // let discrepencyyduck = 0; //
+        // let discrepencyxbeam = 0; // 720 209 // 928 170
+        // let discrepencyybeam = 0; // 
 
         // size of sprites for box hits etc
-        const jumpx = 0;
-        const jumpy = 0;
-        const duckx = 0;
-        const ducky = 0;
-        const leftx = 0;
-        const lefty = 0;
-        const rightx = 0;
-        const righty = 0;
+        let jumpx = Math.round(573 / 7 * 0.7);
+        let jumpy = 162;
+        let duckx = jumpx;
+        let ducky = jumpy;
+        let leftx = Math.round(860 / 5 * 0.7);
+        let lefty = Math.round(256 / 2 * 0.7);
+        let rightx = leftx;
+        let righty = lefty;
+
+        const x = 0;
+        const y = 0;
 
         var discrepencyy, discrepencyx = 0;
 
         var exit = true;
 
-        var key, img, canvas1, canvas2, canvas3;
+        var key, img, canvas1, canvas2, canvas3, construct;
 
         var secondMotion, nojump = false;
 
@@ -234,7 +237,7 @@
             document.getElementById("keyframeSprites").style.top = yPos + "px";
         }
 
-        window.addEventListener('keydown', function (e) { doWhichKey(e); }) // can you simplify this
+        window.addEventListener('keydown', function (e) { construct = doWhichKey(e); }) // can you simplify this
         window.addEventListener('keyup', function (e) { doNoKey(e); }) // and this
         //window.addEventListener("click", printMousePos);
 
@@ -281,8 +284,15 @@
         function doWhichKey(e) {
 
             e = e || window.event;
+
             var charCode = e.keyCode || e.which;
+
             key = String.fromCharCode(charCode);
+
+            console.log(document.getElementById(current_animation).style.left);
+            //x = document.getElementById(current_animation).style.left;
+            //y = document.getElementById(current_animation).style.top;
+
             discrepencyx, discrepencyy = 0;
 
             nojump = false;
@@ -679,31 +689,6 @@
 
                     break;
             }
-            /*          switch (current_animation) {
-                            case "Attack_animation":
-                                console.log("attack");
-                                //document.getElementById(current_animation).style.display = "none";
-                                break;
-                            //case "Defend_animation":
-                            //    console.log("defend");
-                            //    document.getElementById(current_animation).style.display = "none";
-                            //    break;
-                            case "Character_jumping":
-                                console.log("jump");
-                                break;
-                            //case "Duck_animation":
-                            //    console.log("down");
-                            //    break;                    
-                            case "Left_animation":
-                                console.log("left");
-                                break;
-                            case "Right_animation":
-                                console.log("right");
-                                break;
-                        }*/
-
-            //document.getElementById(previous_animation).style.display = "none";
-            //document.getElementById(current_animation).style.left = xPos +"px";
 
             // drawing the key pressed animation
 
@@ -712,44 +697,48 @@
             canvas.drawImage(img, 0, 0);
 
             // console.log(state);
+            // console.log(key);
+
             // console.log(previous_animation);
             // console.log(current_animation);
-            // console.log(key);
+
             // console.log(vx);
             // console.log(vy);
 
             // console.log(xPos);
             // console.log(yPos);
+
             console.log(window.innerWidth);
             console.log(self.innerWidth);
-            console.log(getWidth());
 
-            return String.fromCharCode(charCode);
+            console.log(getWidth());
+            console.log(String.fromCharCode(charCode));
+
+            return (x, y);
         }
 
-        function enemySprites(x,y) {
+        function enemySprites() {
             // with oops move box in different directions
-            var yPos = 0;
-            var xPos = 0;
+            var y1, x1, totalx, totaly, timer = 0;
             var exit = false;
             var window_width = 856; //650 1504
-            var total = 0;
             var movex = 10;
             //var movey = 10;
             var lives = 3;
-            var timer = 0;
-
-            timer = scoreboard();
 
             document.getElementById("box_sprite").style.display = "block";
 
             while (exit == false) {
-                xPos -= movex;
-                yPos -= movey;
-                total += move;
+                x1 -= movex;
+                //y1 -= Math.floor(Math.random() * ) + ;
+                totalx += movex;
+                //totaly += movey;
                 timer += 1;
 
-                if ( collision_check(xPos, yPos) ) {
+                console.log(x);
+                console.log(y);
+
+                if (collision_check(x1, y1, x, y)) {
 
                     lives(lives);
 
@@ -759,20 +748,30 @@
                         exit = true;
                     }
                 }
-                
+
                 document.getElementById("score_text").innerText = "Timer: " + timer;
 
-                document.getElementById("box_sprite_container").style.left = xPos + "px";
+                document.getElementById("box_sprite_container").style.left = x1 + "px";
 
-                if ( timer == 999 ) {
+                setTimeout(1000);
+
+                if (timer == 999) {
                     exit = true;
                 }
 
-                if ( total == window_width ) {
-                    xPos = 0;
+                if (totalx == window_width) {
+                    x1 = 0;
                 }
+
+                console.log(self.innerHeight);
+                console.log(self.innerWidth);
             }
-            alert("Game Over");
+
+            window.removeEventListener('keydown', function (e) { doWhichKey(e); })
+            window.removeEventListener('keyup', function (e) { doNoKey(e); })
+
+            console.log("game over");
+            //alert("Game Over");
         }
 
         function lives(life_count) {
@@ -783,7 +782,7 @@
             }
         }
 
-        function collision_check() {
+        function collision_check(xPos, yPos, x, y) {
             switch (key) {
                 case "a": if (xPos == 0) {
 
@@ -806,6 +805,8 @@
 
         function level_1() {
         }
+
+        enemySprites();
 
     </script>
 </body>
