@@ -171,14 +171,15 @@
         let boundaryxmax = 890;
 
         // discrepencies to level spritesheets (for changing size of window)
-        // let discrepencyxrun = 0; //
-        // let discrepencyyrun = 0; //
-        // let discrepencyxjump = 0; //
-        // let discrepencyyjump = 0; //
-        // let discrepencyxduck = 0; //
-        // let discrepencyyduck = 0; //
-        // let discrepencyxbeam = 0; // 720 209 // 928 170
-        // let discrepencyybeam = 0; // 
+        // only needed for smaller windows
+        let discrepencyxrun = 0; //
+        let discrepencyyrun = 0; //
+        let discrepencyxjump = 0; //
+        let discrepencyyjump = 0; //
+        let discrepencyxduck = 0; //
+        let discrepencyyduck = 0; //
+        let discrepencyxbeam = 0; // 720 209 // 928 170
+        let discrepencyybeam = 0; // 
 
         // size of sprites for box hits etc
         let jumpx = Math.round(573 / 7 * 0.7);
@@ -289,9 +290,13 @@
 
             key = String.fromCharCode(charCode);
 
+            console.log();
             console.log(document.getElementById(current_animation).style.left);
-            //x = document.getElementById(current_animation).style.left;
-            //y = document.getElementById(current_animation).style.top;
+            console.log(document.getElementById(current_animation).style.top);
+            console.log();
+            x = document.getElementById(current_animation).style.left;
+            y = document.getElementById(current_animation).style.top;
+
 
             discrepencyx, discrepencyy = 0;
 
@@ -728,47 +733,47 @@
 
             document.getElementById("box_sprite").style.display = "block";
 
-            while (exit == false) {
-                x1 -= movex;
-                //y1 -= Math.floor(Math.random() * ) + ;
-                totalx += movex;
-                //totaly += movey;
-                timer += 1;
+            //while (exit == false) {
+            x1 -= movex;
+            //y1 -= Math.floor(Math.random() * ) + ;
+            totalx += movex;
+            //totaly += movey;
+            timer += 1;
 
-                console.log(x);
-                console.log(y);
+            console.log(x);
+            console.log(y);
 
-                if (collision_check(x1, y1, x, y)) {
+            if (collision_check(x1, y1, x, y)) {
 
-                    lives(lives);
+                lives(lives);
 
-                    lives -= 1;
+                lives -= 1;
 
-                    if (lives == 0) {
-                        exit = true;
-                    }
-                }
-
-                document.getElementById("score_text").innerText = "Timer: " + timer;
-
-                document.getElementById("box_sprite_container").style.left = x1 + "px";
-
-                setTimeout(1000);
-
-                if (timer == 999) {
+                if (lives == 0) {
                     exit = true;
                 }
-
-                if (totalx == window_width) {
-                    x1 = 0;
-                }
-
-                console.log(self.innerHeight);
-                console.log(self.innerWidth);
             }
 
-            window.removeEventListener('keydown', function (e) { doWhichKey(e); })
-            window.removeEventListener('keyup', function (e) { doNoKey(e); })
+            document.getElementById("score_text").innerText = "Timer: " + timer;
+
+            document.getElementById("box_sprite_container").style.left = x1 + "px";
+
+            //setTimeout(1000);
+
+            if (timer == 999) {
+                exit = true;
+            }
+
+            if (totalx == window_width) {
+                x1 = 0;
+            }
+
+            console.log(self.innerHeight);
+            console.log(self.innerWidth);
+            //}
+
+            //window.removeEventListener('keydown', function (e) { doWhichKey(e); })
+            //window.removeEventListener('keyup', function (e) { doNoKey(e); })
 
             console.log("game over");
             //alert("Game Over");
@@ -806,7 +811,7 @@
         function level_1() {
         }
 
-        enemySprites();
+        //enemySprites();
 
     </script>
 </body>
