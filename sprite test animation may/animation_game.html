@@ -109,7 +109,7 @@
                     <img id="Character_megaman_jumping" class="Character_jumping_spritesheet pixelart"
                         src="ss_megaman_jump.png" alt="Character Jumping" />
                 </div>
-                <!-- replace with a duck animation later-->
+                <!-- replace with a duck animation later -->
                 <div id="Character_duck" class="Character_jumping">
                     <img id="Character_ducking" class="Character_jumping_spritesheet pixelart" src="ss_megaman_jump.png"
                         alt="Character Jumping" />
@@ -141,9 +141,10 @@
             <div id="platform_sprite_C" class="platform_sprite_C">
                 <img id="platform_sprite_3" class="platform_sprite_3" src="platform.png" alt="Platform Animation">
             </div>
-
-            <div id="box_sprite_container" class="box_sprite_container">
-                <img id="box_sprite" class="box_sprite" src="box_sprite.png" alt="Box Sprite">
+            <div id="boxes" class="boxes">
+                <div id="box_sprite_container" class="box_sprite_container">
+                    <img id="box_sprite" class="box_sprite" src="box_sprite.png" alt="Box Sprite">
+                </div>
             </div>
             <div id="life_counter" class="life_counter">
                 <img id="life_counter_1" class="life_counter_1" src="life_alive.png" alt="Heart Sprite">
@@ -151,7 +152,7 @@
                 <img id="life_counter_3" class="life_counter_3" src="life_alive.png" alt="Heart Sprite">
             </div>
             <div id="scoreboard" class="scoreboard">
-                <p id="score_text" class="score_text">Insert Score</p>
+                <p id="score_text" class="score_text">Timer : 0</p>
             </div>
 
             <canvas class="canvas3" id="canvas3">
@@ -215,6 +216,13 @@
         var jumpHeight = 75;
         var jumpDelay = 1;
 
+        var y1 = 0, x1 = 0, totalx = 0, totaly = 0, timer = 0;
+        var exit = false;
+        var window_width = 856; //650 1504
+        var movex = 10;
+        //var movey = 10;
+        var lives = 3;
+
         var canvas1DOM = document.getElementById("canvas1")
         var canvas2DOM = document.getElementById("canvas2")
         var canvas3DOM = document.getElementById("canvas3")
@@ -227,7 +235,15 @@
         // console.log(xPos);
         // console.log(yPos);
 
+        const timerInterval = setInterval(timerFunc, 1000);
+        //const enemySpriteInterval = setInterval(boxMovement, 1000);
+
+        window.addEventListener('keydown', function (e) { doWhichKey(e); }) // can you simplify this
+        window.addEventListener('keyup', function (e) { doNoKey(e); }) // and this
+        //window.addEventListener("click", printMousePos);
+
         window.onload = function () {
+
             canvas = canvas1DOM.getContext("2d");
             img = document.getElementById(state + "_key");
             canvas.drawImage(img, 0, 0);
@@ -236,11 +252,8 @@
 
             document.getElementById("keyframeSprites").style.left = xPos + "px";
             document.getElementById("keyframeSprites").style.top = yPos + "px";
-        }
 
-        window.addEventListener('keydown', function (e) { construct = doWhichKey(e); }) // can you simplify this
-        window.addEventListener('keyup', function (e) { doNoKey(e); }) // and this
-        //window.addEventListener("click", printMousePos);
+        }
 
         function getWidth() {
             return window.innerWidth;
@@ -294,8 +307,8 @@
             console.log(document.getElementById(current_animation).style.left);
             console.log(document.getElementById(current_animation).style.top);
             console.log();
-            x = document.getElementById(current_animation).style.left;
-            y = document.getElementById(current_animation).style.top;
+            //x = document.getElementById(current_animation).style.left;
+            //y = document.getElementById(current_animation).style.top;
 
 
             discrepencyx, discrepencyy = 0;
@@ -719,57 +732,43 @@
             console.log(getWidth());
             console.log(String.fromCharCode(charCode));
 
-            return (x, y);
+            //return (x, y);
         }
 
-        function enemySprites() {
+        function timerFunc() {
             // with oops move box in different directions
-            var y1, x1, totalx, totaly, timer = 0;
-            var exit = false;
-            var window_width = 856; //650 1504
-            var movex = 10;
-            //var movey = 10;
-            var lives = 3;
+            // var y1 = 0, x1 = 0, totalx = 0, totaly = 0, timer = 0;
+            // var exit = false;
+            // var window_width = 856; //650 1504
+            // var movex = 10;
+            // //var movey = 10;
+            // var lives = 3;
 
-            document.getElementById("box_sprite").style.display = "block";
+            //document.getElementById("box_sprite").style.display = "block";
 
-            //while (exit == false) {
-            x1 -= movex;
-            //y1 -= Math.floor(Math.random() * ) + ;
-            totalx += movex;
-            //totaly += movey;
             timer += 1;
+            console.log(timer);
 
-            console.log(x);
-            console.log(y);
+            // if (collision_check(x1, y1, x, y)) {
 
-            if (collision_check(x1, y1, x, y)) {
+            //     lives(lives);
 
-                lives(lives);
+            //     lives -= 1;
 
-                lives -= 1;
+            //     if (lives == 0) {
+            //         exit = true;
+            //     }
+            // }
 
-                if (lives == 0) {
-                    exit = true;
-                }
-            }
+            document.getElementById("score_text").innerText = "Timer : " + timer;
 
-            document.getElementById("score_text").innerText = "Timer: " + timer;
-
-            document.getElementById("box_sprite_container").style.left = x1 + "px";
-
-            //setTimeout(1000);
 
             if (timer == 999) {
-                exit = true;
+                // exit = true;
             }
 
-            if (totalx == window_width) {
-                x1 = 0;
-            }
-
-            console.log(self.innerHeight);
-            console.log(self.innerWidth);
+            //console.log(self.innerHeight);
+            //console.log(self.innerWidth);
             //}
 
             //window.removeEventListener('keydown', function (e) { doWhichKey(e); })
@@ -777,6 +776,23 @@
 
             console.log("game over");
             //alert("Game Over");
+        }
+
+        function boxMovement() {
+            x1 += movex;
+            //y1 -= Math.floor(Math.random() * ) + ;
+            totalx += movex;
+            //totaly += movey;
+            // console.log("");
+            // console.log(x1);
+            // console.log(y1);
+            // console.log(totalx);
+
+            document.getElementById("boxes").style.right = x1 + "px";
+
+            // if (totalx == window_width) {
+            //     // x1 = 0;
+            // }
         }
 
         function lives(life_count) {
@@ -810,8 +826,6 @@
 
         function level_1() {
         }
-
-        //enemySprites();
 
     </script>
 </body>

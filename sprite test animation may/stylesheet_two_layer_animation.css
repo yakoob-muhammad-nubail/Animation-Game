@@ -118,11 +118,22 @@ body {
 }
 */
 
-.box_sprite {
+.boxes {
     position: absolute;
+    z-index: 3;
+}
+
+.box_sprite_container {
+    position: relative;
+    z-index: 3;
+}
+
+.box_sprite {
+    position: relative;
+    display: block;
     left: 1400px;
     top: 280px;
-    z-index: 2;
+    z-index: 3;
 }
 
 .platform_sprite_1 {
