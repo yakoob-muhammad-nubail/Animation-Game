@@ -71,7 +71,7 @@
 -->
 
 <body>
-    <div class="window1">
+    <div id="window1" class="window1">
         <div class="border1" id="border1">
             <canvas class="canvas1" id="canvas1">
                 <img class="Q_key" id="Q_key" src="keypad_Q.png" alt="Q key pressed">
@@ -91,7 +91,7 @@
         </div>
     </div>
 
-    <div class="window2">
+    <div id="window2" class="window2">
         <div class="border3" id="border3">
             <div id="keyframeSprites" class="keyframeSprites">
                 <div id="Left_animation" class="Left_animation">
@@ -154,8 +154,11 @@
             <div id="scoreboard" class="scoreboard">
                 <p id="score_text" class="score_text">Timer : 0</p>
             </div>
-
             <canvas class="canvas3" id="canvas3">
+            </canvas>
+        </div>
+        <div id="window3" class="window3">
+            <canvas class="canvas4" id="canvas4">
             </canvas>
         </div>
     </div>
@@ -216,11 +219,17 @@
         var jumpHeight = 75;
         var jumpDelay = 1;
 
-        var y1 = 0, x1 = 0, totalx = 0, totaly = 0, timer = 0;
-        var exit = false;
+        var y1 = 0
+        var x1 = 0
+        var totalx = 0
+        var totaly = 0
         var window_width = 856; //650 1504
         var movex = 10;
-        //var movey = 10;
+        //var movey = 10; // for y movement later
+        var min = -200;
+        var max = 140;//140
+
+        var timer = 0;
         var lives = 3;
 
         var canvas1DOM = document.getElementById("canvas1")
@@ -236,13 +245,25 @@
         // console.log(yPos);
 
         const timerInterval = setInterval(timerFunc, 1000);
-        //const enemySpriteInterval = setInterval(boxMovement, 1000);
+        const enemySpriteInterval = setInterval(boxMovement, 50);
 
         window.addEventListener('keydown', function (e) { doWhichKey(e); }) // can you simplify this
         window.addEventListener('keyup', function (e) { doNoKey(e); }) // and this
         //window.addEventListener("click", printMousePos);
+        //checkWindowSize();
 
         window.onload = function () {
+            height = 565;
+            width = window.innerWidth - 565;
+
+            document.getElementById("border3").style.width = width + "px";
+            document.getElementById("border3").style.height = height + "px";
+
+            height = 515;
+            width = window.innerWidth - 615;
+
+            document.getElementById("canvas3").style.width = width + "px";
+            document.getElementById("canvas3").style.height = height + "px";
 
             canvas = canvas1DOM.getContext("2d");
             img = document.getElementById(state + "_key");
@@ -257,6 +278,18 @@
 
         function getWidth() {
             return window.innerWidth;
+        }
+
+        function getHeight() {
+            return window.innerHeight;
+        }
+
+        function checkWindowSize() {
+            width_WIN = window.innerWidth;
+            height_WIN = window.innerHeight;
+
+            console.log("window width is : " + width_WIN);
+            console.log("window height is : " + height_WIN);
         }
 
         function movePositionX() {
@@ -736,51 +769,29 @@
         }
 
         function timerFunc() {
-            // with oops move box in different directions
-            // var y1 = 0, x1 = 0, totalx = 0, totaly = 0, timer = 0;
-            // var exit = false;
-            // var window_width = 856; //650 1504
-            // var movex = 10;
-            // //var movey = 10;
-            // var lives = 3;
-
-            //document.getElementById("box_sprite").style.display = "block";
-
             timer += 1;
             console.log(timer);
-
-            // if (collision_check(x1, y1, x, y)) {
-
-            //     lives(lives);
-
-            //     lives -= 1;
-
-            //     if (lives == 0) {
-            //         exit = true;
-            //     }
-            // }
 
             document.getElementById("score_text").innerText = "Timer : " + timer;
 
 
             if (timer == 999) {
-                // exit = true;
+                gameOver;
             }
 
             //console.log(self.innerHeight);
             //console.log(self.innerWidth);
-            //}
 
-            //window.removeEventListener('keydown', function (e) { doWhichKey(e); })
-            //window.removeEventListener('keyup', function (e) { doNoKey(e); })
-
-            console.log("game over");
+            //console.log("game over");
+            //checkWindowSize();
             //alert("Game Over");
         }
 
         function boxMovement() {
+            window_width = 770;
+
+
             x1 += movex;
-            //y1 -= Math.floor(Math.random() * ) + ;
             totalx += movex;
             //totaly += movey;
             // console.log("");
@@ -788,11 +799,18 @@
             // console.log(y1);
             // console.log(totalx);
 
-            document.getElementById("boxes").style.right = x1 + "px";
+            document.getElementById("box_sprite_container").style.right = x1 + "px";
 
-            // if (totalx == window_width) {
-            //     // x1 = 0;
-            // }
+            console.log("x1 of box is : " + x1);
+
+            if (totalx == window_width) {
+                y1 = Math.floor(Math.random() * (max - min) + min);
+                x1 = 0;
+                totalx = 0; // can be used as a score multiplier
+
+                document.getElementById("box_sprite_container").style.right = x1 + "px";
+                document.getElementById("box_sprite_container").style.top = y1 + "px";
+            }
         }
 
         function lives(life_count) {
@@ -803,25 +821,24 @@
             }
         }
 
-        function collision_check(xPos, yPos, x, y) {
-            switch (key) {
-                case "a": if (xPos == 0) {
+        function collision_check() {
+            // if (collision_check(x1, y1, x, y)) {
 
-                }
-                case "A":
-                case "s":
-                case "S":
-                case "d":
-                case "D":
-                case "w":
-                case "W":
-                case "q":
-                case "Q":
-            }
+            //     lives(lives);
+
+            //     lives -= 1;
+
+            //     if (lives == 0) {
+            //         exit = true;
+            //     }
+            // }
         }
 
         function gameOver() {
-
+            window.removeEventListener('keydown', function (e) { doWhichKey(e); });
+            window.removeEventListener('keyup', function (e) { doNoKey(e); });
+            clearInterval(timerInterval);
+            clearInterval(enemySpriteInterval);
         }
 
         function level_1() {
