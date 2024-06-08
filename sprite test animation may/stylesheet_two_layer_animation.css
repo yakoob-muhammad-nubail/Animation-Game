@@ -6,7 +6,7 @@
 }
 
 body {
-    background: blue;
+    background: white;
 }
 
 /*Non Interactive windows*/
@@ -87,7 +87,7 @@ body {
 
 .scoreboard {
     position: absolute;
-    left: 690px;
+    left: 610px;
     top: 510px;
     z-index: 4;
 }
