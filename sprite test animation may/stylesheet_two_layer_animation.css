@@ -311,6 +311,14 @@ body {
 }
 
 /* game over css */
-.game_over_window_border {}
+.game_over_window_border {
+    display: none;
+}
 
-.game_over_window {}
+.game_over_window {
+    display: none;
+}
+
+.game_over_text {
+    display: none;
+}
