@@ -309,3 +309,8 @@ body {
         transform: translate3d(-100%, 0, 0)
     }
 }
+
+/* game over css */
+.game_over_window_border {}
+
+.game_over_window {}

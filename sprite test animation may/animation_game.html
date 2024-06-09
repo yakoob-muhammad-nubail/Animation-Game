@@ -173,6 +173,12 @@
         </div>
     </div>
 
+    <div id="game_over_window_border" class="game_over_window_border">
+        <div id="game_over_window" class="game_over_window">
+            <p>GAME OVER</p>
+        </div>
+    </div>
+
     <script>
         let xPos = 770; //718 602
         let yPos = 120; //207 188
@@ -905,14 +911,14 @@
             // var boxx = 52;
             // var boxy = 40;
 
-            // console.log("bx : " + bx);
-            // console.log("by : " + by);
+            console.log("bx : " + bx);
+            console.log("by : " + by);
             // console.log("boxx : " + boxx);
             // console.log("boxy : " + boxy);
-            // console.log("sprite run x : " + sprite_run_x);
-            // console.log("sprite run y : " + sprite_run_y);
-            // console.log("sprite jump x : " + sprite_jump_x);
-            // console.log("sprite jump y : " + sprite_jump_y);
+            console.log("sprite run x : " + sprite_run_x);
+            console.log("sprite run y : " + sprite_run_y);
+            console.log("sprite jump x : " + sprite_jump_x);
+            console.log("sprite jump y : " + sprite_jump_y);
 
             switch (current_animation) {
                 case "Left_animation":
@@ -937,10 +943,18 @@
         }
 
         function gameOver() {
+
             window.removeEventListener('keydown', function (e) { doWhichKey(e); });
             window.removeEventListener('keyup', function (e) { doNoKey(e); });
+
             clearInterval(timerInterval);
             clearInterval(enemySpriteInterval);
+
+            document.getElementById("keyframeSprites").style.display = "none";
+            document.getElementById("box_sprite_container").style.display = "none";
+
+
+
         }
 
         function level_1() {
