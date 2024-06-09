@@ -235,6 +235,7 @@
         //var movey = 10; // for y movement later
         var min = -200;
         var max = 140;//140
+        var hit = false;
 
         var timer = 0;
         var live_count = 3;
@@ -270,7 +271,7 @@
 
         window.addEventListener('keydown', function (e) { doWhichKey(e); }) // can you simplify this
         window.addEventListener('keyup', function (e) { doNoKey(e); }) // and this
-        //window.addEventListener("click", printMousePos);
+        window.addEventListener("click", printMousePos);
         //checkWindowSize();
 
         window.onload = function () {
@@ -292,7 +293,6 @@
 
             document.getElementById("keyframeSprites").style.left = xPos + "px";
             document.getElementById("keyframeSprites").style.top = yPos + "px";
-
         }
 
         function getWidth() {
@@ -317,6 +317,11 @@
 
         function printMousePos(event) {
             document.body.textContent = "clientX " + event.clientX + " - clientY: " + event.clientY;
+
+            window.removeEventListener('keydown', function (e) { doWhichKey(e); });
+            window.removeEventListener('keyup', function (e) { doNoKey(e); });
+            clearInterval(timerInterval);
+            clearInterval(enemySpriteInterval);
         }
 
         // function accountDiscrepency() {
@@ -775,13 +780,14 @@
             // console.log(vx);
             // console.log(vy);
 
-            // console.log("");
-            // console.log(xPos);
-            // console.log(yPos);
-            // console.log("");
-            // console.log(x1);
-            // console.log(y1);
-            // console.log("");
+            console.log("key is pressed\ncurrent animation is : " + current_animation);
+            console.log("");
+            console.log("xPos is : " + xPos);
+            console.log("xPos is : " + yPos);
+            console.log("");
+            console.log("x1 is : " + x1);
+            console.log("y1 is : " + y1);
+            console.log("");
 
             //console.log(window.innerWidth);
             //console.log(self.innerWidth);
@@ -827,8 +833,27 @@
 
             //console.log("x1 of box is : " + x1);
 
-            if (totalx == window_width || collision_check() == true) {
+            if (collision_check() == true) {
                 console.log("hit");
+                hit = true;
+            }
+
+            if (totalx == window_width || hit == true) { //set timeout to stop function while collision check is true
+
+                if (hit == true) {
+                    console.log("hit in progress\ncurrent animation is : " + current_animation);
+                    console.log("");
+                    console.log("xPos is : " + xPos);
+                    console.log("xPos is : " + yPos);
+                    console.log("");
+                    console.log("x1 is : " + x1);
+                    console.log("y1 is : " + y1);
+                    console.log("");
+
+                    hit = false;
+                    setTimeout("", 1000);
+                }
+
                 y1 = Math.floor(Math.random() * (max - min) + min);
                 x1 = 0;
                 totalx = 0; // can be used as a score multiplier
@@ -909,7 +934,6 @@
                         //alert("hit");
                     }
             }
-
         }
 
         function gameOver() {
