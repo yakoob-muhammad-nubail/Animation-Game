@@ -7,6 +7,7 @@
 
 body {
     background: white;
+    position: relative;
 }
 
 /*Non Interactive windows*/
@@ -311,14 +312,29 @@ body {
 }
 
 /* game over css */
-.game_over_window_border {
+.game_over_window {
+    position: absolute;
     display: none;
+    z-index: 5;
 }
 
-.game_over_window {
-    display: none;
+.game_over_window_border {
+    background-color: blue;
+    width: 500px;
+    height: 200px;
+    margin: 5px;
+    z-index: 5;
+}
+
+.text_window {
+    position: absolute;
+    background-color: white;
+    width: 450px;
+    height: 150px;
+    margin: 25px;
+    z-index: 5;
 }
 
 .game_over_text {
-    display: none;
+    z-index: 5;
 }

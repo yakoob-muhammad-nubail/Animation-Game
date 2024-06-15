@@ -77,7 +77,10 @@
                         initialization
             - frees up memory for larger executables (key for containers/server connections)
 
-        - 
+
+        - collision control bug
+            - possible issues => boolean hit is not registering
+                              => x and y positions are not registering correctly
 -->
 
 <body>
@@ -167,15 +170,19 @@
             <canvas class="canvas3" id="canvas3">
             </canvas>
         </div>
+
         <div id="window3" class="window3">
             <canvas class="canvas4" id="canvas4">
             </canvas>
         </div>
     </div>
 
-    <div id="game_over_window_border" class="game_over_window_border">
-        <div id="game_over_window" class="game_over_window">
-            <p id="game_over_text" class="game_over_text">GAME OVER</p>
+
+    <div id="game_over_window" class="game_over_window">
+        <div id="game_over_window_border" class="game_over_window_border">
+            <div id="text_window" class="text_window">
+                <p id="game_over_text" class="game_over_text">GAME OVER</p>
+            </div>
         </div>
     </div>
 
@@ -341,15 +348,15 @@
         // }
 
         function clearScreen() {
-            // document.getElementById("Character_megaman_main_1").style.display = "none";
-            // document.getElementById("Character_megaman_main_2").style.display = "none";
-            // document.getElementById("Character_megaman_jumping").style.display = "none";
-            // document.getElementById("Character_megaman_chargeshot").style.display = "none";
-            // document.getElementById("Character_megaman_chargeBeam").style.display = "none";
-            // document.getElementById("portal_sprite").style.display = "none";
-            // document.getElementById("platform_sprite_1").style.display = "none";
-            // document.getElementById("platform_sprite_2").style.display = "none";
-            // document.getElementById("platform_sprite_3").style.display = "none";
+            document.getElementById("Character_megaman_main_1").style.display = "none";
+            document.getElementById("Character_megaman_main_2").style.display = "none";
+            document.getElementById("Character_megaman_jumping").style.display = "none";
+            document.getElementById("Character_megaman_chargeshot").style.display = "none";
+            document.getElementById("Character_megaman_chargeBeam").style.display = "none";
+            document.getElementById("portal_sprite").style.display = "none";
+            document.getElementById("platform_sprite_1").style.display = "none";
+            document.getElementById("platform_sprite_2").style.display = "none";
+            document.getElementById("platform_sprite_3").style.display = "none";
         }
 
         function doNoKey(e) {
@@ -842,6 +849,26 @@
             if (collision_check() == true) {
                 console.log("hit");
                 hit = true;
+            } else {
+                console.log("hit not registered\ncurrent animation is : " + current_animation);
+                console.log("");
+                console.log("xPos is : " + xPos);
+                console.log("xPos is : " + yPos);
+                console.log("");
+                console.log("bx : " + bx);
+                console.log("by : " + by);
+                console.log("boxx : " + boxx);
+                console.log("boxy : " + boxy);
+                console.log("sprite run x : " + sprite_run_x);
+                console.log("sprite run y : " + sprite_run_y);
+                console.log("sprite jump x : " + sprite_jump_x);
+                console.log("sprite jump y : " + sprite_jump_y);
+                console.log("");
+                console.log("x1 is : " + x1);
+                console.log("y1 is : " + y1);
+                console.log("");
+                console.log("hit : " + hit);
+                console.log("live_count : " + live_count);
             }
 
             if (totalx == window_width || hit == true) { //set timeout to stop function while collision check is true
@@ -852,12 +879,23 @@
                     console.log("xPos is : " + xPos);
                     console.log("xPos is : " + yPos);
                     console.log("");
+                    console.log("bx : " + bx);
+                    console.log("by : " + by);
+                    console.log("boxx : " + boxx);
+                    console.log("boxy : " + boxy);
+                    console.log("sprite run x : " + sprite_run_x);
+                    console.log("sprite run y : " + sprite_run_y);
+                    console.log("sprite jump x : " + sprite_jump_x);
+                    console.log("sprite jump y : " + sprite_jump_y);
+                    console.log("");
                     console.log("x1 is : " + x1);
                     console.log("y1 is : " + y1);
                     console.log("");
+                    console.log("hit : " + hit);
+                    console.log("live_count : " + live_count);
 
                     hit = false;
-                    setTimeout("", 1000);
+                    // setTimeout("", 1000);
                 }
 
                 y1 = Math.floor(Math.random() * (max - min) + min);
@@ -911,14 +949,14 @@
             // var boxx = 52;
             // var boxy = 40;
 
-            console.log("bx : " + bx);
-            console.log("by : " + by);
+            // console.log("bx : " + bx);
+            // console.log("by : " + by);
             // console.log("boxx : " + boxx);
             // console.log("boxy : " + boxy);
-            console.log("sprite run x : " + sprite_run_x);
-            console.log("sprite run y : " + sprite_run_y);
-            console.log("sprite jump x : " + sprite_jump_x);
-            console.log("sprite jump y : " + sprite_jump_y);
+            // console.log("sprite run x : " + sprite_run_x);
+            // console.log("sprite run y : " + sprite_run_y);
+            // console.log("sprite jump x : " + sprite_jump_x);
+            // console.log("sprite jump y : " + sprite_jump_y);
 
             switch (current_animation) {
                 case "Left_animation":
@@ -943,7 +981,6 @@
         }
 
         function gameOver() {
-
             window.removeEventListener('keydown', function (e) { doWhichKey(e); });
             window.removeEventListener('keyup', function (e) { doNoKey(e); });
 
@@ -953,12 +990,16 @@
             document.getElementById("keyframeSprites").style.display = "none";
             document.getElementById("box_sprite_container").style.display = "none";
 
+            document.getElementById("game_over_window").style.display = "block";
 
+            width = window.innerWidth / 2 - 250;
+            height = window.innerHeight / 2 - 100;
 
+            document.getElementById("game_over_window").style.left = width + "px";
+            document.getElementById("game_over_window").style.top = height + "px";
         }
 
-        function level_1() {
-        }
+        function level_1() { }
 
     </script>
 </body>

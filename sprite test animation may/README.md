@@ -1,0 +1,1 @@
+Open up animation_game.html in web browser to run game.
