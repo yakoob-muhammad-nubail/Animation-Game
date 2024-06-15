@@ -793,14 +793,14 @@
             // console.log(vx);
             // console.log(vy);
 
-            console.log("key is pressed\ncurrent animation is : " + current_animation);
-            console.log("");
-            console.log("xPos is : " + xPos);
-            console.log("xPos is : " + yPos);
-            console.log("");
-            console.log("x1 is : " + x1);
-            console.log("y1 is : " + y1);
-            console.log("");
+            // console.log("key is pressed\ncurrent animation is : " + current_animation);
+            // console.log("");
+            // console.log("xPos is : " + xPos);
+            // console.log("xPos is : " + yPos);
+            // console.log("");
+            // console.log("x1 is : " + x1);
+            // console.log("y1 is : " + y1);
+            // console.log("");
 
             //console.log(window.innerWidth);
             //console.log(self.innerWidth);
@@ -898,7 +898,7 @@
                     // setTimeout("", 1000);
                 }
 
-                y1 = Math.floor(Math.random() * (max - min) + min);
+                //y1 = Math.floor(Math.random() * (max - min) + min);
                 x1 = 0;
                 totalx = 0; // can be used as a score multiplier
 
@@ -920,7 +920,7 @@
             by = y1 + 280; //280
             sprite_run_x = xPos + 600; //770
             sprite_run_y = yPos + 100; //120
-            sprite_jump_x = xPos + 620; //l 20
+            sprite_jump_x = xPos + 625; //l 20
             sprite_jump_y = yPos + 60; //b 40
 
             // x1 = 0;
@@ -960,19 +960,19 @@
 
             switch (current_animation) {
                 case "Left_animation":
-                    if (sprite_run_x >= bx && sprite_run_x <= (bx + boxx) && sprite_run_y >= by && sprite_jump_y <= (by + boxy)) {
+                    if (sprite_run_x >= bx && sprite_run_x < (bx + boxx) && sprite_run_y >= by && sprite_jump_y < (by + boxy)) {
                         lives();
                         return true;
                         //alert("hit");
                     }
                 case "Character_duck":
-                    if (sprite_jump_x >= bx && sprite_jump_x <= (bx + boxx) && sprite_jump_y >= by && sprite_jump_y <= (by + boxy)) {
+                    if (sprite_jump_x >= bx && sprite_jump_x < (bx + boxx) && sprite_jump_y >= by && sprite_jump_y < (by + boxy)) {
                         lives();
                         return true;
                         //alert("hit");
                     }
                 case "Character_jumping":
-                    if (sprite_jump_x >= bx && sprite_jump_x <= (bx + boxx) && sprite_jump_y >= by && sprite_jump_y <= (by + boxy)) {
+                    if (sprite_jump_x >= bx && sprite_jump_x < (bx + boxx) && sprite_jump_y >= by && sprite_jump_y < (by + boxy)) {
                         lives();
                         return true;
                         //alert("hit");
