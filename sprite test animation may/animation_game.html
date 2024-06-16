@@ -43,16 +43,19 @@
         - group into functions
         - remove log statements
         - look for further efficiencies
+    - collision control - tbd - low priority
+            - borders - done
+            - with other objects - done
+                - power up - tbd
+                    - 1-up, restart, invincible (star), fireball - tbd
+                - enemy (bot) - done
+    - collision control bug - done
+            - possible issues => boolean hit is not registering
+                              => x and y positions are not registering correctly
+                              => issue was solved by checking where hit was registered and adding in discrepency
+                              => started from moving parent divs
 
     - immediate      
-        - collision control (2) - tbd
-            - borders - done
-            - with other objects - tbd
-                - power up - tbd
-                    - same script 
-                    - 1-up, restart, invincible (star), fireball
-                - enemy (bot) - tbd
-
         - animating text (3) - extra
             - save phrase as a var in js
             - run through each char in a loop (for)
@@ -67,6 +70,7 @@
             - change after fixing
 
         - oops (5) - tbd
+            - ties into new levels
             - classes and objects
             - best for multiple blocks and power ups for a new level
                 - after timer is changed (300 seconds - 5 minutes) per level
@@ -76,11 +80,6 @@
                         object needed, include the drawing function as part of the object 
                         initialization
             - frees up memory for larger executables (key for containers/server connections)
-
-
-        - collision control bug
-            - possible issues => boolean hit is not registering
-                              => x and y positions are not registering correctly
 -->
 
 <body>
@@ -176,7 +175,6 @@
             </canvas>
         </div>
     </div>
-
 
     <div id="game_over_window" class="game_over_window">
         <div id="game_over_window_border" class="game_over_window_border">
