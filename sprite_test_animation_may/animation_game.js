@@ -66,10 +66,10 @@ var live_count = 3;
 
 var bx = x1 + 800; //800
 var by = y1 + 280; //280
-var sprite_run_x = xPos + 600; //770
+var sprite_run_x = xPos + 660; //770
 var sprite_run_y = yPos + 100; //120
-var sprite_jump_x = xPos + 600 + 20; //l 20
-var sprite_jump_y = yPos + 100 - 40; //b 40
+var sprite_jump_x = xPos + 650; //840 802
+var sprite_jump_y = yPos + 100; //300 355
 
 var runx = (860 / 5 * 0.70);
 var runy = (256 / 2 * 0.70);
@@ -758,16 +758,16 @@ function lives() {
 
     bx = x1 + 800; //800
     by = y1 + 280; //280
-    sprite_run_x = xPos + 600; //770
+    sprite_run_x = xPos + 660; //770
     sprite_run_y = yPos + 100; //120
-    sprite_jump_x = xPos + 640; //840 802
+    sprite_jump_x = xPos + 650; //840 802
     sprite_jump_y = yPos + 100; //300 355
 
-    // x1 = 0;
-    // y1 = Math.floor(Math.random() * (max - min) + min);
+    x1 = 0;
+    y1 = Math.floor(Math.random() * (max - min) + min);
 
-    // document.getElementById("box_sprite_container").style.right = x1 + "px";
-    // document.getElementById("box_sprite_container").style.top = y1 + "px";
+    document.getElementById("box_sprite_container").style.right = x1 + "px";
+    document.getElementById("box_sprite_container").style.top = y1 + "px";
 
     if (live_count == 0) {
         gameOver();
@@ -777,9 +777,9 @@ function lives() {
 function collision_check() {
     bx = x1 + 800; //800
     by = y1 + 280; //280
-    sprite_run_x = xPos + 600; //770
+    sprite_run_x = xPos + 660; //770
     sprite_run_y = yPos + 100; //120
-    sprite_jump_x = xPos + 640; //840 802
+    sprite_jump_x = xPos + 650; //840 802
     sprite_jump_y = yPos + 100; //300 355
 
     // var runx = (860 / 5 * 0.70);
