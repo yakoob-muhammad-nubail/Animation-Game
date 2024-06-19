@@ -95,12 +95,14 @@ const enemySpriteInterval = setInterval(boxMovement, 5);
 
 window.addEventListener('keydown', function (e) { doWhichKey(e); }) // can you simplify this
 window.addEventListener('keyup', function (e) { doNoKey(e); }) // and this
-//window.addEventListener("click", printMousePos);
+window.addEventListener("click", printMousePos);
 //checkWindowSize();
 
 window.onload = function () {
+    var height, width, top, left;
+
     height = 565;
-    width = window.innerWidth - 565;
+    width = window.innerWidth - 580; //575
 
     console.log("width  border 3 : " + width);
     console.log("height  border 3 : " + height);
@@ -109,7 +111,7 @@ window.onload = function () {
     document.getElementById("border3").style.height = height + "px";
 
     height = 515;
-    width = window.innerWidth - 615;
+    width = window.innerWidth - 630; //625
 
     console.log("width  canvas 3 : " + width);
     console.log("height  canvas 3 : " + height);
@@ -117,12 +119,33 @@ window.onload = function () {
     document.getElementById("canvas3").style.width = width + "px";
     document.getElementById("canvas3").style.height = height + "px";
 
+    width = window.innerWidth - 25;
+    height = window.innerHeight - 610;//610
+
+    console.log("width border 4 : " + width);
+    console.log("height border 4 : " + top);
+
+    document.getElementById("border4").style.width = width + "px";
+    document.getElementById("border4").style.height = height + "px";
+    // document.getElementById("window3").style.top = top + "px";
+    // document.getElementById("window3").style.left = left + "px";
+
+    width = window.innerWidth - 75;
+    height = window.innerHeight - 660;// 635
+
+    console.log("width canvas 4 : " + width);
+    console.log("height canvas 4 : " + top);
+
+    document.getElementById("canvas4").style.width = width + "px";
+    document.getElementById("canvas4").style.height = height + "px";
+
     canvas = canvas1DOM.getContext("2d");
     img = document.getElementById(state + "_key");
     canvas.drawImage(img, 0, 0);
 
     document.getElementById("keyframeSprites").style.left = xPos + "px";
     document.getElementById("keyframeSprites").style.top = yPos + "px";
+
 }
 
 function getWidth() {
@@ -667,7 +690,7 @@ function boxMovement() {
         console.log("hit");
         hit = true;
     } else {
-        console.log("hit not registered\ncurrent animation is : " + current_animation);
+        // console.log("hit not registered\ncurrent animation is : " + current_animation);
         // console.log("");
         // console.log("xPos is : " + xPos);
         // console.log("xPos is : " + yPos);
@@ -691,7 +714,7 @@ function boxMovement() {
     if (totalx == window_width || hit == true) { //set timeout to stop function while collision check is true
 
         if (hit == true) {
-            console.log("hit in progress\ncurrent animation is : " + current_animation);
+            // console.log("hit in progress\ncurrent animation is : " + current_animation);
             // console.log("");
             // console.log("xPos is : " + xPos);
             // console.log("xPos is : " + yPos);
@@ -809,13 +832,11 @@ function gameOver() {
 
     document.getElementById("game_over_window").style.display = "block";
 
-    width = window.innerWidth / 2 - 250;
-    height = window.innerHeight / 2 - 100;
+    width = window.innerWidth / 2 - 400;
+    height = window.innerHeight / 2 - 150;
 
     document.getElementById("game_over_window").style.left = width + "px";
     document.getElementById("game_over_window").style.top = height + "px";
 }
 
 function level_1() { }
-
-

@@ -65,6 +65,22 @@ body {
     background-color: white;
 }
 
+.window3 {
+    z-index: 6;
+    top: 580px;
+    position: absolute;
+}
+
+.border4 {
+    background-color: black;
+    margin: 5px;
+}
+
+.canvas4 {
+    background-color: white;
+    margin: 25px;
+}
+
 .keyframeSprites {
     position: absolute;
     left: 600px;
@@ -320,8 +336,8 @@ body {
 
 .game_over_window_border {
     background-color: blue;
-    width: 500px;
-    height: 200px;
+    width: 800px;
+    height: 300px;
     margin: 5px;
     z-index: 5;
 }
@@ -329,8 +345,8 @@ body {
 .text_window {
     position: absolute;
     background-color: white;
-    width: 450px;
-    height: 150px;
+    width: 750px;
+    height: 250px;
     margin: 25px;
     z-index: 5;
 }
