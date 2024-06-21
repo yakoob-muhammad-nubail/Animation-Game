@@ -29,6 +29,8 @@ let lefty = Math.round(256 / 2 * 0.7);
 let rightx = leftx;
 let righty = lefty;
 
+var e = 0;
+
 var discrepencyy, discrepencyx = 0;
 
 var exit = true;
@@ -95,7 +97,7 @@ const enemySpriteInterval = setInterval(boxMovement, 5);
 
 window.addEventListener('keydown', function (e) { doWhichKey(e); }) // can you simplify this
 window.addEventListener('keyup', function (e) { doNoKey(e); }) // and this
-window.addEventListener("click", printMousePos);
+//window.addEventListener("click", printMousePos);
 //checkWindowSize();
 
 window.onload = function () {
@@ -200,6 +202,7 @@ function clearScreen() {
 }
 
 function doNoKey(e) {
+    e = 0;
     canvas = canvas1DOM.getContext("2d");
     img = document.getElementById("no_key");
     canvas.drawImage(img, 0, 0);
@@ -207,9 +210,9 @@ function doNoKey(e) {
 
 function doWhichKey(e) {
 
-    e = e || window.event;
+    //e = e || window.event;
 
-    var charCode = e.keyCode || e.which;
+    charCode = e.keyCode || e.which;
 
     key = String.fromCharCode(charCode);
 
