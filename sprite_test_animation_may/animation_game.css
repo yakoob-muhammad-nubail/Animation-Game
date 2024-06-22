@@ -83,8 +83,8 @@ body {
 
 .keyframeSprites {
     position: absolute;
-    left: 600px;
-    top: 100px;
+    left: 720px;
+    top: 120px;
     z-index: 3;
 }
 
@@ -93,6 +93,7 @@ body {
     left: 1380px;
     top: 150px;
     z-index: 2;
+    /* display: none; */
 }
 
 .life_counter {
@@ -122,6 +123,32 @@ body {
     position: relative;
     left: 800px;
     top: 280px;
+}
+
+.sprite_hb {
+    position: absolute;
+    z-index: 3;
+}
+
+.sprite_hb_test {
+    position: relative;
+}
+
+.s_hb {
+    position: relative;
+}
+
+.box_hb {
+    position: absolute;
+    z-index: 3;
+}
+
+.box_hb_test {
+    position: relative;
+}
+
+.b_hb {
+    position: relative;
 }
 
 /* 
@@ -156,6 +183,7 @@ body {
     left: 700px;
     top: 400px;
     z-index: 2;
+    /* display: none; */
 }
 
 .platform_sprite_2 {
@@ -163,6 +191,7 @@ body {
     left: 700px;
     top: 300px;
     z-index: 2;
+    /* display: none; */
 }
 
 .platform_sprite_3 {
@@ -170,6 +199,7 @@ body {
     left: 700px;
     top: 200px;
     z-index: 2;
+    /* display: none; */
 }
 
 /* .Left_animation{

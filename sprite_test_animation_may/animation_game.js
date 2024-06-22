@@ -1,6 +1,3 @@
-let xPos = 770; //718 602
-let yPos = 120; //207 188
-
 // collision control
 // borders for movement
 let boundaryymax = 110;
@@ -31,7 +28,7 @@ let righty = lefty;
 
 var e = 0;
 
-var discrepencyy, discrepencyx = 0;
+var discrepencyy = 0, discrepencyx = 0;
 
 var exit = true;
 
@@ -52,6 +49,8 @@ var vy = 10;
 var jumpHeight = 75;
 var jumpDelay = 1;
 
+var xPos = 790; //718 602
+var yPos = 120; //207 188
 var y1 = 0
 var x1 = 0
 var totalx = 0
@@ -59,7 +58,7 @@ var totaly = 0
 var window_width = 856; //650 1504
 var movex = 1;
 //var movey = 10; // for y movement later
-var min = -200;
+var min = -200;//-200
 var max = 140;//140
 var hit = false;
 
@@ -80,6 +79,8 @@ var jump_y = 162;
 var boxx = 52;
 var boxy = 40;
 
+var offsets = 0, left = 0, top = 0;
+
 var canvas1DOM = document.getElementById("canvas1")
 var canvas2DOM = document.getElementById("canvas2")
 var canvas3DOM = document.getElementById("canvas3")
@@ -97,17 +98,17 @@ const enemySpriteInterval = setInterval(boxMovement, 5);
 
 window.addEventListener('keydown', function (e) { doWhichKey(e); }) // can you simplify this
 window.addEventListener('keyup', function (e) { doNoKey(e); }) // and this
-//window.addEventListener("click", printMousePos);
+window.addEventListener("click", printMousePos);
 //checkWindowSize();
 
 window.onload = function () {
-    var height, width, top, left;
+    var height, width;
 
     height = 565;
     width = window.innerWidth - 580; //575
 
-    console.log("width  border 3 : " + width);
-    console.log("height  border 3 : " + height);
+    // console.log("width  border 3 : " + width);
+    // console.log("height  border 3 : " + height);
 
     document.getElementById("border3").style.width = width + "px";
     document.getElementById("border3").style.height = height + "px";
@@ -115,8 +116,8 @@ window.onload = function () {
     height = 515;
     width = window.innerWidth - 630; //625
 
-    console.log("width  canvas 3 : " + width);
-    console.log("height  canvas 3 : " + height);
+    // console.log("width  canvas 3 : " + width);
+    // console.log("height  canvas 3 : " + height);
 
     document.getElementById("canvas3").style.width = width + "px";
     document.getElementById("canvas3").style.height = height + "px";
@@ -124,8 +125,8 @@ window.onload = function () {
     width = window.innerWidth - 25;
     height = window.innerHeight - 610;//610
 
-    console.log("width border 4 : " + width);
-    console.log("height border 4 : " + top);
+    // console.log("width border 4 : " + width);
+    // console.log("height border 4 : " + top);
 
     document.getElementById("border4").style.width = width + "px";
     document.getElementById("border4").style.height = height + "px";
@@ -135,8 +136,8 @@ window.onload = function () {
     width = window.innerWidth - 75;
     height = window.innerHeight - 660;// 635
 
-    console.log("width canvas 4 : " + width);
-    console.log("height canvas 4 : " + top);
+    // console.log("width canvas 4 : " + width);
+    // console.log("height canvas 4 : " + top);
 
     document.getElementById("canvas4").style.width = width + "px";
     document.getElementById("canvas4").style.height = height + "px";
@@ -144,6 +145,7 @@ window.onload = function () {
     canvas = canvas1DOM.getContext("2d");
     img = document.getElementById(state + "_key");
     canvas.drawImage(img, 0, 0);
+    canvas = canvas3DOM.getContext("2d");
 
     document.getElementById("keyframeSprites").style.left = xPos + "px";
     document.getElementById("keyframeSprites").style.top = yPos + "px";
@@ -224,7 +226,8 @@ function doWhichKey(e) {
     //x = document.getElementById(current_animation).style.left;
     //y = document.getElementById(current_animation).style.top;
 
-    discrepencyx, discrepencyy = 0;
+    discrepencyx = 0;
+    discrepencyy = 0;
 
     nojump = false;
 
@@ -650,8 +653,6 @@ function doWhichKey(e) {
 
     //console.log(getWidth());
     //console.log(String.fromCharCode(charCode));
-
-    //return (x, y);
 }
 
 function timerFunc() {
@@ -693,22 +694,25 @@ function boxMovement() {
         console.log("hit");
         hit = true;
     } else {
-        // console.log("hit not registered\ncurrent animation is : " + current_animation);
+        console.log("hit not registered\ncurrent animation is : " + current_animation);
         // console.log("");
         // console.log("xPos is : " + xPos);
-        // console.log("xPos is : " + yPos);
+        // console.log("yPos is : " + yPos);
         // console.log("");
-        // console.log("bx : " + bx);
-        // console.log("by : " + by);
-        // console.log("boxx : " + boxx);
-        // console.log("boxy : " + boxy);
         // console.log("sprite run x : " + sprite_run_x);
         // console.log("sprite run y : " + sprite_run_y);
+        // console.log("");
         // console.log("sprite jump x : " + sprite_jump_x);
         // console.log("sprite jump y : " + sprite_jump_y);
         // console.log("");
         // console.log("x1 is : " + x1);
         // console.log("y1 is : " + y1);
+        // console.log("");
+        // console.log("bx : " + bx);
+        // console.log("by : " + by);
+        // console.log("");
+        // console.log("boxx : " + boxx);
+        // console.log("boxy : " + boxy);
         // console.log("");
         // console.log("hit : " + hit);
         // console.log("live_count : " + live_count);
@@ -716,30 +720,31 @@ function boxMovement() {
 
     if (totalx == window_width || hit == true) { //set timeout to stop function while collision check is true
 
-        if (hit == true) {
-            // console.log("hit in progress\ncurrent animation is : " + current_animation);
-            // console.log("");
-            // console.log("xPos is : " + xPos);
-            // console.log("xPos is : " + yPos);
-            // console.log("");
-            // console.log("bx : " + bx);
-            // console.log("by : " + by);
-            // console.log("boxx : " + boxx);
-            // console.log("boxy : " + boxy);
-            // console.log("sprite run x : " + sprite_run_x);
-            // console.log("sprite run y : " + sprite_run_y);
-            // console.log("sprite jump x : " + sprite_jump_x);
-            // console.log("sprite jump y : " + sprite_jump_y);
-            // console.log("");
-            // console.log("x1 is : " + x1);
-            // console.log("y1 is : " + y1);
-            // console.log("");
-            // console.log("hit : " + hit);
-            // console.log("live_count : " + live_count);
+        console.log("hit in progress\ncurrent animation is : " + current_animation);
+        // console.log("");
+        // console.log("xPos is : " + xPos);
+        // console.log("yPos is : " + yPos);
+        // console.log("");
+        // console.log("sprite run x : " + sprite_run_x);
+        // console.log("sprite run y : " + sprite_run_y);
+        // console.log("");
+        // console.log("sprite jump x : " + sprite_jump_x);
+        // console.log("sprite jump y : " + sprite_jump_y);
+        // console.log("");
+        // console.log("x1 is : " + x1);
+        // console.log("y1 is : " + y1);
+        // console.log("");
+        // console.log("bx : " + bx);
+        // console.log("by : " + by);
+        // console.log("");
+        // console.log("boxx : " + boxx);
+        // console.log("boxy : " + boxy);
+        // console.log("");
+        // console.log("hit : " + hit);
+        // console.log("live_count : " + live_count);
 
-            hit = false;
-            // setTimeout("", 1000);
-        }
+        hit = false;
+        // setTimeout("", 1000);
 
         y1 = Math.floor(Math.random() * (max - min) + min);
         x1 = 0;
@@ -759,13 +764,6 @@ function lives() {
         case 2: document.getElementById("life_counter_3").src = "life_dead.png";
     }
 
-    bx = x1 + 800; //800
-    by = y1 + 280; //280
-    sprite_run_x = xPos + 660; //770
-    sprite_run_y = yPos + 100; //120
-    sprite_jump_x = xPos + 650; //840 802
-    sprite_jump_y = yPos + 100; //300 355
-
     x1 = 0;
     y1 = Math.floor(Math.random() * (max - min) + min);
 
@@ -778,12 +776,70 @@ function lives() {
 }
 
 function collision_check() {
-    bx = x1 + 800; //800
-    by = y1 + 280; //280
-    sprite_run_x = xPos + 660; //770
-    sprite_run_y = yPos + 100; //120
-    sprite_jump_x = xPos + 650; //840 802
-    sprite_jump_y = yPos + 100; //300 355
+    // offsets = document.getElementById('box_sprite_container').getBoundingClientRect();
+    // top = offsets.top;
+    // left = offsets.left;
+
+    console.log("window width : " + window.innerWidth);
+    console.log("");
+    console.log("x1 is : " + x1);
+    console.log("y1 is : " + y1);
+    console.log("");
+    console.log("bx : " + bx);
+    console.log("by : " + by);
+    console.log("");
+
+    //728 - 1368 = 591
+    if (y1 > 0) { bx = 800 - x1 - 5; }
+    else if (y1 < 0) { bx = 800 - x1 - 5; }
+    else { bx = 800 - x1 - 5; }
+
+    //128 - 338
+    if (y1 > 0) { by = y1 + 310; }
+    else if (y1 < 0) { by = 200 - Math.abs(y1) + 112; }
+    else { by = y1 + 310; }// y1 == 0
+
+    //document.getElementById("box_sprite_container").style.right = "0px"; 
+    document.getElementById("sprite_hb_test").style.left = bx + "px";
+    document.getElementById("sprite_hb_test").style.top = by + "px";
+
+    // offsets = document.getElementById('Left_animation').getBoundingClientRect();
+    // top = offsets.top;
+    // left = offsets.left;
+
+    sprite_run_x = xPos; //776
+    sprite_run_y = yPos; //216
+
+    //776
+    sprite_run_x = xPos - 564;
+
+    //216
+    sprite_run_y = yPos + 75;
+
+    document.getElementById("box_hb_test_run").style.left = sprite_run_x + "px";
+    document.getElementById("box_hb_test_run").style.top = sprite_run_y + "px";
+
+    // offsets = document.getElementById('Character_jumping').getBoundingClientRect();
+    // top = offsets.top;
+    // left = offsets.left;
+    //sprite_jump_x = xPos;
+    //sprite_jump_y = yPos;
+
+    //804
+    sprite_jump_x = xPos - 539;
+
+    //227
+    sprite_jump_y = yPos + 85;
+
+    document.getElementById("box_hb_test_jump").style.left = sprite_jump_x + "px";
+    document.getElementById("box_hb_test_jump").style.top = sprite_jump_y + "px";
+
+    // canvas = canvas3DOM.getContext("2d");
+    // canvas.beginPath();
+    // canvas.arc(bx, by, 100, 0, 2 * Math.PI);
+    // canvas.arc(sprite_run_x, sprite_run_y, 100, 0, 2 * Math.PI);
+    // canvas.arc(sprite_jump_x, sprite_jump_y, 100, 0, 2 * Math.PI);
+    // canvas.stroke();
 
     // var runx = (860 / 5 * 0.70);
     // var runy = (256 / 2 * 0.70);
@@ -830,16 +886,16 @@ function gameOver() {
     clearInterval(timerInterval);
     clearInterval(enemySpriteInterval);
 
-    document.getElementById("keyframeSprites").style.display = "none";
-    document.getElementById("box_sprite_container").style.display = "none";
+    //document.getElementById("keyframeSprites").style.display = "none";
+    //document.getElementById("box_sprite_container").style.display = "none";
 
-    document.getElementById("game_over_window").style.display = "block";
+    //document.getElementById("game_over_window").style.display = "block";
 
     width = window.innerWidth / 2 - 400;
     height = window.innerHeight / 2 - 150;
 
-    document.getElementById("game_over_window").style.left = width + "px";
-    document.getElementById("game_over_window").style.top = height + "px";
+    //document.getElementById("game_over_window").style.left = width + "px";
+    //document.getElementById("game_over_window").style.top = height + "px";
 }
 
 function level_1() { }
