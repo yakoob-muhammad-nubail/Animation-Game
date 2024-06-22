@@ -59,7 +59,7 @@ var window_width = 856; //650 1504
 var movex = 1;
 //var movey = 10; // for y movement later
 var min = -200;//-200
-var max = 140;//140
+var max = 0;//140
 var hit = false;
 
 var timer = 0;
@@ -618,10 +618,7 @@ function doWhichKey(e) {
         //     break;
 
         default:
-
             state = "no";
-
-            break;
     }
 
     // drawing the key pressed animation
@@ -694,7 +691,7 @@ function boxMovement() {
         console.log("hit");
         hit = true;
     } else {
-        console.log("hit not registered\ncurrent animation is : " + current_animation);
+        // console.log("hit not registered\ncurrent animation is : " + current_animation);
         // console.log("");
         // console.log("xPos is : " + xPos);
         // console.log("yPos is : " + yPos);
@@ -721,32 +718,32 @@ function boxMovement() {
     if (totalx == window_width || hit == true) { //set timeout to stop function while collision check is true
 
         console.log("hit in progress\ncurrent animation is : " + current_animation);
-        // console.log("");
-        // console.log("xPos is : " + xPos);
-        // console.log("yPos is : " + yPos);
-        // console.log("");
-        // console.log("sprite run x : " + sprite_run_x);
-        // console.log("sprite run y : " + sprite_run_y);
+        console.log("");
+        console.log("xPos is : " + xPos);
+        console.log("yPos is : " + yPos);
+        console.log("");
+        console.log("sprite run x : " + sprite_run_x);
+        console.log("sprite run y : " + sprite_run_y);
         // console.log("");
         // console.log("sprite jump x : " + sprite_jump_x);
         // console.log("sprite jump y : " + sprite_jump_y);
         // console.log("");
         // console.log("x1 is : " + x1);
         // console.log("y1 is : " + y1);
-        // console.log("");
-        // console.log("bx : " + bx);
-        // console.log("by : " + by);
-        // console.log("");
+        console.log("");
+        console.log("bx : " + bx);
+        console.log("by : " + by);
+        console.log("");
         // console.log("boxx : " + boxx);
         // console.log("boxy : " + boxy);
         // console.log("");
-        // console.log("hit : " + hit);
-        // console.log("live_count : " + live_count);
+        console.log("hit : " + hit);
+        console.log("live_count : " + live_count);
 
         hit = false;
         // setTimeout("", 1000);
 
-        y1 = Math.floor(Math.random() * (max - min) + min);
+        //y1 = Math.floor(Math.random() * (max - min) + min);
         x1 = 0;
         totalx = 0; // can be used as a score multiplier
 
@@ -765,7 +762,7 @@ function lives() {
     }
 
     x1 = 0;
-    y1 = Math.floor(Math.random() * (max - min) + min);
+    //y1 = Math.floor(Math.random() * (max - min) + min);
 
     document.getElementById("box_sprite_container").style.right = x1 + "px";
     document.getElementById("box_sprite_container").style.top = y1 + "px";
@@ -780,24 +777,27 @@ function collision_check() {
     // top = offsets.top;
     // left = offsets.left;
 
-    console.log("window width : " + window.innerWidth);
-    console.log("");
-    console.log("x1 is : " + x1);
-    console.log("y1 is : " + y1);
-    console.log("");
-    console.log("bx : " + bx);
-    console.log("by : " + by);
-    console.log("");
+    // console.log("window width : " + window.innerWidth);
+    // console.log("");
+    // console.log("x1 is : " + x1);
+    // console.log("y1 is : " + y1);
+    // console.log("");
+    // console.log("bx : " + bx);
+    // console.log("by : " + by);
+    // console.log("");
 
-    //728 - 1368 = 591
-    if (y1 > 0) { bx = 800 - x1 - 5; }
-    else if (y1 < 0) { bx = 800 - x1 - 5; }
-    else { bx = 800 - x1 - 5; }
-
-    //128 - 338
-    if (y1 > 0) { by = y1 + 310; }
-    else if (y1 < 0) { by = 200 - Math.abs(y1) + 112; }
-    else { by = y1 + 310; }// y1 == 0
+    //728 - 1368 = 591 //128 - 338
+    switch (current_animation) {
+        case "Left_animation":
+            if (y1 > 0) { bx = 800 - x1 - 5; by = y1 + 310; console.log("low y"); }
+            else if (y1 < 0) { bx = 800 - x1; by = 200 - Math.abs(y1) + 112; console.log("high y"); }
+            else { bx = 800 - x1 - 5; by = y1 + 310; console.log("even y"); }
+            break;
+        default:
+            if (y1 > 0) { bx = 800 - x1 - 5; by = y1 + 310; console.log("low y"); }
+            else if (y1 < 0) { bx = 800 - x1 - 5; by = 200 - Math.abs(y1) + 112; console.log("high y"); }
+            else { bx = 800 - x1 - 5; by = y1 + 310; console.log("even y"); }
+    }
 
     //document.getElementById("box_sprite_container").style.right = "0px"; 
     document.getElementById("sprite_hb_test").style.left = bx + "px";
@@ -807,14 +807,14 @@ function collision_check() {
     // top = offsets.top;
     // left = offsets.left;
 
-    sprite_run_x = xPos; //776
-    sprite_run_y = yPos; //216
+    //sprite_run_x = xPos; //776
+    //sprite_run_y = yPos; //216
 
     //776
-    sprite_run_x = xPos - 564;
+    sprite_run_x = xPos - 534;
 
     //216
-    sprite_run_y = yPos + 75;
+    sprite_run_y = yPos + 85;
 
     document.getElementById("box_hb_test_run").style.left = sprite_run_x + "px";
     document.getElementById("box_hb_test_run").style.top = sprite_run_y + "px";
@@ -822,14 +822,15 @@ function collision_check() {
     // offsets = document.getElementById('Character_jumping').getBoundingClientRect();
     // top = offsets.top;
     // left = offsets.left;
+
     //sprite_jump_x = xPos;
     //sprite_jump_y = yPos;
 
     //804
-    sprite_jump_x = xPos - 539;
+    sprite_jump_x = xPos - 559;
 
     //227
-    sprite_jump_y = yPos + 85;
+    sprite_jump_y = yPos + 135;
 
     document.getElementById("box_hb_test_jump").style.left = sprite_jump_x + "px";
     document.getElementById("box_hb_test_jump").style.top = sprite_jump_y + "px";
@@ -886,16 +887,16 @@ function gameOver() {
     clearInterval(timerInterval);
     clearInterval(enemySpriteInterval);
 
-    //document.getElementById("keyframeSprites").style.display = "none";
-    //document.getElementById("box_sprite_container").style.display = "none";
+    document.getElementById("keyframeSprites").style.display = "none";
+    document.getElementById("box_sprite_container").style.display = "none";
 
-    //document.getElementById("game_over_window").style.display = "block";
+    document.getElementById("game_over_window").style.display = "block";
 
     width = window.innerWidth / 2 - 400;
     height = window.innerHeight / 2 - 150;
 
-    //document.getElementById("game_over_window").style.left = width + "px";
-    //document.getElementById("game_over_window").style.top = height + "px";
+    document.getElementById("game_over_window").style.left = width + "px";
+    document.getElementById("game_over_window").style.top = height + "px";
 }
 
 function level_1() { }
