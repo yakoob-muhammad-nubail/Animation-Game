@@ -889,6 +889,59 @@ function gameOver() {
 
     document.getElementById("game_over_window").style.left = width + "px";
     document.getElementById("game_over_window").style.top = height + "px";
+
+    var hoverElement1 = document.getElementById("game_over_text_1");
+    hoverElement1.addEventListener("mouseover", function () {
+        console.log("Mouse is over the element");
+        hoverElement1.style.color = "blue";
+    });
+    hoverElement1.addEventListener("mouseout", function () {
+        console.log("Mouse is out of the element");
+        hoverElement1.style.color = "black";
+    });
+
+    var hoverElement2 = document.getElementById("game_over_text_2");
+    hoverElement2.addEventListener("mouseover", function () {
+        console.log("Mouse is over the element");
+        hoverElement2.style.color = "blue";
+    });
+    hoverElement2.addEventListener("mouseout", function () {
+        console.log("Mouse is out of the element");
+        hoverElement2.style.color = "black";
+    });
+
+    var hoverElement3 = document.getElementById("game_over_text_3");
+    hoverElement3.addEventListener("mouseover", function () {
+        console.log("Mouse is over the element");
+        hoverElement3.style.color = "blue";
+    });
+    hoverElement3.addEventListener("mouseout", function () {
+        console.log("Mouse is out of the element");
+        hoverElement3.style.color = "black";
+    });
+
+    var upArrowElement = document.getElementById("up_arrow");
+    upArrowElement.addEventListener("mouseover", function () {
+        console.log("Mouse is over the element");
+        upArrowElement.src = "up_arrow_highlight.png";
+    });
+    upArrowElement.addEventListener("mouseout", function () {
+        console.log("Mouse is out of the element");
+        upArrowElement.src = "up_arrow.png";
+    });
+
+    var downArrowElement = document.getElementById("down_arrow");
+    downArrowElement.addEventListener("mouseover", function () {
+        console.log("Mouse is over the element");
+        downArrowElement.src = "down_arrow_highlight.png";
+    });
+    downArrowElement.addEventListener("mouseout", function () {
+        console.log("Mouse is out of the element");
+        downArrowElement.src = "down_arrow.png";
+    });
+
 }
 
 function level_1() { }
+
+//gameOver();
