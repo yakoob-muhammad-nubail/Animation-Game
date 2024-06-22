@@ -51,6 +51,9 @@
                 - enemy (bot) - done
             - on a side note as the divs are changed the hit boxes need to be updated.
             currently there is an issue with the hitboxes, hitbox needs to be adjusted.
+                - the hitbox for the box and jumping sprite are both set, hitbox for 
+                the running sprite is same as the jumping sprite. best solution is
+                switching to ctx draw
     - collision control bug - done
             - possible issues => boolean hit is not registering
                               => x and y positions are not registering correctly
@@ -75,7 +78,6 @@
         - functional programming (4) - tbd - optional
             - good grouping
             - change after fixing
-
         - oops (5) - tbd
             - ties into new levels
             - classes and objects
@@ -173,12 +175,12 @@
             <div id="scoreboard" class="scoreboard">
                 <p id="score_text" class="score_text">Timer : 0</p>
             </div>
-            <div id="sprite_hb" class="sprite_hb">
+            <!-- <div id="sprite_hb" class="sprite_hb">
                 <div id="sprite_hb_test" class="sprite_hb_test">
                     <img id="s_hb" class="s_hb" src="hitbox.png" alt="Sprite Hitbox">
                 </div>
-            </div>
-            <div id="box_hb_run" class="box_hb">
+            </div> -->
+            <!-- <div id="box_hb_run" class="box_hb">
                 <div id="box_hb_test_run" class="box_hb_test">
                     <img id="b_hb" class="b_hb" src="hitbox.png" alt="Box Hitbox">
                 </div>
@@ -187,7 +189,7 @@
                 <div id="box_hb_test_jump" class="box_hb_test">
                     <img id="b_hb" class="b_hb" src="hitbox.png" alt="Box Hitbox">
                 </div>
-            </div>
+            </div> -->
             <canvas class=" canvas3" id="canvas3">
             </canvas>
         </div>
