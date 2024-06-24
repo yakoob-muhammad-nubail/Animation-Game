@@ -149,7 +149,6 @@ window.onload = function () {
 
     document.getElementById("keyframeSprites").style.left = xPos + "px";
     document.getElementById("keyframeSprites").style.top = yPos + "px";
-
 }
 
 function getWidth() {
@@ -773,101 +772,46 @@ function lives() {
 }
 
 function collision_check() {
-    // offsets = document.getElementById('box_sprite_container').getBoundingClientRect();
-    // top = offsets.top;
-    // left = offsets.left;
-
-    // console.log("window width : " + window.innerWidth);
-    // console.log("");
-    // console.log("x1 is : " + x1);
-    // console.log("y1 is : " + y1);
-    // console.log("");
-    // console.log("bx : " + bx);
-    // console.log("by : " + by);
-    // console.log("");
 
     //728 - 1368 = 591 //128 - 338
     if (y1 > 0) { bx = 800 - x1 - 5; by = y1 + 310; console.log("low y"); }
     else if (y1 < 0) { bx = 800 - x1; by = 200 - Math.abs(y1) + 112; console.log("high y"); }
     else { bx = 800 - x1 - 5; by = y1 + 310; console.log("even y"); }
 
-    //document.getElementById("box_sprite_container").style.right = "0px"; 
-    // document.getElementById("sprite_hb_test").style.left = bx + "px";
-    // document.getElementById("sprite_hb_test").style.top = by + "px";
-
-    // offsets = document.getElementById('Left_animation').getBoundingClientRect();
-    // top = offsets.top;
-    // left = offsets.left;
-
-    //sprite_run_x = xPos; //776
-    //sprite_run_y = yPos; //216
-
     //776
-    sprite_run_x = xPos - 600;
-
+    sprite_run_x = xPos - 565;
     //216
-    sprite_run_y = yPos + 85;
-
-    // document.getElementById("box_hb_test_run").style.left = sprite_run_x + "px";
-    // document.getElementById("box_hb_test_run").style.top = sprite_run_y + "px";
-
-    // offsets = document.getElementById('Character_jumping').getBoundingClientRect();
-    // top = offsets.top;
-    // left = offsets.left;
-
-    //sprite_jump_x = xPos;
-    //sprite_jump_y = yPos;
+    sprite_run_y = yPos + 80;
 
     //804
-    sprite_jump_x = xPos - 559;
-
+    sprite_jump_x = xPos - 545;
     //227
-    sprite_jump_y = yPos + 135;
+    sprite_jump_y = yPos + 90;
 
-    // document.getElementById("box_hb_test_jump").style.left = sprite_jump_x + "px";
-    // document.getElementById("box_hb_test_jump").style.top = sprite_jump_y + "px";
+    document.getElementById("sprite_hb_test").style.left = bx + "px";
+    document.getElementById("sprite_hb_test").style.top = by + "px";
 
-    // canvas = canvas3DOM.getContext("2d");
-    // canvas.beginPath();
-    // canvas.arc(bx, by, 100, 0, 2 * Math.PI);
-    // canvas.arc(sprite_run_x, sprite_run_y, 100, 0, 2 * Math.PI);
-    // canvas.arc(sprite_jump_x, sprite_jump_y, 100, 0, 2 * Math.PI);
-    // canvas.stroke();
+    document.getElementById("box_hb_test_run").style.left = sprite_run_x + "px";
+    document.getElementById("box_hb_test_run").style.top = sprite_run_y + "px";
 
-    // var runx = (860 / 5 * 0.70);
-    // var runy = (256 / 2 * 0.70);
-    // var jump_x = (573 / 7);
-    // var jump_y = 162;
-    // var boxx = 52;
-    // var boxy = 40;
-
-    // console.log("bx : " + bx);
-    // console.log("by : " + by);
-    // console.log("boxx : " + boxx);
-    // console.log("boxy : " + boxy);
-    // console.log("sprite run x : " + sprite_run_x);
-    // console.log("sprite run y : " + sprite_run_y);
-    // console.log("sprite jump x : " + sprite_jump_x);
-    // console.log("sprite jump y : " + sprite_jump_y);
+    document.getElementById("box_hb_test_jump").style.left = sprite_jump_x + "px";
+    document.getElementById("box_hb_test_jump").style.top = sprite_jump_y + "px";
 
     switch (current_animation) {
         case "Left_animation":
             if (sprite_run_x >= bx && sprite_run_x <= (bx + boxx) && sprite_run_y >= by && sprite_run_y <= (by + boxy)) {
                 lives();
                 return true;
-                //alert("hit");
             }// since there is always a return no break statement is needed
         case "Character_duck":
             if (sprite_jump_x >= bx && sprite_jump_x <= (bx + boxx) && sprite_jump_y >= by && sprite_jump_y <= (by + boxy)) {
                 lives();
                 return true;
-                //alert("hit");
             }
         case "Character_jumping":
             if (sprite_jump_x >= bx && sprite_jump_x <= (bx + boxx) && sprite_jump_y >= by && sprite_jump_y <= (by + boxy)) {
                 lives();
                 return true;
-                //alert("hit");
             }
     }
 }
