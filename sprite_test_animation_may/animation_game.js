@@ -81,8 +81,21 @@ var boxy = 40;
 
 var offsets = 0, left = 0, top = 0;
 
-var game_over_text_1 = 65, game_over_text_2 = 65, game_over_text_3 = 65;
+var game_over_text = "game_over_text_1";
+var game_over_entry = "game_over_entry_1";
+var lowercaseDown = false;
+var lowercaseUp = false;
+var increment = 1;
+var currentChar = 65;
+var keyOne = 0, keyTwo = 0; keyThree = 0;
 //ASCII 65 (A) - 90 (Z), 97 (a) - 122 (z)
+
+var hoverElement1 = document.getElementById("game_over_text_1");
+var hoverElement2 = document.getElementById("game_over_text_2");
+var hoverElement3 = document.getElementById("game_over_text_3");
+var upArrowElement = document.getElementById("up_arrow");
+var downArrowElement = document.getElementById("down_arrow");
+var enterButtonElement = document.getElementById("enter_button");
 
 var canvas1DOM = document.getElementById("canvas1")
 var canvas2DOM = document.getElementById("canvas2")
@@ -105,6 +118,18 @@ window.addEventListener('keyup', function (e) { doNoKey(e); }) // and this
 //checkWindowSize();
 
 window.onload = function () {
+    resetLayout();
+
+    canvas = canvas1DOM.getContext("2d");
+    img = document.getElementById(state + "_key");
+    canvas.drawImage(img, 0, 0);
+    canvas = canvas3DOM.getContext("2d");
+
+    document.getElementById("keyframeSprites").style.left = xPos + "px";
+    document.getElementById("keyframeSprites").style.top = yPos + "px";
+}
+
+function resetLayout() {
     var height, width;
 
     height = 565;
@@ -144,14 +169,6 @@ window.onload = function () {
 
     document.getElementById("canvas4").style.width = width + "px";
     document.getElementById("canvas4").style.height = height + "px";
-
-    canvas = canvas1DOM.getContext("2d");
-    img = document.getElementById(state + "_key");
-    canvas.drawImage(img, 0, 0);
-    canvas = canvas3DOM.getContext("2d");
-
-    document.getElementById("keyframeSprites").style.left = xPos + "px";
-    document.getElementById("keyframeSprites").style.top = yPos + "px";
 }
 
 function getWidth() {
@@ -193,7 +210,7 @@ function printMousePos(event) {
 //     }
 // }
 
-function clearScreen() {
+function clearScreen() { //debug function
     document.getElementById("Character_megaman_main_1").style.display = "none";
     document.getElementById("Character_megaman_main_2").style.display = "none";
     document.getElementById("Character_megaman_jumping").style.display = "none";
@@ -220,14 +237,6 @@ function doWhichKey(e) {
 
     key = String.fromCharCode(charCode);
 
-    // console.log();
-    // console.log(document.getElementById(current_animation).style.left);
-    // console.log(document.getElementById(current_animation).style.top);
-    // console.log();
-
-    //x = document.getElementById(current_animation).style.left;
-    //y = document.getElementById(current_animation).style.top;
-
     discrepencyx = 0;
     discrepencyy = 0;
 
@@ -240,21 +249,6 @@ function doWhichKey(e) {
                 console.log("boundary x min reached");
                 //current_animation = previous_animation;
                 break;
-
-                // if (previous_animation != current_animation) {
-                //     // if the current animation is diff from previous animation
-
-                //     switch (current_animation) {
-                //         //case "Left_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                //         //case "Right_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                //         case "Character_duck": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                //         case "Character_jumping": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                //         //const discrepencyxjump2 = 0; //833
-                //         //const discrepencyyjump2 = 0; //488
-                //         //case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
-                //         //case ""const discrepencyybeam; //615 200
-                //     }
-                // }
             }
 
             previous_animation = current_animation;
@@ -281,21 +275,6 @@ function doWhichKey(e) {
             if (xPos == boundaryxmin || yPos == boundaryymax || yPos == boundaryymin) {
                 console.log("boundary x min reached");
                 break;
-
-                // if (previous_animation != current_animation) {
-                //     // if the current animation is diff from previous animation
-
-                //     switch (current_animation) {
-                //         //case "Left_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                //         //case "Right_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                //         case "Character_duck": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                //         case "Character_jumping": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                //         //const discrepencyxjump2 = 0; //833
-                //         //const discrepencyyjump2 = 0; //488
-                //         //case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
-                //         //case ""const discrepencyybeam; //615 200
-                //     }
-                // }
             }
 
             previous_animation = current_animation;
@@ -334,21 +313,6 @@ function doWhichKey(e) {
                 console.log("boundary y min reached");
                 // current_animation = previous_animation;
                 break;
-
-                // if (previous_animation != current_animation) {
-                //     // if the current animation is diff from previous animation
-
-                //     switch (current_animation) {
-                //         //case "Left_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                //         //case "Right_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                //         case "Character_duck": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                //         case "Character_jumping": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                //         //const discrepencyxjump2 = 0; //833
-                //         //const discrepencyyjump2 = 0; //488
-                //         //case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
-                //         //case ""const discrepencyybeam; //615 200
-                //     }
-                // }
             }
 
             state = "S";
@@ -376,21 +340,6 @@ function doWhichKey(e) {
                 console.log("boundary y min reached");
                 // current_animation = previous_animation;
                 break;
-
-                // if (previous_animation != current_animation) {
-                //     // if the current animation is diff from previous animation
-
-                //     switch (current_animation) {
-                //         //case "Left_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                //         //case "Right_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                //         case "Character_duck": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                //         case "Character_jumping": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                //         //const discrepencyxjump2 = 0; //833
-                //         //const discrepencyyjump2 = 0; //488
-                //         //case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
-                //         //case ""const discrepencyybeam; //615 200
-                //     }
-                // }
             }
 
             state = "S";
@@ -420,21 +369,6 @@ function doWhichKey(e) {
                 console.log("moving right");
                 //current_animation = previous_animation;
                 break;
-
-                // if (previous_animation != current_animation) {
-                //     // if the current animation is diff from previous animation
-
-                //     switch (current_animation) {
-                //         //case "Left_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                //         //case "Right_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                //         case "Character_duck": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                //         case "Character_jumping": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                //         //const discrepencyxjump2 = 0; //833
-                //         //const discrepencyyjump2 = 0; //488
-                //         //case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
-                //         //case ""const discrepencyybeam; //615 200
-                //     }
-                // }
             }
 
             previous_animation = current_animation;
@@ -466,21 +400,6 @@ function doWhichKey(e) {
                 console.log("moving right");
                 //current_animation = previous_animation;
                 break;
-
-                // if (previous_animation != current_animation) {
-                //     // if the current animation is diff from previous animation
-
-                //     switch (current_animation) {
-                //         //case "Left_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                //         //case "Right_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                //         case "Character_duck": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                //         case "Character_jumping": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                //         //const discrepencyxjump2 = 0; //833
-                //         //const discrepencyyjump2 = 0; //488
-                //         //case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
-                //         //case ""const discrepencyybeam; //615 200
-                //     }
-                // }
             }
 
             previous_animation = current_animation;
@@ -511,21 +430,6 @@ function doWhichKey(e) {
                 console.log("boundary y max reached");
                 // current_animation = previous_animation;
                 break;
-
-                // if (previous_animation != current_animation) {
-                //     // if the current animation is diff from previous animation
-
-                //     switch (current_animation) {
-                //         //case "Left_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                //         //case "Right_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                //         case "Character_duck": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                //         case "Character_jumping": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                //         //const discrepencyxjump2 = 0; //833
-                //         //const discrepencyyjump2 = 0; //488
-                //         //case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
-                //         //case ""const discrepencyybeam; //615 200
-                //     }
-                // }
             }
 
             previous_animation = current_animation;
@@ -554,21 +458,6 @@ function doWhichKey(e) {
                 console.log("boundary y max reached");
                 //current_animation = previous_animation;
                 break;
-
-                // if (previous_animation != current_animation) {
-                //     // if the current animation is diff from previous animation
-
-                //     switch (current_animation) {
-                //         //case "Left_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                //         //case "Right_animation": discrepencyy = discrepencyyrun; discrepencyx = discrepencyxrun;
-                //         case "Character_duck": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                //         case "Character_jumping": discrepencyy = discrepencyyjump; discrepencyx = discrepencyxjump;
-                //         //const discrepencyxjump2 = 0; //833
-                //         //const discrepencyyjump2 = 0; //488
-                //         //case "Attack_animation": discrepencyy = discrepencyybeam; discrepencyx = discrepencyxbeam;
-                //         //case ""const discrepencyybeam; //615 200
-                //     }
-                // }
             }
 
             previous_animation = current_animation;
@@ -624,52 +513,17 @@ function doWhichKey(e) {
     }
 
     // drawing the key pressed animation
-
     canvas = canvas1DOM.getContext("2d");
     img = document.getElementById(state + "_key");
     canvas.drawImage(img, 0, 0);
-
-    // console.log(state);
-    // console.log(key);
-
-    // console.log(previous_animation);
-    // console.log(current_animation);
-
-    // console.log(vx);
-    // console.log(vy);
-
-    // console.log("key is pressed\ncurrent animation is : " + current_animation);
-    // console.log("");
-    // console.log("xPos is : " + xPos);
-    // console.log("xPos is : " + yPos);
-    // console.log("");
-    // console.log("x1 is : " + x1);
-    // console.log("y1 is : " + y1);
-    // console.log("");
-
-    //console.log(window.innerWidth);
-    //console.log(self.innerWidth);
-
-    //console.log(getWidth());
-    //console.log(String.fromCharCode(charCode));
 }
 
 function timerFunc() {
     timer += 1;
-    //console.log(timer);
 
     document.getElementById("score_text").innerText = "Timer : " + timer;
 
-    if (timer == 999) {
-        gameOver;
-    }
-
-    //console.log(self.innerHeight);
-    //console.log(self.innerWidth);
-
-    //console.log("game over");
-    //checkWindowSize();
-    //alert("Game Over");
+    if (timer == 999) { gameOver; }
 }
 
 function boxMovement() {
@@ -678,72 +532,15 @@ function boxMovement() {
     x1 += movex;
     totalx += movex;
 
-    // totaly += movey;
-    // console.log("");
-    // console.log(x1);
-    // console.log(y1);
-    // console.log("");
-    // console.log(totalx);
-
     document.getElementById("box_sprite_container").style.right = x1 + "px";
-
-    //console.log("x1 of box is : " + x1);
 
     if (collision_check() == true) {
         console.log("hit");
         hit = true;
-    } else {
-        // console.log("hit not registered\ncurrent animation is : " + current_animation);
-        // console.log("");
-        // console.log("xPos is : " + xPos);
-        // console.log("yPos is : " + yPos);
-        // console.log("");
-        // console.log("sprite run x : " + sprite_run_x);
-        // console.log("sprite run y : " + sprite_run_y);
-        // console.log("");
-        // console.log("sprite jump x : " + sprite_jump_x);
-        // console.log("sprite jump y : " + sprite_jump_y);
-        // console.log("");
-        // console.log("x1 is : " + x1);
-        // console.log("y1 is : " + y1);
-        // console.log("");
-        // console.log("bx : " + bx);
-        // console.log("by : " + by);
-        // console.log("");
-        // console.log("boxx : " + boxx);
-        // console.log("boxy : " + boxy);
-        // console.log("");
-        // console.log("hit : " + hit);
-        // console.log("live_count : " + live_count);
     }
 
     if (totalx == window_width || hit == true) { //set timeout to stop function while collision check is true
-
-        // console.log("hit in progress\ncurrent animation is : " + current_animation);
-        // console.log("");
-        // console.log("xPos is : " + xPos);
-        // console.log("yPos is : " + yPos);
-        // console.log("");
-        // console.log("sprite run x : " + sprite_run_x);
-        // console.log("sprite run y : " + sprite_run_y);
-        // // console.log("");
-        // // console.log("sprite jump x : " + sprite_jump_x);
-        // // console.log("sprite jump y : " + sprite_jump_y);
-        // // console.log("");
-        // // console.log("x1 is : " + x1);
-        // // console.log("y1 is : " + y1);
-        // console.log("");
-        // console.log("bx : " + bx);
-        // console.log("by : " + by);
-        // console.log("");
-        // // console.log("boxx : " + boxx);
-        // // console.log("boxy : " + boxy);
-        // // console.log("");
-        // console.log("hit : " + hit);
-        // console.log("live_count : " + live_count);
-
         hit = false;
-        // setTimeout("", 1000);
 
         y1 = Math.floor(Math.random() * (max - min) + min);
         x1 = 0;
@@ -775,7 +572,6 @@ function lives() {
 }
 
 function collision_check() {
-
     //728 - 1368 = 591 //128 - 338
     if (y1 > 0) { bx = 800 - x1 - 5; by = y1 + 310; console.log("low y"); }
     else if (y1 < 0) { bx = 800 - x1; by = 200 - Math.abs(y1) + 112; console.log("high y"); }
@@ -819,7 +615,7 @@ function collision_check() {
     }
 }
 
-function gameOver() {
+function closeGame() {
     window.removeEventListener('keydown', function (e) { doWhichKey(e); });
     window.removeEventListener('keyup', function (e) { doNoKey(e); });
 
@@ -828,8 +624,9 @@ function gameOver() {
 
     document.getElementById("keyframeSprites").style.display = "none";
     document.getElementById("box_sprite_container").style.display = "none";
+}
 
-    document.getElementById("game_over_window").style.display = "block";
+function updateGameOverWindow() {
 
     width = window.innerWidth / 2 - 400;
     height = window.innerHeight / 2 - 150;
@@ -837,120 +634,165 @@ function gameOver() {
     document.getElementById("game_over_window").style.left = width + "px";
     document.getElementById("game_over_window").style.top = height + "px";
 
-    document.getElementById("game_over_text_1").innerHTML = "&#" + game_over_text_1;
-    document.getElementById("game_over_text_2").innerHTML = "&#" + game_over_text_2;
-    document.getElementById("game_over_text_3").innerHTML = "&#" + game_over_text_3;
+    resetLayout();
+}
 
-    var hoverElement1 = document.getElementById("game_over_text_1");
+function eventListenerUI() {
+    startChar = currentChar;
+
+    document.getElementById("game_over_text_1").innerHTML = "&#" + startChar;
+    document.getElementById("game_over_text_2").innerHTML = "&#" + startChar;
+    document.getElementById("game_over_text_3").innerHTML = "&#" + startChar;
+    document.getElementById("game_over_entry_1").innerHTML = "&#" + startChar;
+    document.getElementById("game_over_entry_2").innerHTML = "&#" + startChar;
+    document.getElementById("game_over_entry_3").innerHTML = "&#" + startChar;
+
     hoverElement1.addEventListener("mouseover", function () {
-        console.log("Mouse is over the element");
+        //console.log("Mouse is over the element");
         hoverElement1.style.color = "blue";
     });
     hoverElement1.addEventListener("mouseout", function () {
-        console.log("Mouse is out of the element");
+        //console.log("Mouse is out of the element");
         hoverElement1.style.color = "black";
     });
 
-    var hoverElement2 = document.getElementById("game_over_text_2");
     hoverElement2.addEventListener("mouseover", function () {
-        console.log("Mouse is over the element");
+        //console.log("Mouse is over the element");
         hoverElement2.style.color = "blue";
     });
     hoverElement2.addEventListener("mouseout", function () {
-        console.log("Mouse is out of the element");
+        //console.log("Mouse is out of the element");
         hoverElement2.style.color = "black";
     });
 
-    var hoverElement3 = document.getElementById("game_over_text_3");
     hoverElement3.addEventListener("mouseover", function () {
-        console.log("Mouse is over the element");
+        //console.log("Mouse is over the element");
         hoverElement3.style.color = "blue";
     });
     hoverElement3.addEventListener("mouseout", function () {
-        console.log("Mouse is out of the element");
+        //console.log("Mouse is out of the element");
         hoverElement3.style.color = "black";
     });
 
-    var upArrowElement = document.getElementById("up_arrow");
     upArrowElement.addEventListener("mouseover", function () {
-        console.log("Mouse is over the element");
+        //console.log("Mouse is over the element");
         upArrowElement.src = "up_arrow_highlight.png";
     });
     upArrowElement.addEventListener("mouseout", function () {
-        console.log("Mouse is out of the element");
+        //console.log("Mouse is out of the element");
         upArrowElement.src = "up_arrow.png";
     });
 
-    var downArrowElement = document.getElementById("down_arrow");
     downArrowElement.addEventListener("mouseover", function () {
-        console.log("Mouse is over the element");
+        //console.log("Mouse is over the element");
         downArrowElement.src = "down_arrow_highlight.png";
     });
     downArrowElement.addEventListener("mouseout", function () {
-        console.log("Mouse is out of the element");
+        //console.log("Mouse is out of the element");
         downArrowElement.src = "down_arrow.png";
     });
 
-    var enterButtonElement = document.getElementById("enter_button");
     enterButtonElement.addEventListener("mouseover", function () {
-        console.log("Mouse is over the element Enter button");
+        //console.log("Mouse is over the element Enter button");
         enterButtonElement.src = "enter_button_highlight.png";
     });
     enterButtonElement.addEventListener("mouseout", function () {
-        console.log("Mouse is over the element Enter button");
+        //console.log("Mouse is over the element Enter button");
         enterButtonElement.src = "enter_button.png";
     });
-    // first entry - different function
-    var lowercaseDown = false;
-    var lowercaseUp = false;
+}
 
-    var downArrowElement = document.getElementById("down_arrow");
-    var upArrowElement = document.getElementById("up_arrow");
-    var enterButtonElement = document.getElementById("enter_button");
+function entry(game_over_text, game_over_entry, nextEntry) {
+    let currentChar = 65;
+    let lowercaseDown = false;
+    let lowercaseUp = false;
 
     function handleDownArrowMouseUp() {
-        console.log("Down arrow is pressed for first entry");
+        //console.log("Down arrow is pressed for entry");
 
-        if (lowercaseDown == false) {
-            if (game_over_text_1 != 90) { game_over_text_1 += 1; }
-            else { game_over_text_1 = 97; lowercaseDown = true; lowercaseUp = true; }
+        if (!lowercaseDown) {
+            if (currentChar != 90) { currentChar += 1; }
+            else { currentChar = 97; lowercaseDown = true; lowercaseUp = true; }
         } else {
-            if (game_over_text_1 != 122) { game_over_text_1 += 1; }
-            else { game_over_text_1 = 65; lowercaseDown = false; lowercaseUp = false; }
+            if (currentChar != 122) { currentChar += 1; }
+            else { currentChar = 65; lowercaseDown = false; lowercaseUp = false; }
         }
 
-        document.getElementById("game_over_text_1").innerHTML = "&#" + game_over_text_1;
-        document.getElementById("game_over_entry_1").innerHTML = "&#" + game_over_text_1;
+        document.getElementById(game_over_text).innerHTML = "&#" + currentChar;
+        document.getElementById(game_over_entry).innerHTML = "&#" + currentChar;
     }
 
     function handleUpArrowMouseUp() {
-        console.log("Up arrow is pressed for first entry");
+        //console.log("Up arrow is pressed for entry");
 
-        if (lowercaseUp == false) {
-            if (game_over_text_1 != 65) { game_over_text_1 -= 1; }
-            else { game_over_text_1 = 122; lowercaseUp = true; lowercaseDown = true; }
+        if (!lowercaseUp) {
+            if (currentChar != 65) { currentChar -= 1; }
+            else { currentChar = 122; lowercaseUp = true; lowercaseDown = true; }
         } else {
-            if (game_over_text_1 != 97) { game_over_text_1 -= 1; }
-            else { game_over_text_1 = 90; lowercaseUp = false; lowercaseDown = false; }
+            if (currentChar != 97) { currentChar -= 1; }
+            else { currentChar = 90; lowercaseUp = false; lowercaseDown = false; }
         }
 
-        document.getElementById("game_over_text_1").innerHTML = "&#" + game_over_text_1;
-        document.getElementById("game_over_entry_1").innerHTML = "&#" + game_over_text_1;
+        document.getElementById(game_over_text).innerHTML = "&#" + currentChar;
+        document.getElementById(game_over_entry).innerHTML = "&#" + currentChar;
     }
 
-    function handleEnterButtonMouseUp() {
-        console.log("Clicked the element Enter Button");
+    function handleEnterButtonMouseUpEntry() {
+        //console.log("Clicked the element Enter Button");
         downArrowElement.removeEventListener("mouseup", handleDownArrowMouseUp);
         upArrowElement.removeEventListener("mouseup", handleUpArrowMouseUp);
+        lowercaseDown = false;
+        lowercaseUp = false;
+
+        switch (nextEntry) {
+            case entryTwo: keyOne = currentChar; break;
+            case entryThree: keyTwo = currentChar; break;
+            case null: keyThree = currentChar; endGameOver(); break;
+        }
+
+        //console.log(keyOne + "  " + keyTwo + "  " + keyThree);
+
+        if (nextEntry) nextEntry();
     }
 
-    // Add event listeners for down and up arrow elements
     downArrowElement.addEventListener("mouseup", handleDownArrowMouseUp);
     upArrowElement.addEventListener("mouseup", handleUpArrowMouseUp);
+    enterButtonElement.addEventListener("click", handleEnterButtonMouseUpEntry, { once: true });
+}
 
-    enterButtonElement.addEventListener("click", handleEnterButtonMouseUp, { once: true });
+function entryOne() {
+    entry("game_over_text_1", "game_over_entry_1", entryTwo);
+}
+
+function entryTwo() {
+    entry("game_over_text_2", "game_over_entry_2", entryThree);
+}
+
+function entryThree() {
+    entry("game_over_text_3", "game_over_entry_3", null);
+}
+
+function endGameOver() {
+    document.getElementById("window1").style.display = "none";
+    document.getElementById("window2").style.display = "none";
+    document.getElementById("window3").style.display = "none";
+    document.getElementById("game_over_window").style.display = "none";
+
+    if (keyThree != 0) {
+        console.log(0 == null);
+        console.log(0 === null);
+    } else {
+        console.log(keyThree);
+    }
+}
+
+function gameOver() {
+    closeGame();
+    updateGameOverWindow();
+    eventListenerUI();
+    entryOne();
 }
 
 function level_1() { }
 
-gameOver();
+//gameOver();
