@@ -81,6 +81,9 @@ var boxy = 40;
 
 var offsets = 0, left = 0, top = 0;
 
+var game_over_text_1 = 65, game_over_text_2 = 65, game_over_text_3 = 65;
+//ASCII 65 (A) - 90 (Z), 97 (a) - 122 (z)
+
 var canvas1DOM = document.getElementById("canvas1")
 var canvas2DOM = document.getElementById("canvas2")
 var canvas3DOM = document.getElementById("canvas3")
@@ -98,7 +101,7 @@ const enemySpriteInterval = setInterval(boxMovement, 5);
 
 window.addEventListener('keydown', function (e) { doWhichKey(e); }) // can you simplify this
 window.addEventListener('keyup', function (e) { doNoKey(e); }) // and this
-window.addEventListener("click", printMousePos);
+//window.addEventListener("click", printMousePos);
 //checkWindowSize();
 
 window.onload = function () {
@@ -788,14 +791,14 @@ function collision_check() {
     //227
     sprite_jump_y = yPos + 90;
 
-    document.getElementById("sprite_hb_test").style.left = bx + "px";
-    document.getElementById("sprite_hb_test").style.top = by + "px";
+    // document.getElementById("sprite_hb_test").style.left = bx + "px";
+    // document.getElementById("sprite_hb_test").style.top = by + "px";
 
-    document.getElementById("box_hb_test_run").style.left = sprite_run_x + "px";
-    document.getElementById("box_hb_test_run").style.top = sprite_run_y + "px";
+    // document.getElementById("box_hb_test_run").style.left = sprite_run_x + "px";
+    // document.getElementById("box_hb_test_run").style.top = sprite_run_y + "px";
 
-    document.getElementById("box_hb_test_jump").style.left = sprite_jump_x + "px";
-    document.getElementById("box_hb_test_jump").style.top = sprite_jump_y + "px";
+    // document.getElementById("box_hb_test_jump").style.left = sprite_jump_x + "px";
+    // document.getElementById("box_hb_test_jump").style.top = sprite_jump_y + "px";
 
     switch (current_animation) {
         case "Left_animation":
@@ -833,6 +836,10 @@ function gameOver() {
 
     document.getElementById("game_over_window").style.left = width + "px";
     document.getElementById("game_over_window").style.top = height + "px";
+
+    document.getElementById("game_over_text_1").innerHTML = "&#" + game_over_text_1;
+    document.getElementById("game_over_text_2").innerHTML = "&#" + game_over_text_2;
+    document.getElementById("game_over_text_3").innerHTML = "&#" + game_over_text_3;
 
     var hoverElement1 = document.getElementById("game_over_text_1");
     hoverElement1.addEventListener("mouseover", function () {
@@ -884,8 +891,66 @@ function gameOver() {
         downArrowElement.src = "down_arrow.png";
     });
 
+    var enterButtonElement = document.getElementById("enter_button");
+    enterButtonElement.addEventListener("mouseover", function () {
+        console.log("Mouse is over the element Enter button");
+        enterButtonElement.src = "enter_button_highlight.png";
+    });
+    enterButtonElement.addEventListener("mouseout", function () {
+        console.log("Mouse is over the element Enter button");
+        enterButtonElement.src = "enter_button.png";
+    });
+    // first entry - different function
+    var lowercaseDown = false;
+    var lowercaseUp = false;
+
+    var downArrowElement = document.getElementById("down_arrow");
+    var upArrowElement = document.getElementById("up_arrow");
+    var enterButtonElement = document.getElementById("enter_button");
+
+    function handleDownArrowMouseUp() {
+        console.log("Down arrow is pressed for first entry");
+
+        if (lowercaseDown == false) {
+            if (game_over_text_1 != 90) { game_over_text_1 += 1; }
+            else { game_over_text_1 = 97; lowercaseDown = true; lowercaseUp = true; }
+        } else {
+            if (game_over_text_1 != 122) { game_over_text_1 += 1; }
+            else { game_over_text_1 = 65; lowercaseDown = false; lowercaseUp = false; }
+        }
+
+        document.getElementById("game_over_text_1").innerHTML = "&#" + game_over_text_1;
+        document.getElementById("game_over_entry_1").innerHTML = "&#" + game_over_text_1;
+    }
+
+    function handleUpArrowMouseUp() {
+        console.log("Up arrow is pressed for first entry");
+
+        if (lowercaseUp == false) {
+            if (game_over_text_1 != 65) { game_over_text_1 -= 1; }
+            else { game_over_text_1 = 122; lowercaseUp = true; lowercaseDown = true; }
+        } else {
+            if (game_over_text_1 != 97) { game_over_text_1 -= 1; }
+            else { game_over_text_1 = 90; lowercaseUp = false; lowercaseDown = false; }
+        }
+
+        document.getElementById("game_over_text_1").innerHTML = "&#" + game_over_text_1;
+        document.getElementById("game_over_entry_1").innerHTML = "&#" + game_over_text_1;
+    }
+
+    function handleEnterButtonMouseUp() {
+        console.log("Clicked the element Enter Button");
+        downArrowElement.removeEventListener("mouseup", handleDownArrowMouseUp);
+        upArrowElement.removeEventListener("mouseup", handleUpArrowMouseUp);
+    }
+
+    // Add event listeners for down and up arrow elements
+    downArrowElement.addEventListener("mouseup", handleDownArrowMouseUp);
+    upArrowElement.addEventListener("mouseup", handleUpArrowMouseUp);
+
+    enterButtonElement.addEventListener("click", handleEnterButtonMouseUp, { once: true });
 }
 
 function level_1() { }
 
-//gameOver();
+gameOver();

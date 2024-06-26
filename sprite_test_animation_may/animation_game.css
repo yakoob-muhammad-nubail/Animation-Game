@@ -428,7 +428,7 @@ body {
 .up_arrow_container {
     position: relative;
     left: 600px;
-    top: -125px;
+    top: -300px;
 }
 
 .up_arrow {
@@ -439,11 +439,65 @@ body {
 .down_arrow_container {
     position: relative;
     left: 600px;
-    top: -125px;
+    top: -300px;
 }
 
 .down_arrow {
     position: relative;
     z-index: 5;
 
+}
+
+.enter_button_container {
+    position: relative;
+    left: 30px;
+    top: -300px;
+}
+
+.enter_button {
+    position: relative;
+    z-index: 5;
+
+}
+
+.entry_1 {
+    position: relative;
+    left: 200px;
+    top: -150px;
+}
+
+.game_over_entry_1 {
+    position: relative;
+    z-index: 5;
+    margin: 10px;
+    width: 24px;
+    font-size: 40px;
+}
+
+.entry_2 {
+    position: relative;
+    left: 250px;
+    top: -206px;
+}
+
+.game_over_entry_2 {
+    position: relative;
+    z-index: 5;
+    margin: 10px;
+    width: 24px;
+    font-size: 40px;
+}
+
+.entry_3 {
+    position: relative;
+    left: 300px;
+    top: -262px;
+}
+
+.game_over_entry_3 {
+    position: relative;
+    z-index: 5;
+    margin: 10px;
+    width: 24px;
+    font-size: 40px;
 }
