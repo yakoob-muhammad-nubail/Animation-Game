@@ -384,14 +384,14 @@ body {
     z-index: 5;
 }
 
-.text_1 {
+.text_1_container {
     position: relative;
     left: 50px;
     width: 24px;
     top: 85px;
 }
 
-.game_over_text_1 {
+.text_1 {
     position: relative;
     z-index: 5;
     margin: 10px;
@@ -399,7 +399,7 @@ body {
     font-size: 40px;
 }
 
-.text_2 {
+.text_2_container {
     position: relative;
     left: 250px;
     top: 29px;
@@ -407,7 +407,7 @@ body {
     z-index: 5;
 }
 
-.game_over_text_2 {
+.text_2 {
     position: relative;
     z-index: 5;
     margin: 10px;
@@ -415,7 +415,7 @@ body {
     font-size: 40px;
 }
 
-.text_3 {
+.text_3_container {
     position: relative;
     left: 450px;
     top: -28px;
@@ -423,7 +423,7 @@ body {
     z-index: 5;
 }
 
-.game_over_text_3 {
+.text_3 {
     position: relative;
     z-index: 5;
     margin: 10px;
@@ -473,7 +473,7 @@ body {
     z-index: 5;
 }
 
-.entry_1 {
+.entry_1_container {
     position: relative;
     left: 200px;
     top: -150px;
@@ -481,7 +481,7 @@ body {
     z-index: 5;
 }
 
-.game_over_entry_1 {
+.entry_1 {
     position: relative;
     z-index: 5;
     margin: 10px;
@@ -490,7 +490,7 @@ body {
     z-index: 5;
 }
 
-.entry_2 {
+.entry_2_container {
     position: relative;
     left: 250px;
     top: -206px;
@@ -498,7 +498,7 @@ body {
     z-index: 5;
 }
 
-.game_over_entry_2 {
+.entry_2 {
     position: relative;
     z-index: 5;
     margin: 10px;
@@ -507,7 +507,7 @@ body {
     z-index: 5;
 }
 
-.entry_3 {
+.entry_3_container {
     position: relative;
     left: 300px;
     top: -262px;
@@ -515,11 +515,132 @@ body {
     z-index: 5;
 }
 
-.game_over_entry_3 {
+.entry_3 {
     position: relative;
     z-index: 5;
     margin: 10px;
     width: 24px;
     font-size: 40px;
+    z-index: 5;
+}
+
+.scoreboard_window {
+    position: absolute;
+    left: -1800px;
+    display: none;
+    z-index: 5;
+}
+
+.scoreboard_window_border {
+    background-color: blue;
+    position: absolute;
+    width: 800px;
+    height: 300px;
+    margin: 5px;
+    z-index: 5;
+}
+
+.scoreboard_text_window {
+    position: absolute;
+    background-color: white;
+    width: 750px;
+    height: 250px;
+    margin: 25px;
+    z-index: 5;
+}
+
+.game_over_text_container {
+    position: relative;
+    width: 0px;
+    height: 0px;
+    z-index: 5;
+}
+
+.game_over_text {
+    position: relative;
+    font-size: 100px;
+    width: 620px;
+    /* height: */
+    z-index: 5;
+}
+
+.scoreboard_text_container_1 {
+    position: relative;
+    width: 400px;
+    height: 0px;
+    z-index: 5;
+}
+
+.scoreboard_text_title_1 {
+    position: relative;
+    font-size: 40px;
+    width: 400px;
+    height: 0px;
+    z-index: 5;
+}
+
+.scoreboard_text_container_2 {
+    position: relative;
+    width: 400px;
+    height: 0px;
+    z-index: 5;
+}
+
+.scoreboard_text_title_2 {
+    position: relative;
+    font-size: 40px;
+    width: 400px;
+    height: 0px;
+    z-index: 5;
+}
+
+.scoreboard_text_container_3 {
+    position: relative;
+    background-color: orange;
+    width: 400px;
+    height: 0px;
+    z-index: 5;
+}
+
+.scoreboard_text_title_3 {
+    position: relative;
+    background-color: blue;
+    font-size: 40px;
+    width: 400px;
+    height: 0px;
+    z-index: 5;
+}
+
+.scoreboard_text_container_4 {
+    position: relative;
+    background-color: orange;
+    width: 400px;
+    height: 0px;
+    z-index: 5;
+}
+
+.scoreboard_text_title_4 {
+    position: relative;
+    background-color: blue;
+    font-size: 40px;
+    width: 400px;
+    height: 0px;
+    z-index: 5;
+}
+
+.scoreboard_text_container_5 {
+    position: relative;
+    background-color: orange;
+    width: 400px;
+    height: 0px;
+    z-index: 5;
+}
+
+.scoreboard_text_title_5 {
+    position: relative;
+    background-color: blue;
+    font-size: 40px;
+    width: 400px;
+    height: 0px;
     z-index: 5;
 }

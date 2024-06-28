@@ -1,0 +1,79 @@
+- find how to move exact position of keyframes animation across screen with js - done
+    - write a function that changes the z-index of all the spritesheets - done
+    - cannot move keyframes with position or any matter - done
+    - creat parabolic standing jump - done
+    - switch if else to case statement - done
+    - rotate through jump, attack and run animation - done
+    - create discrepencies for spritesheet locations - done
+            - when rotating through sprites megaman location appears to be 
+                same location - done
+            - change initial location - done
+            - center animations - done
+            - get new discrepencies - done  
+    - true parabolic jump - done
+
+    - combine running animation into one animation using two keyframes - tbd - priority low
+        - doable did this with the jump animation check there 
+    - use e key to switch between platforms - tbd - priority low
+        - with w and s
+        - add in collision control after
+    - add in duck animation for e key - tbd - need to make new spritesheet - priority low
+        - new spritesheet
+        - new keyframe animation
+    - background drawn on canvas - tbd - priority low
+        - method 1 - use canvas draw
+        - method 2 - find a good background spritesheet that is wider than 925px (at least 1800px for parallax scroll)
+    - allow for combination of jump and left/right movement - tbd - priority low
+    - clean up code - tbd - priority low 
+        - final commit
+        - once a week
+        - group into functions
+        - remove log statements
+        - look for further efficiencies
+    - collision control - tbd - low priority
+            - borders - done
+            - with other objects - done
+                - power up - tbd
+                    - 1-up, restart, invincible (star), fireball - tbd
+                - enemy (bot) - done
+            - on a side note as the divs are changed the hit boxes need to be updated.
+            currently there is an issue with the hitboxes, hitbox needs to be adjusted.
+                - the hitbox for the box and jumping sprite are both set, hitbox for 
+                the running sprite is same as the jumping sprite. best solution is
+                switching to ctx draw
+    - collision control bug - done
+            - possible issues => boolean hit is not registering
+                              => x and y positions are not registering correctly
+                              => issue was solved by checking where hit was registered and adding in discrepency
+                              => started from moving parent divs
+
+    - immediate
+        - finish setting up localhost using python (1) - tbd - optional
+            - setup scoreboard database - tbd
+            - setup localhost - tbd
+        - file relocation (2) - tbd
+            - need to rename paths in html files - tbd
+                - change src rename by adding a variable to a txt path - optional   
+        - animating text (3) - extra
+            - save phrase as a var in js
+            - run through each char in a loop (for)
+            - intro text
+            - pause menu text
+            - start menu
+                - blur
+                - start button
+        - functional programming (4) - tbd - optional
+            - good grouping
+            - change after finishing game
+            - refactored the gameover part of the js script - done
+        - oops (5) - tbd
+            - ties into new levels
+            - classes and objects
+            - best for multiple blocks and power ups for a new level
+                - after timer is changed (300 seconds - 5 minutes) per level
+                - powerups, more blocks per level, create objects for each powerup
+                    - draw spritesheets
+                        - draw basic images using ctx draw and repeat the function for each
+                        object needed, include the drawing function as part of the object 
+                        initialization
+            - frees up memory for larger executables (key for containers/server connections)

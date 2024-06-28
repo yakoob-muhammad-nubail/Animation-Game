@@ -14,7 +14,7 @@ let discrepencyyjump = 0; //
 let discrepencyxduck = 0; //
 let discrepencyyduck = 0; //
 let discrepencyxbeam = 0; // 720 209 // 928 170
-let discrepencyybeam = 0; // 
+let discrepencyybeam = 0; //
 
 // size of sprites for box hits etc
 let jumpx = Math.round(573 / 7 * 0.7);
@@ -25,6 +25,8 @@ let leftx = Math.round(860 / 5 * 0.7);
 let lefty = Math.round(256 / 2 * 0.7);
 let rightx = leftx;
 let righty = lefty;
+
+var height, width;
 
 var e = 0;
 
@@ -81,21 +83,58 @@ var boxy = 40;
 
 var offsets = 0, left = 0, top = 0;
 
-var game_over_text = "game_over_text_1";
-var game_over_entry = "game_over_entry_1";
+var game_over_text = "text_1";
+var game_over_entry = "entry_1";
 var lowercaseDown = false;
 var lowercaseUp = false;
 var increment = 1;
 var currentChar = 65;
 var keyOne = 0, keyTwo = 0; keyThree = 0;
 //ASCII 65 (A) - 90 (Z), 97 (a) - 122 (z)
-
-var hoverElement1 = document.getElementById("game_over_text_1");
-var hoverElement2 = document.getElementById("game_over_text_2");
-var hoverElement3 = document.getElementById("game_over_text_3");
+var sprite = document.getElementById("keyframeSprites");
+var scoreText = document.getElementById("score_text");
+var boxSpriteContainer = document.getElementById("box_sprite_container")
+var heart1 = document.getElementById("life_counter_1");
+var heart2 = document.getElementById("life_counter_2");
+var heart3 = document.getElementById("life_counter_3");
+var megamanMain1 = document.getElementById("Character_megaman_main_1");
+var megamanMain2 = document.getElementById("Character_megaman_main_2");
+var megamanJumping = document.getElementById("Character_megaman_jumping");
+var megamanChargeshot = document.getElementById("Character_megaman_chargeshot");
+var megamanChargeBeam = document.getElementById("Character_megaman_chargeBeam");
+var portalSprite = document.getElementById("portal_sprite");
+var platformSprite1 = document.getElementById("platform_sprite_A");
+var platformSprite2 = document.getElementById("platform_sprite_B");
+var platformSprite3 = document.getElementById("platform_sprite_C");
+var border3 = document.getElementById("border3");
+var canvas3 = document.getElementById("canvas3");
+var border4 = document.getElementById("border4");
+var canvas4 = document.getElementById("canvas4");
+var window1 = document.getElementById("window1");
+var window2 = document.getElementById("window2");
+var window3 = document.getElementById("window3");
+var gameOverWindow = document.getElementById("game_over_window");
+var hoverElement1 = document.getElementById("text_1");
+var hoverElement2 = document.getElementById("text_2");
+var hoverElement3 = document.getElementById("text_3");
+var hoverElement4 = document.getElementById("entry_1");
+var hoverElement5 = document.getElementById("entry_2");
+var hoverElement6 = document.getElementById("entry_3");
 var upArrowElement = document.getElementById("up_arrow");
 var downArrowElement = document.getElementById("down_arrow");
 var enterButtonElement = document.getElementById("enter_button");
+var scoreboardWindow = document.getElementById("scoreboard_window");
+var scoreboardWindowBorder = document.getElementById("scoreboard_window_border");
+var scoreboardTextWindow = document.getElementById("scoreboard_text_window");
+var gameOverTextContainer = document.getElementById("game_over_text_container");
+var scoreboardTextContainer1 = document.getElementById("scoreboard_text_container_1");
+var scoreboardTextContainer2 = document.getElementById("scoreboard_text_container_2");
+var scoreboardTextContainer3 = document.getElementById("scoreboard_text_container_3");
+var scoreboardTextContainer4 = document.getElementById("scoreboard_text_container_4");
+var scoreboardTextContainer5 = document.getElementById("scoreboard_text_container_5");
+var scoreboardText3 = document.getElementById("scoreboard_text_title_3");
+var scoreboardText4 = document.getElementById("scoreboard_text_title_4");
+var scoreboardText5 = document.getElementById("scoreboard_text_title_5");
 
 var canvas1DOM = document.getElementById("canvas1")
 var canvas2DOM = document.getElementById("canvas2")
@@ -125,50 +164,25 @@ window.onload = function () {
     canvas.drawImage(img, 0, 0);
     canvas = canvas3DOM.getContext("2d");
 
-    document.getElementById("keyframeSprites").style.left = xPos + "px";
-    document.getElementById("keyframeSprites").style.top = yPos + "px";
+    sprite.style.left = xPos + "px";
+    sprite.style.top = yPos + "px";
+}
+
+function moveElement(width, height, element) {
+    element.style.left = width + "px";
+    element.style.top = height + "px";
+}
+
+function resizeElement(width, height, element) {
+    element.style.width = width + "px";
+    element.style.height = height + "px";
 }
 
 function resetLayout() {
-    var height, width;
-
-    height = 565;
-    width = window.innerWidth - 580; //575
-
-    // console.log("width  border 3 : " + width);
-    // console.log("height  border 3 : " + height);
-
-    document.getElementById("border3").style.width = width + "px";
-    document.getElementById("border3").style.height = height + "px";
-
-    height = 515;
-    width = window.innerWidth - 630; //625
-
-    // console.log("width  canvas 3 : " + width);
-    // console.log("height  canvas 3 : " + height);
-
-    document.getElementById("canvas3").style.width = width + "px";
-    document.getElementById("canvas3").style.height = height + "px";
-
-    width = window.innerWidth - 25;
-    height = window.innerHeight - 610;//610
-
-    // console.log("width border 4 : " + width);
-    // console.log("height border 4 : " + top);
-
-    document.getElementById("border4").style.width = width + "px";
-    document.getElementById("border4").style.height = height + "px";
-    // document.getElementById("window3").style.top = top + "px";
-    // document.getElementById("window3").style.left = left + "px";
-
-    width = window.innerWidth - 75;
-    height = window.innerHeight - 660;// 635
-
-    // console.log("width canvas 4 : " + width);
-    // console.log("height canvas 4 : " + top);
-
-    document.getElementById("canvas4").style.width = width + "px";
-    document.getElementById("canvas4").style.height = height + "px";
+    resizeElement(window.innerWidth - 580, 565, border3);
+    resizeElement(window.innerWidth - 630, 515, canvas3);
+    resizeElement(window.innerWidth - 25, window.innerHeight - 610, border4);
+    resizeElement(window.innerWidth - 75, window.innerHeight - 660, canvas4);
 }
 
 function getWidth() {
@@ -211,15 +225,15 @@ function printMousePos(event) {
 // }
 
 function clearScreen() { //debug function
-    document.getElementById("Character_megaman_main_1").style.display = "none";
-    document.getElementById("Character_megaman_main_2").style.display = "none";
-    document.getElementById("Character_megaman_jumping").style.display = "none";
-    document.getElementById("Character_megaman_chargeshot").style.display = "none";
-    document.getElementById("Character_megaman_chargeBeam").style.display = "none";
-    document.getElementById("portal_sprite").style.display = "none";
-    document.getElementById("platform_sprite_1").style.display = "none";
-    document.getElementById("platform_sprite_2").style.display = "none";
-    document.getElementById("platform_sprite_3").style.display = "none";
+    megamanMain1.style.display = "none";
+    megamanMain2.style.display = "none";
+    megamanJumping.style.display = "none";
+    megamanChargeshot.style.display = "none";
+    megamanChargeBeam.style.display = "none";
+    portalSprite.style.display = "none";
+    platformSprite1.style.display = "none";
+    platformSprite2.style.display = "none";
+    platformSprite3.style.display = "none";
 }
 
 function doNoKey(e) {
@@ -292,8 +306,8 @@ function doWhichKey(e) {
                 document.getElementById(previous_animation).style.display = "none";
             }
 
-            document.getElementById("keyframeSprites").style.left = xPos + "px";
-            document.getElementById("keyframeSprites").style.top = yPos + "px";
+            sprite.style.left = xPos + "px";
+            sprite.style.top = yPos + "px";
 
             break;
 
@@ -521,7 +535,7 @@ function doWhichKey(e) {
 function timerFunc() {
     timer += 1;
 
-    document.getElementById("score_text").innerText = "Timer : " + timer;
+    scoreText.innerText = "Timer : " + timer;
 
     if (timer == 999) { gameOver; }
 }
@@ -532,7 +546,7 @@ function boxMovement() {
     x1 += movex;
     totalx += movex;
 
-    document.getElementById("box_sprite_container").style.right = x1 + "px";
+    boxSpriteContainer.style.right = x1 + "px";
 
     if (collision_check() == true) {
         console.log("hit");
@@ -546,8 +560,8 @@ function boxMovement() {
         x1 = 0;
         totalx = 0; // can be used as a score multiplier
 
-        document.getElementById("box_sprite_container").style.right = x1 + "px";
-        document.getElementById("box_sprite_container").style.top = y1 + "px";
+        boxSpriteContainer.style.right = x1 + "px";
+        boxSpriteContainer.style.top = y1 + "px";
     }
 }
 
@@ -555,16 +569,16 @@ function lives() {
     live_count -= 1;
 
     switch (live_count) {
-        case 0: document.getElementById("life_counter_1").src = "life_dead.png";
-        case 1: document.getElementById("life_counter_2").src = "life_dead.png";
-        case 2: document.getElementById("life_counter_3").src = "life_dead.png";
+        case 0: heart1.src = "life_dead.png";
+        case 1: heart2.src = "life_dead.png";
+        case 2: heart3.src = "life_dead.png";
     }
 
     x1 = 0;
     y1 = Math.floor(Math.random() * (max - min) + min);
 
-    document.getElementById("box_sprite_container").style.right = x1 + "px";
-    document.getElementById("box_sprite_container").style.top = y1 + "px";
+    boxSpriteContainer.style.right = x1 + "px";
+    boxSpriteContainer.style.top = y1 + "px";
 
     if (live_count == 0) {
         gameOver();
@@ -627,12 +641,7 @@ function closeGame() {
 }
 
 function updateGameOverWindow() {
-
-    width = window.innerWidth / 2 - 400;
-    height = window.innerHeight / 2 - 150;
-
-    document.getElementById("game_over_window").style.left = width + "px";
-    document.getElementById("game_over_window").style.top = height + "px";
+    moveElement(window.innerWidth / 2 - 400, window.innerHeight / 2 - 150, gameOverWindow)
 
     resetLayout();
 }
@@ -640,63 +649,63 @@ function updateGameOverWindow() {
 function eventListenerUI() {
     startChar = currentChar;
 
-    document.getElementById("game_over_text_1").innerHTML = "&#" + startChar;
-    document.getElementById("game_over_text_2").innerHTML = "&#" + startChar;
-    document.getElementById("game_over_text_3").innerHTML = "&#" + startChar;
-    document.getElementById("game_over_entry_1").innerHTML = "&#" + startChar;
-    document.getElementById("game_over_entry_2").innerHTML = "&#" + startChar;
-    document.getElementById("game_over_entry_3").innerHTML = "&#" + startChar;
+    hoverElement1.innerHTML = "&#" + startChar;
+    hoverElement2.innerHTML = "&#" + startChar;
+    hoverElement3.innerHTML = "&#" + startChar;
+    hoverElement4.innerHTML = "&#" + startChar;
+    hoverElement5.innerHTML = "&#" + startChar;
+    hoverElement6.innerHTML = "&#" + startChar;
 
-    hoverElement1.addEventListener("mouseover", function () {
+    hoverElement1.addEventListener("mouseover", function hoverOverText1() {
         //console.log("Mouse is over the element");
         hoverElement1.style.color = "blue";
     });
-    hoverElement1.addEventListener("mouseout", function () {
+    hoverElement1.addEventListener("mouseout", function hoverOutText1() {
         //console.log("Mouse is out of the element");
         hoverElement1.style.color = "black";
     });
 
-    hoverElement2.addEventListener("mouseover", function () {
+    hoverElement2.addEventListener("mouseover", function hoverOverText2() {
         //console.log("Mouse is over the element");
         hoverElement2.style.color = "blue";
     });
-    hoverElement2.addEventListener("mouseout", function () {
+    hoverElement2.addEventListener("mouseout", function hoverOutText2() {
         //console.log("Mouse is out of the element");
         hoverElement2.style.color = "black";
     });
 
-    hoverElement3.addEventListener("mouseover", function () {
+    hoverElement3.addEventListener("mouseover", function hoverOverText3() {
         //console.log("Mouse is over the element");
         hoverElement3.style.color = "blue";
     });
-    hoverElement3.addEventListener("mouseout", function () {
+    hoverElement3.addEventListener("mouseout", function hoverOutText3() {
         //console.log("Mouse is out of the element");
         hoverElement3.style.color = "black";
     });
 
-    upArrowElement.addEventListener("mouseover", function () {
+    upArrowElement.addEventListener("mouseover", function hoverOverUpArrow() {
         //console.log("Mouse is over the element");
         upArrowElement.src = "up_arrow_highlight.png";
     });
-    upArrowElement.addEventListener("mouseout", function () {
+    upArrowElement.addEventListener("mouseout", function hoverOutUpArrow() {
         //console.log("Mouse is out of the element");
         upArrowElement.src = "up_arrow.png";
     });
 
-    downArrowElement.addEventListener("mouseover", function () {
+    downArrowElement.addEventListener("mouseover", function hoverOverDownArrow() {
         //console.log("Mouse is over the element");
         downArrowElement.src = "down_arrow_highlight.png";
     });
-    downArrowElement.addEventListener("mouseout", function () {
+    downArrowElement.addEventListener("mouseout", function hoverOutDownArrow() {
         //console.log("Mouse is out of the element");
         downArrowElement.src = "down_arrow.png";
     });
 
-    enterButtonElement.addEventListener("mouseover", function () {
+    enterButtonElement.addEventListener("mouseover", function hoverOverEnterButton() {
         //console.log("Mouse is over the element Enter button");
         enterButtonElement.src = "enter_button_highlight.png";
     });
-    enterButtonElement.addEventListener("mouseout", function () {
+    enterButtonElement.addEventListener("mouseout", function hoverOutEnterButton() {
         //console.log("Mouse is over the element Enter button");
         enterButtonElement.src = "enter_button.png";
     });
@@ -704,18 +713,17 @@ function eventListenerUI() {
 
 function entry(game_over_text, game_over_entry, nextEntry) {
     let currentChar = 65;
-    let lowercaseDown = false;
-    let lowercaseUp = false;
+    let lowercase = false;
 
     function handleDownArrowMouseUp() {
         //console.log("Down arrow is pressed for entry");
 
-        if (!lowercaseDown) {
+        if (!lowercase) {
             if (currentChar != 90) { currentChar += 1; }
-            else { currentChar = 97; lowercaseDown = true; lowercaseUp = true; }
+            else { currentChar = 97; lowercase = true; }
         } else {
             if (currentChar != 122) { currentChar += 1; }
-            else { currentChar = 65; lowercaseDown = false; lowercaseUp = false; }
+            else { currentChar = 65; lowercase = false; }
         }
 
         document.getElementById(game_over_text).innerHTML = "&#" + currentChar;
@@ -727,10 +735,10 @@ function entry(game_over_text, game_over_entry, nextEntry) {
 
         if (!lowercaseUp) {
             if (currentChar != 65) { currentChar -= 1; }
-            else { currentChar = 122; lowercaseUp = true; lowercaseDown = true; }
+            else { currentChar = 122; lowercase = true; }
         } else {
             if (currentChar != 97) { currentChar -= 1; }
-            else { currentChar = 90; lowercaseUp = false; lowercaseDown = false; }
+            else { currentChar = 90; lowercase = true; }
         }
 
         document.getElementById(game_over_text).innerHTML = "&#" + currentChar;
@@ -747,10 +755,10 @@ function entry(game_over_text, game_over_entry, nextEntry) {
         switch (nextEntry) {
             case entryTwo: keyOne = currentChar; break;
             case entryThree: keyTwo = currentChar; break;
-            case null: keyThree = currentChar; endGameOver(); break;
+            case null: keyThree = currentChar;
+                endGameOver();
+                break;
         }
-
-        //console.log(keyOne + "  " + keyTwo + "  " + keyThree);
 
         if (nextEntry) nextEntry();
     }
@@ -761,29 +769,69 @@ function entry(game_over_text, game_over_entry, nextEntry) {
 }
 
 function entryOne() {
-    entry("game_over_text_1", "game_over_entry_1", entryTwo);
+    entry("text_1", "entry_1", entryTwo);
 }
 
 function entryTwo() {
-    entry("game_over_text_2", "game_over_entry_2", entryThree);
+    entry("text_2", "entry_2", entryThree);
 }
 
 function entryThree() {
-    entry("game_over_text_3", "game_over_entry_3", null);
+    entry("text_3", "entry_3", null);
+}
+
+function updateScoreboardWindow() {
+    window1.style.display = "none";
+    window2.style.display = "none";
+    window3.style.display = "none";
+    gameOverWindow.style.display = "none";
+    scoreboardWindow.style.display = "block";
+}
+
+function resetScoreboardLayout() {
+    moveElement(0, 0, scoreboardWindow);
+    resizeElement(window.innerWidth - 25, window.innerHeight - 25, scoreboardWindowBorder);
+    resizeElement(window.innerWidth - 75, window.innerHeight - 75, scoreboardTextWindow);
+    moveElement(window.innerWidth / 2 - 350, 0, gameOverTextContainer);
+    moveElement(350, 75, scoreboardTextContainer1);
+
+    width = 850;
+    height = 35;
+
+    scoreboardTextContainer2.style.left = width + "px";
+    scoreboardTextContainer2.style.top = height + "px";
+}
+
+function setupScoreboardData() {
+    width = 100;
+    height = 100;
+
+    scoreboardTextContainer3.style.left = width + "px";
+    scoreboardTextContainer3.style.top = height + "px";
+    scoreboardText3.innerHTML = "1<br /><br />2";
+
+    width = 350;
+    height = 60;
+
+    scoreboardTextContainer4.style.left = width + "px";
+    scoreboardTextContainer4.style.top = height + "px";
+    scoreboardText4.innerHTML = "1<br /><br />2";
+
+    width = 850;
+    height = 25;
+
+    scoreboardTextContainer5.style.left = width + "px";
+    scoreboardTextContainer5.style.top = height + "px";
+    scoreboardText5.innerHTML = "1<br /><br />2";
 }
 
 function endGameOver() {
-    document.getElementById("window1").style.display = "none";
-    document.getElementById("window2").style.display = "none";
-    document.getElementById("window3").style.display = "none";
-    document.getElementById("game_over_window").style.display = "none";
-
-    if (keyThree != 0) {
-        console.log(0 == null);
-        console.log(0 === null);
-    } else {
-        console.log(keyThree);
-    }
+    console.log(keyThree);
+    // setup scoreboard window
+    updateScoreboardWindow();
+    resetScoreboardLayout();
+    // setting up data
+    setupScoreboardData();
 }
 
 function gameOver() {
@@ -796,3 +844,4 @@ function gameOver() {
 function level_1() { }
 
 //gameOver();
+//clearScreen();
