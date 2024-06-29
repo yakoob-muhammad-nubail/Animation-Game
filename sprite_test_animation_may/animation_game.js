@@ -143,6 +143,7 @@ var canvas3DOM = document.getElementById("canvas3")
 const timerInterval = setInterval(timerFunc, 1000);
 const enemySpriteInterval = setInterval(boxMovement, 5);
 
+//debugging
 //window.addEventListener("click", printMousePos);
 //checkWindowSize();
 
@@ -163,8 +164,8 @@ function handleKeyDown(e) {
     doWhichKey(e);
 }
 
-function handleKeyUp(e) {
-    doNoKey(e);
+function handleKeyUp() {
+    doNoKey();
 }
 
 function main() {
@@ -244,300 +245,62 @@ function clearScreen() { //debug function
     platformSprite3.style.display = "none";
 }
 
-function doNoKey(e) {
-    e = 0;
+function doNoKey() {
     canvas = canvas1DOM.getContext("2d");
     img = document.getElementById("no_key");
     canvas.drawImage(img, 0, 0);
 }
 
 function doWhichKey(e) {
-
-    //e = e || window.event;
+    const keyCodeMap = {
+        65: "a",  // 'a'
+        68: "d",  // 'd'
+        83: "s",  // 's'
+        87: "w",  // 'w'
+        113: "q", // 'q'
+        101: "e"  // 'e'
+    };
 
     charCode = e.keyCode || e.which;
-
-    key = String.fromCharCode(charCode);
+    key = keyCodeMap[charCode] || String.fromCharCode(charCode);
 
     discrepencyx = 0;
     discrepencyy = 0;
-
     nojump = false;
 
-    switch (key) {
-        case "a":
-
-            if (xPos == boundaryxmin || yPos == boundaryymax || yPos == boundaryymin) {
-                console.log("boundary x min reached");
-                //current_animation = previous_animation;
-                break;
-            }
-
-            previous_animation = current_animation;
-            state = "A";
-            current_animation = "Left_animation";
-
-            // xPos += discrepencyx;
-            // yPos += discrepencyy;
-
-            xPos -= vx;
-
-            document.getElementById(current_animation).style.display = "block";
-
-            if (current_animation != previous_animation) {
-                document.getElementById(previous_animation).style.display = "none";
-            }
-
-            document.getElementById("keyframeSprites").style.left = xPos + "px";
-            document.getElementById("keyframeSprites").style.top = yPos + "px";
-
-            break;
-        case "A":
-
-            if (xPos == boundaryxmin || yPos == boundaryymax || yPos == boundaryymin) {
-                console.log("boundary x min reached");
-                break;
-            }
-
-            previous_animation = current_animation;
-            state = "A";
-            current_animation = "Left_animation";
-
-            // xPos += discrepencyx;
-            // yPos += discrepencyy;
-
-            xPos -= vx;
-
-            document.getElementById(current_animation).style.display = "block";
-
-            if (current_animation != previous_animation) {
-                document.getElementById(previous_animation).style.display = "none";
-            }
-
-            sprite.style.left = xPos + "px";
-            sprite.style.top = yPos + "px";
-
-            break;
-
-        //case "e":
-        //    state = "E";
-        //    current_animation = "Defend_animation";
-        //    break;
-
-        //case "E":
-        //    state = "E";
-        //    current_animation = "Defend_animation";
-        //    break;
-
-        case "s":
-
-            if (yPos == (boundaryymin + discrepencyyduck)) {
-                console.log("boundary y min reached");
-                // current_animation = previous_animation;
-                break;
-            }
-
-            state = "S";
-            previous_animation = current_animation;
-            current_animation = "Character_duck";
-
-            // xPos += discrepencyx;
-            // yPos += discrepencyy;
-
-            yPos += vy;
-
-            document.getElementById(current_animation).style.display = "block";
-
-            if (current_animation != previous_animation) {
-                document.getElementById(previous_animation).style.display = "none";
-            }
-
-            document.getElementById("keyframeSprites").style.top = yPos + "px";
-            document.getElementById("keyframeSprites").style.left = xPos + "px";
-
-            break;
-        case "S":
-
-            if (yPos == boundaryymin + discrepencyyduck) {
-                console.log("boundary y min reached");
-                // current_animation = previous_animation;
-                break;
-            }
-
-            state = "S";
-            previous_animation = current_animation;
-            current_animation = "Character_duck";
-
-            // xPos += discrepencyx;
-            // yPos += discrepencyy;
-
-            yPos += vy;
-
-            document.getElementById(current_animation).style.display = "block";
-
-            if (current_animation != previous_animation) {
-                document.getElementById(previous_animation).style.display = "none";
-            }
-
-            document.getElementById("keyframeSprites").style.top = yPos + "px";
-            document.getElementById("keyframeSprites").style.left = xPos + "px";
-
-            break;
-
-        case "d":
-
-            if (xPos == boundaryxmax || yPos == boundaryymin || yPos == boundaryymax) {
-                console.log("boundary x max reached");
-                console.log("moving right");
-                //current_animation = previous_animation;
-                break;
-            }
-
-            previous_animation = current_animation;
-            state = "D";
-            current_animation = "Left_animation";
-            console.log("right");
-
-            console.log("moving right success");
-            // xPos += discrepencyx;
-            // yPos += discrepencyy;
-
-            xPos += vx;
-
-            document.getElementById(current_animation).style.display = "block";
-
-            if (current_animation != previous_animation) {
-                document.getElementById(previous_animation).style.display = "none";
-            }
-
-            document.getElementById("keyframeSprites").style.top = yPos + "px";
-            document.getElementById("keyframeSprites").style.left = xPos + "px";
-
-            break;
-
-        case "D":
-
-            if (xPos == boundaryxmax || yPos == boundaryymin || yPos == boundaryymax) {
-                console.log("boundary x max reached");
-                console.log("moving right");
-                //current_animation = previous_animation;
-                break;
-            }
-
-            previous_animation = current_animation;
-            state = "D";
-            current_animation = "Left_animation";
-            console.log("right");
-
-            console.log("moving right success");
-            // xPos += discrepencyx;
-            // yPos += discrepencyy;
-
-            xPos += vx;
-
-            document.getElementById(current_animation).style.display = "block";
-
-            if (current_animation != previous_animation) {
-                document.getElementById(previous_animation).style.display = "none";
-            }
-
-            document.getElementById("keyframeSprites").style.top = yPos + "px";
-            document.getElementById("keyframeSprites").style.left = xPos + "px";
-
-            break;
-
-        case "w":
-
-            if (yPos == (boundaryymax + discrepencyxjump)) {
-                console.log("boundary y max reached");
-                // current_animation = previous_animation;
-                break;
-            }
-
-            previous_animation = current_animation;
-            state = "W";
-            current_animation = "Character_jumping";
-
-            // xPos += discrepencyx;
-            // yPos += discrepencyy;
-
-            yPos -= vy;
-
-            document.getElementById(current_animation).style.display = "block";
-
-            if (current_animation != previous_animation) {
-                document.getElementById(previous_animation).style.display = "none";
-            }
-
-            document.getElementById("keyframeSprites").style.top = yPos + "px";
-            document.getElementById("keyframeSprites").style.left = xPos + "px";
-
-            break;
-
-        case "W":
-
-            if (yPos == (boundaryymax + discrepencyxjump)) {
-                console.log("boundary y max reached");
-                //current_animation = previous_animation;
-                break;
-            }
-
-            previous_animation = current_animation;
-            state = "W";
-            current_animation = "Character_jumping";
-
-            xPos += discrepencyx;
-            yPos += discrepencyy;
-
-            yPos -= vy;
-
-            document.getElementById(current_animation).style.display = "block";
-
-            if (current_animation != previous_animation) {
-                document.getElementById(previous_animation).style.display = "none";
-            }
-
-            document.getElementById("keyframeSprites").style.top = yPos + "px";
-            document.getElementById("keyframeSprites").style.left = xPos + "px";
-
-            break;
-
-        // case "q":
-
-        //     previous_animation = current_animation;
-        //     state = "Q";
-        //     current_animation = "Attack_animation";
-
-        //     document.getElementById(current_animation).style.display = "block";
-
-        //     if (current_animation != previous_animation) {
-        //         document.getElementById(previous_animation).style.display = "none";
-        //     }
-
-        //     break;
-
-        // case "Q":
-
-        //     previous_animation = current_animation;
-        //     state = "Q";
-        //     current_animation = "Attack_animation";
-
-        //     document.getElementById(current_animation).style.display = "block";
-
-        //     if (current_animation != previous_animation) {
-        //         document.getElementById(previous_animation).style.display = "none";
-        //     }
-
-        //     break;
-
-        default:
-            state = "no";
+    if ((key === "a" || key === "A") && xPos !== boundaryxmin && yPos !== boundaryymax && yPos !== boundaryymin) {
+        moveCharacter("Left_animation", -vx, 0);
+    } else if ((key === "d" || key === "D") && xPos !== boundaryxmax && yPos !== boundaryymin && yPos !== boundaryymax) {
+        moveCharacter("Left_animation", vx, 0);
+    } else if ((key === "s" || key === "S") && yPos !== (boundaryymin + discrepencyyduck)) {
+        moveCharacter("Character_duck", 0, vy);
+    } else if ((key === "w" || key === "W") && yPos !== (boundaryymax + discrepencyxjump)) {
+        moveCharacter("Character_jumping", 0, -vy);
+    } else {
+        state = "no";
     }
 
     // drawing the key pressed animation
     canvas = canvas1DOM.getContext("2d");
     img = document.getElementById(state + "_key");
     canvas.drawImage(img, 0, 0);
+}
+
+function moveCharacter(animation, deltaX, deltaY) {
+    previous_animation = current_animation;
+    state = animation.charAt(0).toUpperCase();
+    current_animation = animation;
+
+    xPos += deltaX;
+    yPos += deltaY;
+
+    document.getElementById(current_animation).style.display = "block";
+    if (current_animation !== previous_animation) {
+        document.getElementById(previous_animation).style.display = "none";
+    }
+
+    document.getElementById("keyframeSprites").style.left = xPos + "px";
+    document.getElementById("keyframeSprites").style.top = yPos + "px";
 }
 
 function timerFunc() {
@@ -609,15 +372,6 @@ function collision_check() {
     //227
     sprite_jump_y = yPos + 90;
 
-    // document.getElementById("sprite_hb_test").style.left = bx + "px";
-    // document.getElementById("sprite_hb_test").style.top = by + "px";
-
-    // document.getElementById("box_hb_test_run").style.left = sprite_run_x + "px";
-    // document.getElementById("box_hb_test_run").style.top = sprite_run_y + "px";
-
-    // document.getElementById("box_hb_test_jump").style.left = sprite_jump_x + "px";
-    // document.getElementById("box_hb_test_jump").style.top = sprite_jump_y + "px";
-
     switch (current_animation) {
         case "Left_animation":
             if (sprite_run_x >= bx && sprite_run_x <= (bx + boxx) && sprite_run_y >= by && sprite_run_y <= (by + boxy)) {
@@ -638,9 +392,6 @@ function collision_check() {
 }
 
 function closeGame() {
-    //window.removeEventListener('keydown', function (e) { doWhichKey(e); });
-    //window.removeEventListener('keyup', function (e) { doNoKey(e); });
-
     clearInterval(timerInterval);
     clearInterval(enemySpriteInterval);
 
