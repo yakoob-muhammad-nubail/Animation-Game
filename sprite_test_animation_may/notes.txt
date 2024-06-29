@@ -66,6 +66,8 @@
             - good grouping
             - change after finishing game
             - refactored the gameover part of the js script - done
+            - refactored everything - done
+            - need to look at moving the keyup and key down functions to a main function - tbd
         - oops (5) - tbd
             - ties into new levels
             - classes and objects

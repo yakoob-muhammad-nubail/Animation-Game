@@ -140,34 +140,42 @@ var canvas1DOM = document.getElementById("canvas1")
 var canvas2DOM = document.getElementById("canvas2")
 var canvas3DOM = document.getElementById("canvas3")
 
-// console.log(state);
-// console.log(previous_animation);
-// console.log(key);
-// console.log(vx);
-// console.log(vy);
-// console.log(xPos);
-// console.log(yPos);
-
 const timerInterval = setInterval(timerFunc, 1000);
 const enemySpriteInterval = setInterval(boxMovement, 5);
 
-window.addEventListener('keydown', function (e) { doWhichKey(e); }) // can you simplify this
-window.addEventListener('keyup', function (e) { doNoKey(e); }) // and this
 //window.addEventListener("click", printMousePos);
 //checkWindowSize();
 
-window.onload = function () {
-    resetLayout();
+resetLayout();
 
-    canvas = canvas1DOM.getContext("2d");
-    img = document.getElementById(state + "_key");
-    canvas.drawImage(img, 0, 0);
-    canvas = canvas3DOM.getContext("2d");
+canvas = canvas1DOM.getContext("2d");
+img = document.getElementById(state + "_key");
+canvas.drawImage(img, 0, 0);
+canvas = canvas3DOM.getContext("2d");
 
-    sprite.style.left = xPos + "px";
-    sprite.style.top = yPos + "px";
+sprite.style.left = xPos + "px";
+sprite.style.top = yPos + "px";
+
+main();
+
+
+function handleKeyDown(e) {
+    doWhichKey(e);
 }
 
+function handleKeyUp(e) {
+    doNoKey(e);
+}
+
+function main() {
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
+}
+
+function removeEventListeners() {
+    window.removeEventListener('keydown', handleKeyDown);
+    window.removeEventListener('keyup', handleKeyUp);
+}
 function moveElement(width, height, element) {
     element.style.left = width + "px";
     element.style.top = height + "px";
@@ -630,8 +638,8 @@ function collision_check() {
 }
 
 function closeGame() {
-    window.removeEventListener('keydown', function (e) { doWhichKey(e); });
-    window.removeEventListener('keyup', function (e) { doNoKey(e); });
+    //window.removeEventListener('keydown', function (e) { doWhichKey(e); });
+    //window.removeEventListener('keyup', function (e) { doNoKey(e); });
 
     clearInterval(timerInterval);
     clearInterval(enemySpriteInterval);
@@ -794,34 +802,16 @@ function resetScoreboardLayout() {
     resizeElement(window.innerWidth - 75, window.innerHeight - 75, scoreboardTextWindow);
     moveElement(window.innerWidth / 2 - 350, 0, gameOverTextContainer);
     moveElement(350, 75, scoreboardTextContainer1);
-
-    width = 850;
-    height = 35;
-
-    scoreboardTextContainer2.style.left = width + "px";
-    scoreboardTextContainer2.style.top = height + "px";
+    moveElement(850, 35, scoreboardTextContainer2);
 }
 
 function setupScoreboardData() {
-    width = 100;
-    height = 100;
-
-    scoreboardTextContainer3.style.left = width + "px";
-    scoreboardTextContainer3.style.top = height + "px";
+    moveElement(100, 100, scoreboardTextContainer3);
+    moveElement(350, 60, scoreboardTextContainer4);
     scoreboardText3.innerHTML = "1<br /><br />2";
-
-    width = 350;
-    height = 60;
-
-    scoreboardTextContainer4.style.left = width + "px";
-    scoreboardTextContainer4.style.top = height + "px";
+    moveElement(350, 60, scoreboardTextContainer4);
     scoreboardText4.innerHTML = "1<br /><br />2";
-
-    width = 850;
-    height = 25;
-
-    scoreboardTextContainer5.style.left = width + "px";
-    scoreboardTextContainer5.style.top = height + "px";
+    moveElement(850, 25, scoreboardTextContainer5);
     scoreboardText5.innerHTML = "1<br /><br />2";
 }
 
@@ -835,6 +825,7 @@ function endGameOver() {
 }
 
 function gameOver() {
+    removeEventListeners();
     closeGame();
     updateGameOverWindow();
     eventListenerUI();
