@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=c:\Users\nubs\Documents\GitHub_Desktop_y-m-n\Animation_Game\Animation-Game\sprite_test_animation_may\venv
+set VIRTUAL_ENV=c:\Users\nubs\Documents\GitHub_Desktop_y-m-n\Animation_Game\Animation-Game\venv
 
 if not defined PROMPT set PROMPT=$P$G
 

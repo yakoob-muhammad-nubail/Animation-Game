@@ -99,4 +99,8 @@
             - database
             - home page
             - game page
-        - remove sprite test animation may
+        - remove sprite test animation may - done
+        - enemy sprite lags when first loading - tbd
+            - could be an issue with ram and tabs open
+        - the scoreboard buttons dont loop through the alphabet properly = tbd
+        - move other test files into repository
