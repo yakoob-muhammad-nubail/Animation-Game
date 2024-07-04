@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="animation_game.css">
+    <link rel="stylesheet" href="../static/css/animation_game.css">
     <title>Animation Game</title>
     <style>
     </style>
@@ -14,13 +14,13 @@
     <div id="window1" class="window1">
         <div class="border1" id="border1">
             <canvas class="canvas1" id="canvas1">
-                <img class="Q_key" id="Q_key" src="keypad_Q.png" alt="Q key pressed">
-                <img class="W_key" id="W_key" src="keypad_W.png" alt="W key pressed">
-                <img class="E_key" id="E_key" src="keypad_E.png" alt="E key pressed">
-                <img class="A_key" id="A_key" src="keypad_A.png" alt="Q key pressed">
-                <img class="S_key" id="S_key" src="keypad_S.png" alt="S key pressed">
-                <img class="D_key" id="D_key" src="keypad_D.png" alt="D key pressed">
-                <img class="no_key" id="no_key" src="keypad_main.png" alt="No key pressed">
+                <img class="Q_key" id="Q_key" src="../static/images/keypad_Q.png" alt="Q key pressed">
+                <img class="W_key" id="W_key" src="../static/images/keypad_W.png" alt="W key pressed">
+                <img class="E_key" id="E_key" src="../static/images/keypad_E.png" alt="E key pressed">
+                <img class="A_key" id="A_key" src="../static/images/keypad_A.png" alt="Q key pressed">
+                <img class="S_key" id="S_key" src="../static/images/keypad_S.png" alt="S key pressed">
+                <img class="D_key" id="D_key" src="../static/images/keypad_D.png" alt="D key pressed">
+                <img class="no_key" id="no_key" src="../static/images/keypad_main.png" alt="No key pressed">
             </canvas>
         </div>
         <div class="border2" id="border2">
@@ -36,7 +36,7 @@
                 <div id="Left_animation" class="Left_animation">
                     <div class="Character">
                         <img id="Character_megaman_main_1" class="Character_spritesheet pixelart"
-                            src="ss_megaman_twolayer.png" alt="Character_Stationary_layer1" />
+                            src="../static/images/ss_megaman_twolayer.png" alt="Character_Stationary_layer1" />
                     </div>
                 </div>
                 <!-- move with adobe software later -->
@@ -47,46 +47,49 @@
                 </div> -->
                 <div id="Character_jumping" class="Character_jumping">
                     <img id="Character_megaman_jumping" class="Character_jumping_spritesheet pixelart"
-                        src="ss_megaman_jump.png" alt="Character Jumping" />
+                        src="../static/images/ss_megaman_jump.png" alt="Character Jumping" />
                 </div>
                 <!-- replace with a duck animation later -->
                 <div id="Character_duck" class="Character_jumping">
-                    <img id="Character_ducking" class="Character_jumping_spritesheet pixelart" src="ss_megaman_jump.png"
-                        alt="Character Jumping" />
+                    <img id="Character_ducking" class="Character_jumping_spritesheet pixelart" 
+                    src="../static/images/ss_megaman_jump.png" alt="Character Jumping" />
                 </div>
                 <div id="Attack_animation" class="Attack_animation">
                     <div id="Character_chargeshot" class="Character_chargeShot">
                         <img id="Character_megaman_chargeshot" class="Character_chargeShot_spritesheet pixelart"
-                            src="ss_megaman_attack.png" alt="Character Attacking" />
+                            src="../static/images/ss_megaman_attack.png" alt="Character Attacking" />
                     </div>
                     <div id="Character_chargeBeam" class="Character_chargeBeam">
                         <img id="Character_megaman_chargeBeam" class="Character_chargeBeam_spritesheet pixelart"
-                            src="ss_megaman_blast.png" alt="Blast Animation" />
+                            src="../static/images/ss_megaman_blast.png" alt="Blast Animation" />
                     </div>
                 </div>
             </div>
 
             <div id="portal_sprites" class="portal_sprites">
-                <img id="portal_sprite" class="portal_sprite" src="portal.jpg" alt="Portal Animation">
+                <img id="portal_sprite" class="portal_sprite" src="../static/images/portal.jpg" alt="Portal Animation">
             </div>
             <div id="platform_sprite_A" class="platform_sprite_A">
-                <img id="platform_sprite_1" class="platform_sprite_1" src="platform.png" alt="Platform Animation">
+                <img id="platform_sprite_1" class="platform_sprite_1" src="../static/images/platform.png" 
+                alt="Platform Animation">
             </div>
             <div id="platform_sprite_B" class="platform_sprite_B">
-                <img id="platform_sprite_2" class="platform_sprite_2" src="platform.png" alt="Platform Animation">
+                <img id="platform_sprite_2" class="platform_sprite_2" src="../static/images/platform.png" 
+                alt="Platform Animation">
             </div>
             <div id="platform_sprite_C" class="platform_sprite_C">
-                <img id="platform_sprite_3" class="platform_sprite_3" src="platform.png" alt="Platform Animation">
+                <img id="platform_sprite_3" class="platform_sprite_3" src="../static/images/platform.png" 
+                alt="Platform Animation">
             </div>
             <div id="boxes" class="boxes">
                 <div id="box_sprite_container" class="box_sprite_container">
-                    <img id="box_sprite" class="box_sprite" src="box_sprite.png" alt="Box Sprite">
+                    <img id="box_sprite" class="box_sprite" src="../static/images/box_sprite.png" alt="Box Sprite">
                 </div>
             </div>
             <div id="life_counter" class="life_counter">
-                <img id="life_counter_1" class="life_counter_1" src="life_alive.png" alt="Heart Sprite">
-                <img id="life_counter_2" class="life_counter_2" src="life_alive.png" alt="Heart Sprite">
-                <img id="life_counter_3" class="life_counter_3" src="life_alive.png" alt="Heart Sprite">
+                <img id="life_counter_1" class="life_counter_1" src="../static/images/life_alive.png" alt="Heart Sprite">
+                <img id="life_counter_2" class="life_counter_2" src="../static/images/life_alive.png" alt="Heart Sprite">
+                <img id="life_counter_3" class="life_counter_3" src="../static/images/life_alive.png" alt="Heart Sprite">
             </div>
             <div id="scoreboard" class="scoreboard">
                 <p id="score_text" class="score_text">Timer : 0</p>
@@ -140,13 +143,13 @@
                     <p id="entry_3" class="entry_3">A</p>
                 </div>
                 <div id="up_arrow_container" class="up_arrow_container">
-                    <img id="up_arrow" class="up_arrow" src="up_arrow.png" alt="Up Arrow">
+                    <img id="up_arrow" class="up_arrow" src="../static/images/up_arrow.png" alt="Up Arrow">
                 </div>
                 <div id="down_arrow_container" class="down_arrow_container">
-                    <img id="down_arrow" class="down_arrow" src="down_arrow.png" alt="Down Arrow">
+                    <img id="down_arrow" class="down_arrow" src="../static/images/down_arrow.png" alt="Down Arrow">
                 </div>
                 <div id="enter_button_container" class="enter_button_container">
-                    <img id="enter_button" class="enter_button" src="enter_button.png" alt="Enter Button">
+                    <img id="enter_button" class="enter_button" src="../static/images/enter_button.png" alt="Enter Button">
                 </div>
             </div>
         </div>
@@ -178,4 +181,4 @@
     </div>
 </body>
 
-<script rel="script" src="animation_game.js"></script>
+<script rel="script" src="../static/js/animation_game.js"></script>

@@ -27,8 +27,8 @@
     - clean up code - tbd - priority low 
         - final commit
         - once a week
-        - group into functions
-        - remove log statements
+        - group into functions - refactor done - done
+        - remove log statements - done
         - look for further efficiencies
     - collision control - tbd - low priority
             - borders - done
@@ -87,3 +87,18 @@
         - set screen to set window size - tbd - optional
             - responsive web design
             - large screen, min screen and mobile
+        - file relocation (-1)  - done
+            - re order priorities
+            - move files into specific folders - done
+                - move test files into test folders 
+            - fix file paths
+    - sidenote
+        - finish notes app with localhost then add in localhost for this app
+        - dockerize containers 
+            - db
+            - login
+            - sign-in
+            - sign-out
+            - database
+            - home page
+            - game page

@@ -340,9 +340,9 @@ function lives() {
     live_count -= 1;
 
     switch (live_count) {
-        case 0: heart1.src = "life_dead.png";
-        case 1: heart2.src = "life_dead.png";
-        case 2: heart3.src = "life_dead.png";
+        case 0: heart1.src = "../static/images/life_dead.png";
+        case 1: heart2.src = "../static/images/life_dead.png";
+        case 2: heart3.src = "../static/images/life_dead.png";
     }
 
     x1 = 0;
@@ -444,29 +444,29 @@ function eventListenerUI() {
 
     upArrowElement.addEventListener("mouseover", function hoverOverUpArrow() {
         //console.log("Mouse is over the element");
-        upArrowElement.src = "up_arrow_highlight.png";
+        upArrowElement.src = "../static/images/up_arrow_highlight.png";
     });
     upArrowElement.addEventListener("mouseout", function hoverOutUpArrow() {
         //console.log("Mouse is out of the element");
-        upArrowElement.src = "up_arrow.png";
+        upArrowElement.src = "../static/images/up_arrow.png";
     });
 
     downArrowElement.addEventListener("mouseover", function hoverOverDownArrow() {
         //console.log("Mouse is over the element");
-        downArrowElement.src = "down_arrow_highlight.png";
+        downArrowElement.src = "../static/images/down_arrow_highlight.png";
     });
     downArrowElement.addEventListener("mouseout", function hoverOutDownArrow() {
         //console.log("Mouse is out of the element");
-        downArrowElement.src = "down_arrow.png";
+        downArrowElement.src = "../static/images/down_arrow.png";
     });
 
     enterButtonElement.addEventListener("mouseover", function hoverOverEnterButton() {
         //console.log("Mouse is over the element Enter button");
-        enterButtonElement.src = "enter_button_highlight.png";
+        enterButtonElement.src = "../static/images/enter_button_highlight.png";
     });
     enterButtonElement.addEventListener("mouseout", function hoverOutEnterButton() {
         //console.log("Mouse is over the element Enter button");
-        enterButtonElement.src = "enter_button.png";
+        enterButtonElement.src = "../static/images/enter_button.png";
     });
 }
 
