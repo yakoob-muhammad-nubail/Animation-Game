@@ -48,12 +48,9 @@
                               => started from moving parent divs
 
     - immediate
-        - finish setting up localhost using python (1) - tbd - optional
-            - setup scoreboard database - tbd
-            - setup localhost - tbd
-        - file relocation (2) - tbd
-            - need to rename paths in html files - tbd
-                - change src rename by adding a variable to a txt path - optional   
+        - file relocation - done
+            - need to rename paths in html files - done
+                - change src rename by adding a variable to a txt path - tbd - optional   
         - animating text (3) - extra
             - save phrase as a var in js
             - run through each char in a loop (for)
@@ -62,13 +59,13 @@
             - start menu
                 - blur
                 - start button
-        - functional programming (4) - tbd - optional
+        - functional programming - done
             - good grouping
             - change after finishing game
             - refactored the gameover part of the js script - done
             - refactored everything - done
-            - need to look at moving the keyup and key down functions to a main function - tbd
-        - oops (5) - tbd
+            - need to look at moving the keyup and key down functions to a main function - done
+        - oops (4) - tbd - optional
             - ties into new levels
             - classes and objects
             - best for multiple blocks and power ups for a new level
@@ -79,19 +76,19 @@
                         object needed, include the drawing function as part of the object 
                         initialization
             - frees up memory for larger executables (key for containers/server connections)
-        - create multiple blocks (0) - tbd - immediate
+        - create multiple blocks (2) - tbd - immediate
             - use appenchild 
             - lag when game first loads - check issue
-        - setup localhost (0.5) - tbd - immediate
+        - setup localhost (1) - tbd - immediate
             - login, logout, sign-up, scoreboard, game, home
         - set screen to set window size - tbd - optional
             - responsive web design
             - large screen, min screen and mobile
-        - file relocation (-1)  - done
+        - file relocation - done
             - re order priorities
             - move files into specific folders - done
-                - move test files into test folders 
-            - fix file paths
+                - move test files into test folders  - done
+            - fix file paths - done
     - sidenote
         - finish notes app with localhost then add in localhost for this app
         - dockerize containers 
@@ -102,3 +99,4 @@
             - database
             - home page
             - game page
+        - remove sprite test animation may
