@@ -79,3 +79,11 @@
                         object needed, include the drawing function as part of the object 
                         initialization
             - frees up memory for larger executables (key for containers/server connections)
+        - create multiple blocks (0) - tbd - immediate
+            - use appenchild 
+            - lag when game first loads - check issue
+        - setup localhost (0.5) - tbd - immediate
+            - login, logout, sign-up, scoreboard, game, home
+        - set screen to set window size - tbd - optional
+            - responsive web design
+            - large screen, min screen and mobile
