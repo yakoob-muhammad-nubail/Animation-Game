@@ -91,6 +91,7 @@ var increment = 1;
 var currentChar = 65;
 var keyOne = 0, keyTwo = 0; keyThree = 0;
 //ASCII 65 (A) - 90 (Z), 97 (a) - 122 (z)
+
 var sprite = document.getElementById("keyframeSprites");
 var scoreText = document.getElementById("score_text");
 var boxSpriteContainer = document.getElementById("box_sprite_container")
@@ -203,8 +204,8 @@ function getHeight() {
 }
 
 function checkWindowSize() {
-    width_WIN = window.innerWidth;
-    height_WIN = window.innerHeight;
+    width_WIN = getWidth();
+    height_WIN = getHeight();
 
     console.log("window width is : " + width_WIN);
     console.log("window height is : " + height_WIN);
@@ -406,14 +407,12 @@ function updateGameOverWindow() {
 }
 
 function eventListenerUI() {
-    startChar = currentChar;
-
-    hoverElement1.innerHTML = "&#" + startChar;
-    hoverElement2.innerHTML = "&#" + startChar;
-    hoverElement3.innerHTML = "&#" + startChar;
-    hoverElement4.innerHTML = "&#" + startChar;
-    hoverElement5.innerHTML = "&#" + startChar;
-    hoverElement6.innerHTML = "&#" + startChar;
+    hoverElement1.innerHTML = "&#" + currentChar;
+    hoverElement2.innerHTML = "&#" + currentChar;
+    hoverElement3.innerHTML = "&#" + currentChar;
+    hoverElement4.innerHTML = "&#" + currentChar;
+    hoverElement5.innerHTML = "&#" + currentChar;
+    hoverElement6.innerHTML = "&#" + currentChar;
 
     hoverElement1.addEventListener("mouseover", function hoverOverText1() {
         //console.log("Mouse is over the element");

@@ -1,5 +1,5 @@
 - find how to move exact position of keyframes animation across screen with js - done
-    - write a function that changes the z-index of all the spritesheets - done
+    - change the z-index of all the spritesheets - done
     - cannot move keyframes with position or any matter - done
     - creat parabolic standing jump - done
     - switch if else to case statement - done
@@ -11,46 +11,49 @@
             - center animations - done
             - get new discrepencies - done  
     - true parabolic jump - done
+    - clean up code - done
+        - final commit
+        - once a week
+        - look for further efficiencies
+        - group into functions - refactor done - done
+        - remove log statements - done
+    - collision control - done
+        - borders - done
+        - with other objects - done
+            - power up - tbd
+                - 1-up, restart, invincible (star), fireball - tbd
+            - enemy (bot) - done
+    - collision control bug - done
+            - possible issues => boolean hit is not registering
+                              => x and y positions are not registering correctly
+                              => issue was solved by checking where hit was registered and adding in discrepency
+                              => started from moving parent divs
+    - file relocation - done
+        - need to rename paths in html files - done
+    - file relocation - done
+        - re order priorities
+        - move files into specific folders - done
+            - move test files into test folders  - done
+        - fix file paths - done    
+    - functional programming - done
+        - refactored the gameover part of the js script - done
+        - refactored everything - done
+        - need to look at moving the keyup and key down functions to a main function - done 
 
     - combine running animation into one animation using two keyframes - tbd - priority low
         - doable did this with the jump animation check there 
     - use e key to switch between platforms - tbd - priority low
         - with w and s
         - add in collision control after
-    - add in duck animation for e key - tbd - need to make new spritesheet - priority low
+    - add in duck animation for e key - tbd - priority low
         - new spritesheet
         - new keyframe animation
     - background drawn on canvas - tbd - priority low
         - method 1 - use canvas draw
         - method 2 - find a good background spritesheet that is wider than 925px (at least 1800px for parallax scroll)
     - allow for combination of jump and left/right movement - tbd - priority low
-    - clean up code - tbd - priority low 
-        - final commit
-        - once a week
-        - group into functions - refactor done - done
-        - remove log statements - done
-        - look for further efficiencies
-    - collision control - tbd - low priority
-            - borders - done
-            - with other objects - done
-                - power up - tbd
-                    - 1-up, restart, invincible (star), fireball - tbd
-                - enemy (bot) - done
-            - on a side note as the divs are changed the hit boxes need to be updated.
-            currently there is an issue with the hitboxes, hitbox needs to be adjusted.
-                - the hitbox for the box and jumping sprite are both set, hitbox for 
-                the running sprite is same as the jumping sprite. best solution is
-                switching to ctx draw
-    - collision control bug - done
-            - possible issues => boolean hit is not registering
-                              => x and y positions are not registering correctly
-                              => issue was solved by checking where hit was registered and adding in discrepency
-                              => started from moving parent divs
-
+    
     - immediate
-        - file relocation - done
-            - need to rename paths in html files - done
-                - change src rename by adding a variable to a txt path - tbd - optional   
         - animating text (3) - extra
             - save phrase as a var in js
             - run through each char in a loop (for)
@@ -59,12 +62,6 @@
             - start menu
                 - blur
                 - start button
-        - functional programming - done
-            - good grouping
-            - change after finishing game
-            - refactored the gameover part of the js script - done
-            - refactored everything - done
-            - need to look at moving the keyup and key down functions to a main function - done
         - oops (4) - tbd - optional
             - ties into new levels
             - classes and objects
@@ -84,11 +81,7 @@
         - set screen to set window size - tbd - optional
             - responsive web design
             - large screen, min screen and mobile
-        - file relocation - done
-            - re order priorities
-            - move files into specific folders - done
-                - move test files into test folders  - done
-            - fix file paths - done
+
     - sidenote
         - finish notes app with localhost then add in localhost for this app
         - dockerize containers 
@@ -104,3 +97,9 @@
             - could be an issue with ram and tabs open
         - the scoreboard buttons dont loop through the alphabet properly = tbd
         - move other test files into repository
+        - on a side note as the divs are changed the hit boxes need to be updated.
+        currently there is an issue with the hitboxes, hitbox needs to be adjusted.
+        - the hitbox for the box and jumping sprite are both set, hitbox for 
+        the running sprite is same as the jumping sprite. best solution is
+        switching to ctx draw
+        - change src rename by adding a variable to a txt path - tbd - optional 
