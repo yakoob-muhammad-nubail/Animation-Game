@@ -258,8 +258,8 @@ function doWhichKey(e) {
         68: "d",  // 'd'
         83: "s",  // 's'
         87: "w",  // 'w'
-        113: "q", // 'q'
-        101: "e"  // 'e'
+        101: "e", // 'e'
+        113: "q"  // 'q'
     };
 
     charCode = e.keyCode || e.which;
