@@ -486,21 +486,23 @@ function entry(game_over_text, game_over_entry, nextEntry) {
 
         document.getElementById(game_over_text).innerHTML = "&#" + currentChar;
         document.getElementById(game_over_entry).innerHTML = "&#" + currentChar;
+        console.log(currentChar);
     }
 
     function handleUpArrowMouseUp() {
         //console.log("Up arrow is pressed for entry");
 
-        if (!lowercaseUp) {
+        if (!lowercase) {
             if (currentChar != 65) { currentChar -= 1; } // here is the issue
             else { currentChar = 122; lowercase = true; }
         } else {
             if (currentChar != 97) { currentChar -= 1; }
-            else { currentChar = 90; lowercase = true; }
+            else { currentChar = 90; lowercase = false; }
         }
 
         document.getElementById(game_over_text).innerHTML = "&#" + currentChar;
         document.getElementById(game_over_entry).innerHTML = "&#" + currentChar;
+        console.log(currentChar);
     }
 
     function handleEnterButtonMouseUpEntry() {
