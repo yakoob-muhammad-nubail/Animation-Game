@@ -94,7 +94,7 @@ var keyOne = 0, keyTwo = 0; keyThree = 0;
 
 var sprite = document.getElementById("keyframeSprites");
 var scoreText = document.getElementById("score_text");
-var boxSpriteContainer = document.getElementById("box_sprite_container")
+var boxSpriteContainer = document.getElementById("box_sprite_container");
 var heart1 = document.getElementById("life_counter_1");
 var heart2 = document.getElementById("life_counter_2");
 var heart3 = document.getElementById("life_counter_3");
@@ -137,9 +137,9 @@ var scoreboardText3 = document.getElementById("scoreboard_text_title_3");
 var scoreboardText4 = document.getElementById("scoreboard_text_title_4");
 var scoreboardText5 = document.getElementById("scoreboard_text_title_5");
 
-var canvas1DOM = document.getElementById("canvas1")
-var canvas2DOM = document.getElementById("canvas2")
-var canvas3DOM = document.getElementById("canvas3")
+var canvas1DOM = document.getElementById("canvas1");
+var canvas2DOM = document.getElementById("canvas2");
+var canvas3DOM = document.getElementById("canvas3");
 
 const timerInterval = setInterval(timerFunc, 1000);
 const enemySpriteInterval = setInterval(boxMovement, 5);
@@ -477,7 +477,7 @@ function entry(game_over_text, game_over_entry, nextEntry) {
         //console.log("Down arrow is pressed for entry");
 
         if (!lowercase) {
-            if (currentChar != 90) { currentChar += 1; }
+            if (currentChar != 90) { currentChar += 1; } // check this as well 
             else { currentChar = 97; lowercase = true; }
         } else {
             if (currentChar != 122) { currentChar += 1; }
@@ -492,7 +492,7 @@ function entry(game_over_text, game_over_entry, nextEntry) {
         //console.log("Up arrow is pressed for entry");
 
         if (!lowercaseUp) {
-            if (currentChar != 65) { currentChar -= 1; }
+            if (currentChar != 65) { currentChar -= 1; } // here is the issue
             else { currentChar = 122; lowercase = true; }
         } else {
             if (currentChar != 97) { currentChar -= 1; }
