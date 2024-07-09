@@ -12,7 +12,7 @@ def logout():
 
 @views.route('/sign-up')
 def sign_up():
-    return "<p>Sign Up</p>"
+    return "<p>sign Up</p>"
 
 @views.route('/home')
 def home():
@@ -20,4 +20,4 @@ def home():
 
 @views.route('/notes')
 def game():
-    return "<p>home</p>"
+    return "<p>notes app</p>"
