@@ -5,7 +5,7 @@
     - switch if else to case statement - done
     - rotate through jump, attack and run animation - done
     - create discrepencies for spritesheet locations - done
-            - when rotating through sprites megaman location appears to be 
+            - when rotating through sprites megaman location appears to be
                 same location - done
             - change initial location - done
             - center animations - done
