@@ -20,4 +20,4 @@ def home():
 
 @auth.route('/game')
 def game():
-    return "<p>home</p>"
+    return "<p>game app</p>"

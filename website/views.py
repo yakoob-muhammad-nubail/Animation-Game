@@ -18,6 +18,6 @@ def sign_up():
 def home():
     return "<p>home</p>"
 
-@views.route('/notes')
+@views.route('/game')
 def game():
-    return "<p>notes app</p>"
+    return "<p>game app</p>"
