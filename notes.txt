@@ -103,3 +103,4 @@
         the running sprite is same as the jumping sprite. best solution is
         switching to ctx draw
         - change src rename by adding a variable to a txt path - tbd - optional 
+        - throw comments in code before functions, variable sections etc (section based)
