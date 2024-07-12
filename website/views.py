@@ -21,3 +21,7 @@ def home():
 @views.route('/game')
 def game():
     return "<p>game app</p>"
+
+@views.route('/scoreboard')
+def scoreboard():
+    return "<p>scoreboard</p>"

@@ -21,3 +21,7 @@ def home():
 @auth.route('/game')
 def game():
     return "<p>game app</p>"
+
+@auth.route('/scoreboard')
+def scoreboard():
+    return "<p>scoreboard</p>"
