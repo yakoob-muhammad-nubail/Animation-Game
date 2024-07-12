@@ -92,6 +92,8 @@ var currentChar = 65;
 var keyOne = 0, keyTwo = 0; keyThree = 0;
 //ASCII 65 (A) - 90 (Z), 97 (a) - 122 (z)
 
+var string = "", temp = "";
+
 var sprite = document.getElementById("keyframeSprites");
 var scoreText = document.getElementById("score_text");
 var boxSpriteContainer = document.getElementById("box_sprite_container");
@@ -591,7 +593,23 @@ function gameOver() {
     entryOne();
 }
 
+function animateText(element, string) {
+    for (let i = 0; i < string.length; i++) {
+        setTimeout(function () {
+            temp += string.charAt(i);
+            updateText(element, temp);
+        }, 1000);
+    }
+
+    temp = "";
+}
+
+function updateText(element, string) {
+    element.innerHTML = string;
+}
+
 function level_1() { }
 
 //gameOver();
 //clearScreen();
+animateText();
