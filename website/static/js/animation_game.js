@@ -145,7 +145,7 @@ const timerInterval = setInterval(timerFunc, 1000);
 const enemySpriteInterval = setInterval(boxMovement, 5);
 
 //debugging
-//window.addEventListener("click", printMousePos);
+// window.addEventListener("click", printMousePos);
 //checkWindowSize();
 
 resetLayout();
@@ -263,7 +263,10 @@ function doWhichKey(e) {
     };
 
     charCode = e.keyCode || e.which;
-    key = keyCodeMap[charCode] || String.fromCharCode(charCode);
+    key = keyCodeMap[charCode];
+
+    console.log(key);
+    console.log(charCode);
 
     discrepencyx = 0;
     discrepencyy = 0;
@@ -271,12 +274,16 @@ function doWhichKey(e) {
 
     if ((key === "a" || key === "A") && xPos !== boundaryxmin && yPos !== boundaryymax && yPos !== boundaryymin) {
         moveCharacter("Left_animation", -vx, 0);
+        state = "A";
     } else if ((key === "d" || key === "D") && xPos !== boundaryxmax && yPos !== boundaryymin && yPos !== boundaryymax) {
         moveCharacter("Left_animation", vx, 0);
+        state = "D";
     } else if ((key === "s" || key === "S") && yPos !== (boundaryymin + discrepencyyduck)) {
         moveCharacter("Character_duck", 0, vy);
+        state = "S";
     } else if ((key === "w" || key === "W") && yPos !== (boundaryymax + discrepencyxjump)) {
         moveCharacter("Character_jumping", 0, -vy);
+        state = "W";
     } else {
         state = "no";
     }
@@ -300,8 +307,8 @@ function moveCharacter(animation, deltaX, deltaY) {
         document.getElementById(previous_animation).style.display = "none";
     }
 
-    document.getElementById("keyframeSprites").style.left = xPos + "px";
-    document.getElementById("keyframeSprites").style.top = yPos + "px";
+    sprite.style.left = xPos + "px";
+    sprite.style.top = yPos + "px";
 }
 
 function timerFunc() {
@@ -320,15 +327,15 @@ function boxMovement() {
 
     boxSpriteContainer.style.right = x1 + "px";
 
-    if (collision_check() == true) {
-        console.log("hit");
-        hit = true;
-    }
+    // if (collision_check() == true) {
+    //     //console.log("hit");
+    //     hit = true;
+    // }
 
-    if (totalx == window_width || hit == true) { //set timeout to stop function while collision check is true
+    if (totalx == window_width || collision_check()) { //set timeout to stop function while collision check is true
         hit = false;
 
-        y1 = Math.floor(Math.random() * (max - min) + min);
+        y1 = Math.floor(Math.random() * max);
         x1 = 0;
         totalx = 0; // can be used as a score multiplier
 
@@ -346,11 +353,11 @@ function lives() {
         case 2: heart3.src = "../static/images/life_dead.png";
     }
 
-    x1 = 0;
-    y1 = Math.floor(Math.random() * (max - min) + min);
+    // x1 = 0;
+    // y1 = Math.floor(Math.random() * (max - min) + min);
 
-    boxSpriteContainer.style.right = x1 + "px";
-    boxSpriteContainer.style.top = y1 + "px";
+    // boxSpriteContainer.style.right = x1 + "px";
+    // boxSpriteContainer.style.top = y1 + "px";
 
     if (live_count == 0) {
         gameOver();
@@ -359,9 +366,9 @@ function lives() {
 
 function collision_check() {
     //728 - 1368 = 591 //128 - 338
-    if (y1 > 0) { bx = 800 - x1 - 5; by = y1 + 310; console.log("low y"); }
-    else if (y1 < 0) { bx = 800 - x1; by = 200 - Math.abs(y1) + 112; console.log("high y"); }
-    else { bx = 800 - x1 - 5; by = y1 + 310; console.log("even y"); }
+    if (y1 > 0) { bx = 800 - x1 - 5; by = y1 + 310; /*console.log("low y");*/ }
+    else if (y1 < 0) { bx = 800 - x1; by = 200 - Math.abs(y1) + 112; /*console.log("high y");*/ }
+    else { bx = 800 - x1 - 5; by = y1 + 310; /*console.log("even y");*/ }
 
     //776
     sprite_run_x = xPos - 565;
@@ -396,8 +403,8 @@ function closeGame() {
     clearInterval(timerInterval);
     clearInterval(enemySpriteInterval);
 
-    document.getElementById("keyframeSprites").style.display = "none";
-    document.getElementById("box_sprite_container").style.display = "none";
+    sprite.style.display = "none";
+    boxSpriteContainer.style.display = "none";
 }
 
 function updateGameOverWindow() {
