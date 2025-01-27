@@ -3,6 +3,10 @@ WAIT FOR CANVAS VERSION THEN CREATE CSS WITH RESPONSIVE design
     - LAPTOPS
     - TABLETS
     - PHONES
+CREATE STEADY FRAMES THAT DONT MOVE FOR MOBILE TABLET AND PC THAT ARE 10PX OFF FROM THE RIGHT FOR
+RESPONSIVE DESIGN
+ALWAYS ORGANIZE THE NOTES FILE
+MIGRATE THE NOTES FILE TO PERSONAL FILES
 
 - find how to move exact position of keyframes animation across screen with js - done
     - change the z-index of all the spritesheets - done
